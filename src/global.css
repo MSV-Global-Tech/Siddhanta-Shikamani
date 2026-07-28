@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  background-color: #FDFAF4;
+}
+
+html, body, #root, #expo-app {
+  background-color: #FDFAF4;
+}
+
+body {
+  margin: 0;
+  font-family: 'Noto Sans Kannada', sans-serif;
+}
