@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { View, Pressable, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { useRouter } from 'expo-router';
+import { router } from 'expo-router';
 import { clsx } from 'clsx';
 import { ScreenContainer, VStack, HStack } from '@/components/layouts/Containers';
 import { AppText } from '@/components/typography/AppText';
@@ -33,7 +33,6 @@ const popularSearches = [
 ];
 
 export default function SearchScreen() {
-  const router = useRouter();
   const haptics = useHapticFeedback();
   const [query, setQuery] = useState('');
   const [searchHistory, setSearchHistory] = useState<string[]>([]);
@@ -74,8 +73,7 @@ export default function SearchScreen() {
       chapter.content.forEach((verse) => {
         if (
           verse.sanskrit.toLowerCase().includes(normalizedQuery) ||
-          verse.translation.toLowerCase().includes(normalizedQuery) ||
-          verse.commentary.toLowerCase().includes(normalizedQuery)
+          verse.translation.toLowerCase().includes(normalizedQuery)
         ) {
           results.push({
             type: 'verse',

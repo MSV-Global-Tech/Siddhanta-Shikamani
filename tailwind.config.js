@@ -58,10 +58,6 @@ module.exports = {
           'NotoSansKannada-Bold',
           'sans-serif',
         ],
-        'kannada-light': [
-          'NotoSansKannada-Light',
-          'sans-serif',
-        ],
         'kannada-medium': [
           'NotoSansKannada-Medium',
           'sans-serif',

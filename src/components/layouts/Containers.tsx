@@ -115,8 +115,8 @@ export function Card({
 }: CardProps) {
   const variantClasses = {
     elevated: 'bg-white shadow-elevated border border-background-soft',
-    flat: 'bg-background-default',
-    outline: 'bg-white border border-border-default',
+    flat: 'bg-background-default shadow-none',
+    outline: 'bg-white border border-border-default shadow-none',
   };
 
   const paddingClasses = {

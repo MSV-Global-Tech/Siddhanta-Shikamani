@@ -5,8 +5,13 @@ export interface Chapter {
   subtitle: string;
   description: string;
   versesCount: number;
-  readingTime: number;
   category: string;
+  colophon?: string;
+  parichheda?: {
+    id: string;
+    number: number;
+    title: string;
+  };
   content: ChapterVerse[];
 }
 
@@ -15,7 +20,7 @@ export interface ChapterVerse {
   verseNumber: number;
   sanskrit: string;
   translation: string;
-  commentary: string;
+  commentary?: string;
 }
 
 export interface Bookmark {

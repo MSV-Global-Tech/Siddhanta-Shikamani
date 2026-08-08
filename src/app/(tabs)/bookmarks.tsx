@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, ScrollView, Pressable, Alert } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { useRouter } from 'expo-router';
+import { router } from 'expo-router';
 import { clsx } from 'clsx';
 import { ScreenContainer, VStack, HStack } from '@/components/layouts/Containers';
 import { AppText } from '@/components/typography/AppText';
@@ -15,7 +15,6 @@ import { useHapticFeedback } from '@/hooks/useHapticFeedback';
 type FilterType = 'shlokas' | 'notes';
 
 export default function BookmarksScreen() {
-  const router = useRouter();
   const haptics = useHapticFeedback();
   const { bookmarks, removeBookmark, clearBookmarks } = useAppStore();
   const [filter, setFilter] = useState<FilterType>('shlokas');

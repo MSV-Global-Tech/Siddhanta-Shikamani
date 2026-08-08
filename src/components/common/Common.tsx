@@ -6,7 +6,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { AppText } from '../typography/AppText';
 import { HStack, VStack } from '../layouts/Containers';
 import { useHapticFeedback } from '@/hooks/useHapticFeedback';
-import { useRouter } from 'expo-router';
+import { router } from 'expo-router';
 import { toKannadaNumerals } from '@/utils';
 import { LOCAL_STRINGS } from '@/localization';
 
@@ -29,7 +29,6 @@ export function Header({
   subtitle,
   scrollY = 0,
 }: HeaderProps) {
-  const router = useRouter();
   const haptics = useHapticFeedback();
 
   const handleBack = () => {
@@ -264,50 +263,41 @@ export function VerseContent({
   showCommentary = true,
   isBookmarked = false,
   onBookmark,
-  fontSize = 17,
+  fontSize = 20,
 }: VerseContentProps) {
   const haptics = useHapticFeedback();
 
   return (
     <View className="animate-fade-in">
-      {/* ಶ್ಲೋಕ ಸಂಖ್ಯೆ — ಅಲಂಕಾರಿಕ ಪದಕ */}
-      <View className="items-center mb-6">
-        <View className="flex-row items-center">
-          <View className="w-12 h-[1px] bg-secondary-light" />
-          <View className="w-1.5 h-1.5 rounded-full bg-secondary-default mx-2" />
-          <View className="w-12 h-12 rounded-full bg-secondary-subtle border-2 border-secondary-light items-center justify-center mx-1">
-            <AppText variant="body" weight="bold" className="text-primary-dark">
-              {toKannadaNumerals(verseNumber)}
-            </AppText>
-          </View>
-          <View className="w-1.5 h-1.5 rounded-full bg-secondary-default mx-2" />
-          <View className="w-12 h-[1px] bg-secondary-light" />
-        </View>
-        <AppText variant="caption" weight="bold" className="text-secondary-dark tracking-widest mt-2">
+      <View className="items-center mb-2">
+        <AppText variant="caption" weight="bold" className="text-secondary-dark tracking-widest">
           {LOCAL_STRINGS.verse} {toKannadaNumerals(verseNumber)}
         </AppText>
       </View>
 
-      {/* ಮೂಲ ಶ್ಲೋಕ — ಚಿನ್ನದ ಛಾಯೆಯ ಹಿನ್ನೆಲೆಯಲ್ಲಿ, ಗ್ರಂಥ ಶೈಲಿ */}
       {showSanskrit && sanskrit && (
-        <View className="bg-secondary-subtle/60 rounded-2xl px-5 py-7 mb-8 items-center">
-          <Ionicons name="flower-outline" size={16} color="#B4832E" style={{ marginBottom: 10 }} />
-          <AppText
-            variant="verse"
-            align="center"
-            className="text-primary-dark font-serif-kan-bold"
-            style={{ fontSize: fontSize + 3, lineHeight: (fontSize + 3) * 1.95 }}
-          >
-            {sanskrit}
-          </AppText>
-          <Ionicons name="flower-outline" size={16} color="#B4832E" style={{ marginTop: 10 }} />
+        <View className="bg-secondary-subtle/60 rounded-2xl px-5 py-3 mb-3 items-center">
+          {sanskrit.split('\n').map((line, i) => (
+            <AppText
+              key={i}
+              variant="verse"
+              align="center"
+              className="text-primary-dark font-serif-kan-bold"
+              style={{
+                fontSize: 20,
+                lineHeight: 20 * 1.85,
+              }}
+            >
+              {line}
+            </AppText>
+          ))}
         </View>
       )}
 
       {/* ಕನ್ನಡ ಭಾವಾರ್ಥ — ಶುದ್ಧ ಓದುಗ ಶೈಲಿ */}
       {showTranslation && (
-        <View className="mb-8">
-          <View className="flex-row items-center mb-3">
+        <View className="mb-3">
+          <View className="flex-row items-center mb-2">
             <View className="w-1 h-4 rounded-full bg-secondary-default mr-2.5" />
             <AppText variant="caption" weight="bold" className="text-secondary-dark tracking-wide">
               {LOCAL_STRINGS.kannadaBhavartha}
@@ -316,69 +306,15 @@ export function VerseContent({
           <AppText
             variant="reading"
             className="text-text-default"
-            style={{ fontSize: fontSize + 1, lineHeight: (fontSize + 1) * 1.9 }}
+            style={{ fontSize: 20, lineHeight: 20 * 1.8 }}
           >
             {translation}
           </AppText>
         </View>
       )}
 
-      {/* ವ್ಯಾಖ್ಯಾನ — ಸರಳ ವಿಭಾಗ, ಉದ್ದ ಪಠ್ಯಕ್ಕೆ ಅನುಕೂಲ */}
-      {showCommentary && commentary && (
-        <View className="mb-8">
-          <View className="flex-row items-center mb-3">
-            <View className="w-1 h-4 rounded-full bg-primary-light mr-2.5" />
-            <AppText variant="caption" weight="bold" className="text-primary-default tracking-wide">
-              {LOCAL_STRINGS.commentary}
-            </AppText>
-          </View>
-          <AppText
-            variant="bodyLarge"
-            color="muted"
-            style={{ fontSize, lineHeight: fontSize * 1.85 }}
-          >
-            {commentary}
-          </AppText>
-        </View>
-      )}
 
-      {/* ಕ್ರಿಯಾ ಐಕಾನ್‌ಗಳು */}
-      <View className="flex-row items-center justify-center gap-8 pt-5 border-t border-border-light">
-        <Pressable
-          onPress={() => {
-            haptics.medium();
-            onBookmark?.();
-          }}
-          hitSlop={10}
-          className="items-center justify-center"
-        >
-          <Ionicons
-            name={isBookmarked ? 'heart' : 'heart-outline'}
-            size={22}
-            color={isBookmarked ? '#C0392B' : '#7A5C48'}
-          />
-        </Pressable>
-        <Pressable hitSlop={10} className="items-center justify-center">
-          <Ionicons name="share-social-outline" size={22} color="#7A5C48" />
-        </Pressable>
-        <Pressable hitSlop={10} className="items-center justify-center">
-          <Ionicons name="copy-outline" size={22} color="#7A5C48" />
-        </Pressable>
-        <Pressable
-          onPress={() => {
-            haptics.medium();
-            onBookmark?.();
-          }}
-          hitSlop={10}
-          className="items-center justify-center"
-        >
-          <Ionicons
-            name={isBookmarked ? 'bookmark' : 'bookmark-outline'}
-            size={22}
-            color={isBookmarked ? '#B4832E' : '#7A5C48'}
-          />
-        </Pressable>
-      </View>
+
     </View>
   );
 }

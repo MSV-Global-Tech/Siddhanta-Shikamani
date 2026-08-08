@@ -9,8 +9,8 @@
     "scheme": "siddhantashikamani",
     "splash": {
       "image": "./assets/Splash1.jpg",
-      "backgroundColor": "#FFFFFF",
-      "resizeMode": "contain"
+      "backgroundColor": "#120A06",
+      "resizeMode": "cover"
     },
     "ios": {
       "supportsTablet": true,
@@ -44,7 +44,8 @@
               "armeabi-v7a",
               "arm64-v8a",
               "x86_64"
-            ]
+            ],
+            "enableMinifyInReleaseBuilds": true
           }
         }
       ]
@@ -56,7 +57,7 @@
     "extra": {
       "router": {},
       "eas": {
-        "projectId": "b9641b95-0848-443e-a51e-1f085b367ddf"
+        "projectId": "a2b562d6-8625-43bd-b9cc-bef1582c1050"
       }
     }
   }

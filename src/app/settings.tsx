@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Pressable, Alert, Modal, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { useRouter } from 'expo-router';
+import { router } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { clsx } from 'clsx';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -17,7 +17,6 @@ import { CANTO_KEYS } from '@/constants';
 import { storage } from '@/services/storage';
 
 export default function SettingsScreen() {
-  const router = useRouter();
   const insets = useSafeAreaInsets();
   // ಸಿಸ್ಟಂ ನ್ಯಾವಿಗೇಶನ್‌ಗೆ ತಕ್ಕಂತೆ ಕೆಳ ಅಂತರ
   const bottomInset = Math.max(insets.bottom, 8);

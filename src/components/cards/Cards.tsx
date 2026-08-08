@@ -107,12 +107,6 @@ export function ChapterCard({ chapter, variant = 'default', showProgress = true,
                     {toKannadaNumerals(chapter.versesCount)} {LOCAL_STRINGS.verses}
                   </AppText>
                 </View>
-                <View className="bg-white/20 rounded-xl px-3 py-1.5 flex-row items-center gap-1.5">
-                  <Ionicons name="time-outline" size={14} color="#FFFFFF" />
-                  <AppText variant="caption" color="inverted" weight="semibold">
-                    {formatReadingTime(chapter.readingTime)}
-                  </AppText>
-                </View>
               </HStack>
               <View className="bg-white rounded-full p-2.5 shadow-soft">
                 <Ionicons name="arrow-forward" size={16} color={categoryConfig.gradient[1]} />
@@ -159,10 +153,6 @@ export function ChapterCard({ chapter, variant = 'default', showProgress = true,
                   <Ionicons name="bookmarks-outline" size={13} color="#7A5C48" />
                   <AppText variant="caption" color="muted">
                     {toKannadaNumerals(chapter.versesCount)}
-                  </AppText>
-                  <Ionicons name="time-outline" size={13} color="#7A5C48" className="ml-2" />
-                  <AppText variant="caption" color="muted">
-                    {toKannadaNumerals(chapter.readingTime)}
                   </AppText>
                 </HStack>
                 {showProgress && progressPercent > 0 && (
@@ -254,12 +244,6 @@ export function ChapterCard({ chapter, variant = 'default', showProgress = true,
               <Ionicons name="bookmarks-outline" size={15} color="#7A5C48" />
               <AppText variant="bodySmall" color="muted" weight="medium">
                 {toKannadaNumerals(chapter.versesCount)} {LOCAL_STRINGS.verses}
-              </AppText>
-            </HStack>
-            <HStack spacing="xs">
-              <Ionicons name="time-outline" size={15} color="#7A5C48" />
-              <AppText variant="bodySmall" color="muted" weight="medium">
-                {formatReadingTime(chapter.readingTime)}
               </AppText>
             </HStack>
           </HStack>

@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState, useCallback } from 'react';
 import { View, ScrollView, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
-import { useRouter } from 'expo-router';
+import { useRouter, useFocusEffect } from 'expo-router';
 import { clsx } from 'clsx';
 import { ScreenContainer, VStack, HStack } from '@/components/layouts/Containers';
 import { AppText } from '@/components/typography/AppText';
@@ -16,7 +16,18 @@ import { useHapticFeedback } from '@/hooks/useHapticFeedback';
 export default function ProfileScreen() {
   const router = useRouter();
   const haptics = useHapticFeedback();
-  const { profile, readingProgress, bookmarks } = useAppStore();
+  const [profile, setProfile] = useState(() => useAppStore.getState().profile);
+  const [readingProgress, setReadingProgress] = useState(() => useAppStore.getState().readingProgress);
+  const [bookmarks, setBookmarks] = useState(() => useAppStore.getState().bookmarks);
+
+  useFocusEffect(
+    useCallback(() => {
+      const state = useAppStore.getState();
+      setProfile(state.profile);
+      setReadingProgress(state.readingProgress);
+      setBookmarks(state.bookmarks);
+    }, [])
+  );
 
   const totalChaptersRead = readingProgress.filter((p) => p.completed).length;
   const unlockedAchievements = profile.achievements.filter((a) => a.unlocked).length;

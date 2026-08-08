@@ -3,7 +3,6 @@ import { Platform } from 'react-native';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import {
-  NotoSansKannada_300Light,
   NotoSansKannada_400Regular,
   NotoSansKannada_500Medium,
   NotoSansKannada_600SemiBold,
@@ -26,7 +25,6 @@ export function useAppLoading() {
       ? [{}]
       : [
           {
-            'NotoSansKannada-Light': NotoSansKannada_300Light,
             'NotoSansKannada-Regular': NotoSansKannada_400Regular,
             'NotoSansKannada-Medium': NotoSansKannada_500Medium,
             'NotoSansKannada-SemiBold': NotoSansKannada_600SemiBold,
@@ -45,7 +43,12 @@ export function useAppLoading() {
     async function prepare() {
       try {
         if (fontsLoaded || fontError) {
-          await new Promise((resolve) => setTimeout(resolve, 300));
+          // Hide native splash immediately so custom JS splash takes over seamlessly
+          try {
+            await SplashScreen.hideAsync();
+          } catch (e) {
+            // ignore
+          }
           if (!cancelled) setAppIsReady(true);
           return;
         }
@@ -54,15 +57,14 @@ export function useAppLoading() {
         if (!cancelled) setAppIsReady(true);
       }
     }
-    if (Platform.OS === 'web') {
-      prepare();
-    } else {
-      prepare();
-    }
+    prepare();
 
     // Safety fallback: force ready after 5s even if fonts hang
-    timeoutRef.current = setTimeout(() => {
-      if (!cancelled) setAppIsReady(true);
+    timeoutRef.current = setTimeout(async () => {
+      if (!cancelled) {
+        try { await SplashScreen.hideAsync(); } catch (e) { /* ignore */ }
+        setAppIsReady(true);
+      }
     }, 5000);
 
     return () => {
@@ -71,15 +73,8 @@ export function useAppLoading() {
     };
   }, [fontsLoaded, fontError]);
 
-  const onLayoutRootView = useCallback(async () => {
-    if (appIsReady) {
-      try {
-        await SplashScreen.hideAsync();
-      } catch (e) {
-        // ignore
-      }
-    }
-  }, [appIsReady]);
+  // Kept for API compatibility but hideAsync is now called in the effect above
+  const onLayoutRootView = useCallback(() => {}, []);
 
   return {
     appIsReady,

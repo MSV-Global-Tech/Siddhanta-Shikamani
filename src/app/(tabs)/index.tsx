@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState, useCallback } from 'react';
 import { View, Pressable, Image, useWindowDimensions } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
-import { useRouter } from 'expo-router';
+import { useRouter, useFocusEffect } from 'expo-router';
 import { ScreenContainer, VStack, HStack } from '@/components/layouts/Containers';
 import { AppText } from '@/components/typography/AppText';
 import { CHAPTERS } from '@/data/chapters';
@@ -22,7 +22,18 @@ interface QuickAccessItem {
 export default function HomeScreen() {
   const router = useRouter();
   const { width: screenWidth } = useWindowDimensions();
-  const { readingProgress, recentChapters, bookmarks } = useAppStore();
+  const [readingProgress, setReadingProgress] = useState(() => useAppStore.getState().readingProgress);
+  const [recentChapters, setRecentChapters] = useState(() => useAppStore.getState().recentChapters);
+  const [bookmarks, setBookmarks] = useState(() => useAppStore.getState().bookmarks);
+
+  useFocusEffect(
+    useCallback(() => {
+      const state = useAppStore.getState();
+      setReadingProgress(state.readingProgress);
+      setRecentChapters(state.recentChapters);
+      setBookmarks(state.bookmarks);
+    }, [])
+  );
 
   // ಗುರುವಾಣಿ ಚಿತ್ರದ ನಿಖರ ಗಾತ್ರ — 1277×603 ಅನುಪಾತದಲ್ಲಿ ಪರದೆಯ ಅಗಲಕ್ಕೆ ಹೊಂದಿಸಿ
   const quoteImageWidth = screenWidth - 40; // px-5 ಅಂಚು (20 + 20)
@@ -67,14 +78,6 @@ export default function HomeScreen() {
       sub: 'Bookmarks',
       count: toKannadaNumerals(bookmarks.length),
       icon: 'bookmark-outline',
-      route: '/bookmarks',
-    },
-    {
-      key: 'notes',
-      label: LOCAL_STRINGS.notes,
-      sub: 'Notes',
-      count: toKannadaNumerals(notesCount),
-      icon: 'create-outline',
       route: '/bookmarks',
     },
   ];
@@ -134,18 +137,18 @@ export default function HomeScreen() {
             <View key={item.key} className="flex-1 px-1">
               <Pressable
                 onPress={() => router.push(item.route as any)}
-                className="bg-white rounded-2xl border border-border-light shadow-soft items-center px-1 py-3"
+                className="bg-white rounded-3xl border border-border-light shadow-soft items-center px-2 py-4"
                 style={({ pressed }) => ({ opacity: pressed ? 0.8 : 1 })}
               >
-                <View className="w-11 h-11 rounded-xl bg-secondary-subtle border border-secondary-light/40 items-center justify-center mb-2">
-                  <Ionicons name={item.icon} size={22} color="#8A3324" />
+                <View className="w-14 h-14 rounded-2xl bg-secondary-subtle border border-secondary-light/40 items-center justify-center mb-3">
+                  <Ionicons name={item.icon} size={28} color="#8A3324" />
                 </View>
                 <AppText
-                  variant="caption"
-                  weight="semibold"
+                  variant="bodySmall"
+                  weight="bold"
                   align="center"
                   numberOfLines={1}
-                  className="text-text-default"
+                  className="text-primary-dark mb-0.5"
                 >
                   {item.label}
                 </AppText>
@@ -153,7 +156,8 @@ export default function HomeScreen() {
                   align="center"
                   numberOfLines={1}
                   color="muted"
-                  style={{ fontSize: 9, lineHeight: 13 }}
+                  weight="semibold"
+                  style={{ fontSize: 11, lineHeight: 16 }}
                 >
                   ({item.sub})
                 </AppText>

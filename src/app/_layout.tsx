@@ -34,7 +34,8 @@ export default function RootLayout() {
               name="reading/[id]"
               options={{
                 headerShown: false,
-                animation: 'slide_from_right',
+                animation: 'fade_from_bottom',
+                gestureEnabled: false,
               }}
             />
             <Stack.Screen

@@ -28,7 +28,7 @@ export function useReading(chapterId: string) {
       progress: 0,
       next: () => {},
       previous: () => {},
-      goTo: () => {},
+      onVerseViewed: () => {},
     };
   }
 
@@ -46,23 +46,7 @@ export function useReading(chapterId: string) {
     [chapterId, autoSave, updateProgress, addRecent, incrementVerses, progress?.lastReadVerse, totalVerses]
   );
 
-  const next = useCallback(() => {
-    if (currentVerseIndex < totalVerses - 1) {
-      const nextIndex = currentVerseIndex + 1;
-      setCurrentVerseIndex(nextIndex);
-      handleProgressUpdate(nextIndex);
-      haptics.selection();
-    }
-  }, [currentVerseIndex, totalVerses, handleProgressUpdate]);
-
-  const previous = useCallback(() => {
-    if (currentVerseIndex > 0) {
-      setCurrentVerseIndex(currentVerseIndex - 1);
-      haptics.selection();
-    }
-  }, [currentVerseIndex]);
-
-  const goTo = useCallback(
+  const onVerseViewed = useCallback(
     (index: number) => {
       const clamped = Math.max(0, Math.min(index, totalVerses - 1));
       setCurrentVerseIndex(clamped);
@@ -83,8 +67,6 @@ export function useReading(chapterId: string) {
     currentVerseIndex,
     totalVerses,
     progress: calculatedProgress,
-    next,
-    previous,
-    goTo,
+    onVerseViewed,
   };
 }

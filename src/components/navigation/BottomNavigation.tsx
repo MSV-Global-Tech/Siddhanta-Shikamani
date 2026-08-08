@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState, useCallback } from 'react';
 import { View, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { useRouter, usePathname } from 'expo-router';
+import { router, usePathname, useFocusEffect } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { AppText } from '../typography/AppText';
 import { useHapticFeedback } from '@/hooks/useHapticFeedback';
@@ -31,13 +31,7 @@ const tabs: TabItem[] = [
     activeIcon: 'book',
     route: '/chapters',
   },
-  {
-    key: 'search',
-    label: LOCAL_STRINGS.search,
-    icon: 'search-outline',
-    activeIcon: 'search',
-    route: '/search',
-  },
+
   {
     key: 'bookmarks',
     label: LOCAL_STRINGS.bookmarks,
@@ -55,11 +49,16 @@ const tabs: TabItem[] = [
 ];
 
 export function BottomNavigation() {
-  const router = useRouter();
   const pathname = usePathname();
   const haptics = useHapticFeedback();
   const insets = useSafeAreaInsets();
-  const bookmarkCount = useAppStore((state) => state.bookmarks.length);
+  const [bookmarkCount, setBookmarkCount] = useState(() => useAppStore.getState().bookmarks.length);
+
+  useFocusEffect(
+    useCallback(() => {
+      setBookmarkCount(useAppStore.getState().bookmarks.length);
+    }, [])
+  );
 
   // ಸಿಸ್ಟಂ ನ್ಯಾವಿಗೇಶನ್‌ಗೆ ತಕ್ಕಂತೆ ಕೆಳ ಅಂತರ — ಬಟನ್/ಗೆಸ್ಚರ್ ಮೇಲೆ ಸರಿಯಾಗಿ ಕೂರುತ್ತದೆ
   const bottomPadding = Math.max(insets.bottom, 8);
