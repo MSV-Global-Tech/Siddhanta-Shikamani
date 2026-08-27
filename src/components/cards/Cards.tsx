@@ -141,10 +141,10 @@ export function ChapterCard({ chapter, variant = 'default', showProgress = true,
                 </AppText>
               </View>
 
-              <AppText variant="title" weight="semibold" numberOfLines={1} className="mb-1">
+              <AppText variant="title" weight="semibold" numberOfLines={2} className="mb-1">
                 {chapter.title}
               </AppText>
-              <AppText variant="bodySmall" color="muted" numberOfLines={1} className="mb-3">
+              <AppText variant="bodySmall" color="muted" numberOfLines={2} className="mb-3">
                 {chapter.subtitle}
               </AppText>
 
@@ -189,7 +189,7 @@ export function ChapterCard({ chapter, variant = 'default', showProgress = true,
                 </AppText>
               </View>
               <VStack spacing="xs" className="justify-center">
-                <AppText variant="body" weight="semibold" numberOfLines={1}>
+                <AppText variant="body" weight="semibold" numberOfLines={2}>
                   {chapter.title}
                 </AppText>
                 <AppText variant="caption" color="muted">

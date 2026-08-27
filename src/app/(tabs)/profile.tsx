@@ -1,292 +1,291 @@
 import React, { useState, useCallback } from 'react';
-import { View, ScrollView, Pressable } from 'react-native';
+import { View, ScrollView, Pressable, Linking } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter, useFocusEffect } from 'expo-router';
-import { clsx } from 'clsx';
-import { ScreenContainer, VStack, HStack } from '@/components/layouts/Containers';
+import { LinearGradient } from 'expo-linear-gradient';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { AppText } from '@/components/typography/AppText';
-import { StatCard, AchievementCard } from '@/components/cards/Cards';
-import { IconButton } from '@/components/buttons/Button';
 import { useAppStore } from '@/store/useAppStore';
 import { LOCAL_STRINGS } from '@/localization';
-import { toKannadaNumerals, formatDate } from '@/utils';
+import { toKannadaNumerals } from '@/utils';
 import { useHapticFeedback } from '@/hooks/useHapticFeedback';
 
 export default function ProfileScreen() {
   const router = useRouter();
   const haptics = useHapticFeedback();
+  const insets = useSafeAreaInsets();
+
   const [profile, setProfile] = useState(() => useAppStore.getState().profile);
   const [readingProgress, setReadingProgress] = useState(() => useAppStore.getState().readingProgress);
-  const [bookmarks, setBookmarks] = useState(() => useAppStore.getState().bookmarks);
 
   useFocusEffect(
     useCallback(() => {
       const state = useAppStore.getState();
       setProfile(state.profile);
       setReadingProgress(state.readingProgress);
-      setBookmarks(state.bookmarks);
     }, [])
   );
 
   const totalChaptersRead = readingProgress.filter((p) => p.completed).length;
-  const unlockedAchievements = profile.achievements.filter((a) => a.unlocked).length;
-  const totalAchievements = profile.achievements.length;
-  const achievementProgress = Math.round((unlockedAchievements / totalAchievements) * 100);
 
-  const totalHours = Math.floor(profile.totalReadingMinutes / 60);
-  const remainingMinutes = profile.totalReadingMinutes % 60;
+  const stats = [
+    { icon: 'book-outline' as const,          value: toKannadaNumerals(totalChaptersRead),       label: 'ಅಧ್ಯಾಯ',    iconColor: '#8A3324', iconBg: '#FDF0E8' },
+    { icon: 'flame-outline' as const,          value: toKannadaNumerals(profile.readingStreak),   label: 'ಸ್ಟ್ರೀಕ್',  iconColor: '#B4832E', iconBg: '#FEF9EC' },
+    { icon: 'document-text-outline' as const,  value: toKannadaNumerals(profile.totalVersesRead), label: 'ಶ್ಲೋಕ',    iconColor: '#5E2116', iconBg: '#F5EEE8' },
+  ];
 
-  const joinedDate = formatDate(profile.joinedDate);
+  const quickLinks = [
+    { icon: 'library-outline' as const,   label: LOCAL_STRINGS.allChapters,     route: '/chapters',  iconBg: '#FDF0E8', iconColor: '#8A3324' },
+    { icon: 'settings-outline' as const,  label: LOCAL_STRINGS.settingsTitle,    route: '/settings',  iconBg: '#F0F4FF', iconColor: '#3949AB' },
+  ];
 
   return (
-    <ScreenContainer scroll edges={['top']}>
-      <View className="relative">
+    <View className="flex-1 bg-background-soft" style={{ paddingTop: insets.top }}>
+      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 40 }}>
+
+        {/* ── Header ───────────────────────────── */}
         <LinearGradient
-          colors={['#A0522D', '#7A2E22']}
+          colors={['#5E2116', '#8A3324']}
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 1 }}
-          className="h-56 absolute top-0 left-0 right-0"
-        />
-        <View className="absolute top-0 right-0 w-48 h-48 rounded-full bg-white/10 -mr-20 -mt-20" />
-        <View className="absolute bottom-0 left-0 w-36 h-36 rounded-full bg-white/5 -ml-16 -mb-10" />
-      </View>
-
-      <View className="px-6 pt-6 relative z-10">
-        <HStack justify="space-between" className="mb-24">
-          <Pressable
-            onPress={() => {
-              haptics.light();
-              router.push('/settings');
+          style={{ paddingTop: 24, paddingBottom: 32, paddingHorizontal: 24, position: 'relative', overflow: 'hidden' }}
+        >
+          {/* Decorative circle */}
+          <View
+            style={{
+              position: 'absolute', width: 200, height: 200, borderRadius: 100,
+              backgroundColor: 'rgba(255,255,255,0.05)', top: -80, right: -60,
             }}
-            hitSlop={8}
-          >
-            <AppText variant="caption" color="inverted" weight="semibold" className="opacity-90">
-              ಸೆಟ್ಟಿಂಗ್‌ಗಳು
-            </AppText>
-          </Pressable>
-          <IconButton
-            icon="settings-outline"
-            variant="default"
-            color="#FFFFFF"
-            onPress={() => router.push('/settings')}
           />
-        </HStack>
 
-        <View className="bg-white rounded-3xl shadow-elevated p-6 mb-7">
-          <HStack spacing="md" className="mb-6">
-            <LinearGradient
-              colors={['#B5654A', '#8A3324']}
-              start={{ x: 0, y: 0 }}
-              end={{ x: 1, y: 1 }}
-              className="w-20 h-20 rounded-[28px] items-center justify-center"
+          {/* Avatar */}
+          <View className="items-center mb-4">
+            <View
               style={{
-                shadowColor: '#8A3324',
-                shadowOffset: { width: 0, height: 8 },
-                shadowOpacity: 0.3,
-                shadowRadius: 16,
-                elevation: 10,
+                width: 76, height: 76, borderRadius: 38,
+                borderWidth: 2.5, borderColor: 'rgba(255,255,255,0.35)',
+                alignItems: 'center', justifyContent: 'center',
               }}
             >
-              <Ionicons name="person" size={36} color="#FFFFFF" />
-            </LinearGradient>
+              <View className="w-16 h-16 rounded-full bg-background-default items-center justify-center">
+                <Ionicons name="person" size={30} color="#8A3324" />
+              </View>
+            </View>
+          </View>
 
-            <VStack spacing="xs" className="flex-1 justify-center">
-              <AppText variant="heading2" weight="bold">
-                {profile.name}
-              </AppText>
-              <HStack spacing="xs">
-                <Ionicons name="calendar-outline" size={13} color="#A88C74" />
-                <AppText variant="caption" color="muted">
-                  ಸೇರಿದ ದಿನಾಂಕ: {joinedDate}
+          <AppText
+            variant="heading3"
+            weight="bold"
+            align="center"
+            style={{ color: '#FFFFFF', marginBottom: 6 }}
+          >
+            {profile.name}
+          </AppText>
+          <AppText
+            variant="caption"
+            align="center"
+            style={{ color: 'rgba(255,255,255,0.65)', letterSpacing: 0.5 }}
+          >
+            ಸಿದ್ಧಾಂತ ಶಿಖಾಮಣಿ ಓದುಗ
+          </AppText>
+        </LinearGradient>
+
+        {/* ── Stats ─────────────────────────────── */}
+        <View className="px-4 mt-5">
+          <AppText
+            variant="caption"
+            weight="semibold"
+            className="text-text-muted uppercase tracking-widest mb-3 ml-1"
+          >
+            ನಿಮ್ಮ ಅಂಕಿಅಂಶಗಳು
+          </AppText>
+          <View className="flex-row">
+            {stats.map((s, i) => (
+              <View
+                key={i}
+                className="flex-1 bg-white rounded-2xl border border-border-light items-center py-4"
+                style={{
+                  marginRight: i < stats.length - 1 ? 8 : 0,
+                  shadowColor: '#3D2314',
+                  shadowOffset: { width: 0, height: 2 },
+                  shadowOpacity: 0.05,
+                  shadowRadius: 6,
+                  elevation: 2,
+                }}
+              >
+                <View
+                  className="w-10 h-10 rounded-xl items-center justify-center mb-2"
+                  style={{ backgroundColor: s.iconBg }}
+                >
+                  <Ionicons name={s.icon} size={19} color={s.iconColor} />
+                </View>
+                <AppText variant="title" weight="bold" style={{ color: '#3D2314' }}>
+                  {s.value}
                 </AppText>
-              </HStack>
-            </VStack>
-          </HStack>
-
-          <View className="h-px bg-border-light mb-6" />
-
-          <HStack spacing="md">
-            <StatCard
-              icon="book-outline"
-              label="ಪೂರ್ಣಗೊಂಡ ಅಧ್ಯಾಯಗಳು"
-              value={totalChaptersRead}
-              iconBg="bg-primary-subtle"
-              iconColor="#8A3324"
-            />
-            <StatCard
-              icon="ribbon-outline"
-              label="ಸಾಧನೆಗಳು"
-              value={`${toKannadaNumerals(unlockedAchievements)}/${toKannadaNumerals(totalAchievements)}`}
-              iconBg="bg-secondary-subtle"
-              iconColor="#B4832E"
-              trend={achievementProgress > 50 ? 12 : undefined}
-            />
-          </HStack>
-        </View>
-
-        <View className="mb-7">
-          <HStack justify="space-between" className="mb-4">
-            <AppText variant="title" weight="bold">
-              {LOCAL_STRINGS.stats}
-            </AppText>
-          </HStack>
-          <View className="grid grid-cols-2 gap-4">
-            <View className="bg-white rounded-2xl p-5 shadow-soft border border-border-light">
-              <View className="w-10 h-10 rounded-xl bg-secondary-subtle items-center justify-center mb-3">
-                <Ionicons name="document-text-outline" size={20} color="#B4832E" />
+                <AppText variant="caption" color="muted" align="center" style={{ fontSize: 10, marginTop: 2 }}>
+                  {s.label}
+                </AppText>
               </View>
-              <AppText variant="heading2" weight="bold" className="mb-1">
-                {toKannadaNumerals(profile.totalVersesRead)}
-              </AppText>
-              <AppText variant="caption" color="muted" numberOfLines={2}>
-                {LOCAL_STRINGS.versesRead}
-              </AppText>
-            </View>
-
-            <View className="bg-white rounded-2xl p-5 shadow-soft border border-border-light">
-              <View className="w-10 h-10 rounded-xl bg-secondary-subtle items-center justify-center mb-3">
-                <Ionicons name="flame-outline" size={20} color="#B4832E" />
-              </View>
-              <AppText variant="heading2" weight="bold" className="mb-1">
-                {toKannadaNumerals(profile.readingStreak)}
-              </AppText>
-              <AppText variant="caption" color="muted" numberOfLines={2}>
-                {LOCAL_STRINGS.readingStreak} ({LOCAL_STRINGS.days})
-              </AppText>
-            </View>
-
-            <View className="bg-white rounded-2xl p-5 shadow-soft border border-border-light">
-              <View className="w-10 h-10 rounded-xl bg-[#F2E0D4] items-center justify-center mb-3">
-                <Ionicons name="bookmark-outline" size={20} color="#B5654A" />
-              </View>
-              <AppText variant="heading2" weight="bold" className="mb-1">
-                {toKannadaNumerals(bookmarks.length)}
-              </AppText>
-              <AppText variant="caption" color="muted" numberOfLines={2}>
-                {LOCAL_STRINGS.bookmarks} ಸೇರಿಸಲಾಗಿದೆ
-              </AppText>
-            </View>
-
-            <View className="bg-white rounded-2xl p-5 shadow-soft border border-border-light">
-              <View className="w-10 h-10 rounded-xl bg-[#EAD7C7] items-center justify-center mb-3">
-                <Ionicons name="time-outline" size={20} color="#5E2116" />
-              </View>
-              <AppText variant="heading2" weight="bold" className="mb-1">
-                {totalHours > 0 ? `${toKannadaNumerals(totalHours)} ಘಂಟೆ` : ''} {remainingMinutes > 0 ? `${toKannadaNumerals(remainingMinutes)} ನಿಮಿಷ` : totalHours === 0 ? '0 ನಿಮಿಷ' : ''}
-              </AppText>
-              <AppText variant="caption" color="muted" numberOfLines={2}>
-                ಒಟ್ಟು ಓದುವ ಸಮಯ
-              </AppText>
-            </View>
+            ))}
           </View>
         </View>
 
-        <View className="mb-7">
-          <HStack justify="space-between" className="mb-4">
-            <AppText variant="title" weight="bold">
-              {LOCAL_STRINGS.achievements}
-            </AppText>
-            <View className="bg-primary-subtle rounded-xl px-3 py-1.5">
-              <AppText variant="caption" weight="bold" color="primary">
-                {toKannadaNumerals(achievementProgress)}%
-              </AppText>
-            </View>
-          </HStack>
-
-          {profile.achievements.map((achievement) => (
-            <AchievementCard
-              key={achievement.id}
-              title={achievement.title}
-              description={achievement.description}
-              icon={achievement.icon as any}
-              unlocked={achievement.unlocked}
-              unlockedAt={achievement.unlockedAt}
-            />
-          ))}
-        </View>
-
-        <View className="mb-7">
-          <HStack justify="space-between" className="mb-4">
-            <AppText variant="title" weight="bold">
-              ತ್ವರಿತ ಮಾರ್ಗಗಳು
-            </AppText>
-          </HStack>
-          <View className="bg-white rounded-3xl shadow-soft border border-border-light overflow-hidden">
-            {[
-              {
-                icon: 'library-outline',
-                label: LOCAL_STRINGS.allChapters,
-                desc: 'ಬಲ್ಲ ಅಧ್ಯಾಯಗಳನ್ನು ಬ್ರೌಸ್ ಮಾಡಿ',
-                color: '#8A3324',
-                bg: 'bg-primary-subtle',
-                onPress: () => router.push('/chapters'),
-              },
-              {
-                icon: 'bookmark-outline',
-                label: 'ಬುಕ್ಮಾರ್ಕ್‌ಗಳು',
-                desc: 'ನಿಮ್ಮ ಮೆಚ್ಚಿನ ಶ್ಲೋಕಗಳನ್ನು ನೋಡಿ',
-                color: '#B4832E',
-                bg: 'bg-secondary-subtle',
-                onPress: () => router.push('/bookmarks'),
-              },
-              {
-                icon: 'search-outline',
-                label: LOCAL_STRINGS.search,
-                desc: 'ಶ್ಲೋಕಗಳನ್ನು ಹುಡುಕಿ',
-                color: '#8C6220',
-                bg: 'bg-secondary-subtle',
-                onPress: () => router.push('/search'),
-              },
-              {
-                icon: 'settings-outline',
-                label: LOCAL_STRINGS.settingsTitle,
-                desc: 'ಅಪ್ಲಿಕೇಶನ್ ಅನುಭವವನ್ನು ಕಸ್ಟಮೈಸ್ ಮಾಡಿ',
-                color: '#5E2116',
-                bg: 'bg-[#EAD7C7]',
-                onPress: () => router.push('/settings'),
-              },
-            ].map((item, idx) => (
+        {/* ── Quick Links ───────────────────────── */}
+        <View className="px-4 mt-6">
+          <AppText
+            variant="caption"
+            weight="semibold"
+            className="text-text-muted uppercase tracking-widest mb-3 ml-1"
+          >
+            ತ್ವರಿತ ಮಾರ್ಗಗಳು
+          </AppText>
+          <View
+            className="bg-white rounded-3xl overflow-hidden border border-border-light"
+            style={{
+              shadowColor: '#3D2314',
+              shadowOffset: { width: 0, height: 2 },
+              shadowOpacity: 0.05,
+              shadowRadius: 8,
+              elevation: 2,
+            }}
+          >
+            {quickLinks.map((item, idx) => (
               <Pressable
                 key={item.label}
-                onPress={() => {
-                  haptics.light();
-                  item.onPress();
-                }}
-                className={clsx(
-                  'flex-row items-center px-5 py-4',
-                  idx !== 3 && 'border-b border-border-light',
-                )}
-                style={({ pressed }) => ({
-                  backgroundColor: pressed ? '#FBF3E7' : '#FFFFFF',
-                })}
+                onPress={() => { haptics.light(); router.push(item.route as any); }}
+                style={({ pressed }) => ({ backgroundColor: pressed ? '#FBF5EE' : '#FFFFFF' })}
+                className={idx < quickLinks.length - 1 ? 'border-b border-border-light' : ''}
               >
-                <View className={clsx('w-11 h-11 rounded-xl items-center justify-center mr-4', item.bg)}>
-                  <Ionicons name={item.icon as any} size={20} color={item.color} />
-                </View>
-                <VStack spacing="xs" className="flex-1">
-                  <AppText variant="body" weight="semibold">
+                <View className="flex-row items-center px-4 py-3.5">
+                  <View
+                    className="w-9 h-9 rounded-xl items-center justify-center mr-3"
+                    style={{ backgroundColor: item.iconBg }}
+                  >
+                    <Ionicons name={item.icon} size={18} color={item.iconColor} />
+                  </View>
+                  <AppText variant="body" weight="medium" className="flex-1 text-primary-dark">
                     {item.label}
                   </AppText>
-                  <AppText variant="bodySmall" color="muted">
-                    {item.desc}
-                  </AppText>
-                </VStack>
-                <Ionicons name="chevron-forward" size={18} color="#A88C74" />
+                  <Ionicons name="chevron-forward" size={16} color="#C4B5A9" />
+                </View>
               </Pressable>
             ))}
           </View>
         </View>
 
-        <View className="items-center mb-8 pt-4">
-          <AppText variant="caption" color="subtle" align="center">
-            {LOCAL_STRINGS.madeWithLove} ♥
+        {/* ── Contact ───────────────────────────── */}
+        <View className="px-4 mt-6">
+          <AppText
+            variant="caption"
+            weight="semibold"
+            className="text-text-muted uppercase tracking-widest mb-3 ml-1"
+          >
+            ಸಂಪರ್ಕಿಸಿ (Contact Us)
           </AppText>
-          <AppText variant="caption" color="subtle" align="center">
-            {LOCAL_STRINGS.version} 1.0.0
+          <View
+            className="bg-white rounded-3xl overflow-hidden border border-border-light"
+            style={{
+              shadowColor: '#3D2314',
+              shadowOffset: { width: 0, height: 2 },
+              shadowOpacity: 0.05,
+              shadowRadius: 8,
+              elevation: 2,
+            }}
+          >
+            {/* Brand */}
+            <LinearGradient
+              colors={['#5E2116', '#8A3324']}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 0 }}
+              style={{ flexDirection: 'row', alignItems: 'center', padding: 16 }}
+            >
+              <View
+                className="w-10 h-10 rounded-xl items-center justify-center mr-3"
+                style={{ backgroundColor: 'rgba(255,255,255,0.18)', borderWidth: 1, borderColor: 'rgba(255,255,255,0.2)' }}
+              >
+                <Ionicons name="code-slash" size={18} color="#FFFFFF" />
+              </View>
+              <View>
+                <AppText variant="body" weight="bold" style={{ color: '#FFFFFF' }}>
+                  MSV Global Tech
+                </AppText>
+                <AppText variant="caption" style={{ color: 'rgba(255,255,255,0.65)', letterSpacing: 0.5 }}>
+                  Developed & Maintained by
+                </AppText>
+              </View>
+            </LinearGradient>
+
+            {/* Message */}
+            <View className="px-4 py-3.5 bg-[#FFFDF9] border-b border-border-light">
+              <AppText variant="caption" className="text-text-muted mb-2" style={{ lineHeight: 18 }}>
+                If you find any mistakes or have feedback, please contact us. We will try to resolve it.
+              </AppText>
+              <AppText variant="caption" className="text-text-muted" style={{ lineHeight: 18 }}>
+                ತಪ್ಪುಗಳು ಕಂಡರೆ ಅಥವಾ ಸಲಹೆಗಳಿದ್ದರೆ ನಮ್ಮನ್ನು ಸಂಪರ್ಕಿಸಿ. ನಾವು ಅದನ್ನು ಸರಿಪಡಿಸಲು ಪ್ರಯತ್ನಿಸುತ್ತೇವೆ.
+              </AppText>
+            </View>
+
+            {/* Website */}
+            <Pressable
+              onPress={() => Linking.openURL('https://msvglobaltech.com')}
+              style={({ pressed }) => ({ opacity: pressed ? 0.8 : 1 })}
+              className="flex-row items-center px-4 py-3.5 border-b border-border-light"
+            >
+              <View className="w-9 h-9 rounded-xl items-center justify-center mr-3 bg-secondary-subtle">
+                <Ionicons name="globe-outline" size={18} color="#8C6220" />
+              </View>
+              <AppText variant="bodySmall" weight="semibold" className="flex-1 text-primary-dark">
+                msvglobaltech.com
+              </AppText>
+              <Ionicons name="open-outline" size={14} color="#A88C74" />
+            </Pressable>
+
+            {/* Email */}
+            <Pressable
+              onPress={() => Linking.openURL('mailto:msvglobaltech@gmail.com')}
+              style={({ pressed }) => ({ opacity: pressed ? 0.8 : 1 })}
+              className="flex-row items-center px-4 py-3.5 border-b border-border-light"
+            >
+              <View className="w-9 h-9 rounded-xl items-center justify-center mr-3 bg-primary-subtle">
+                <Ionicons name="mail-outline" size={18} color="#8A3324" />
+              </View>
+              <AppText variant="bodySmall" weight="semibold" className="flex-1 text-primary-dark">
+                msvglobaltech@gmail.com
+              </AppText>
+              <Ionicons name="open-outline" size={14} color="#A88C74" />
+            </Pressable>
+
+            {/* WhatsApp */}
+            <Pressable
+              onPress={() => Linking.openURL('https://wa.me/918123363394')}
+              style={({ pressed }) => ({ opacity: pressed ? 0.8 : 1 })}
+              className="flex-row items-center px-4 py-3.5 bg-[#F0FDF4]"
+            >
+              <View className="w-9 h-9 rounded-xl items-center justify-center mr-3 bg-[#DCFCE7]">
+                <Ionicons name="logo-whatsapp" size={18} color="#16A34A" />
+              </View>
+              <AppText variant="bodySmall" weight="semibold" className="flex-1" style={{ color: '#16A34A' }}>
+                +91 8123363394
+              </AppText>
+              <Ionicons name="open-outline" size={14} color="#86EFAC" />
+            </Pressable>
+          </View>
+        </View>
+
+        {/* Footer */}
+        <View className="mt-6 mb-2 items-center">
+          <View className="flex-row items-center justify-center mb-1">
+            <Ionicons name="heart" size={11} color="#B4832E" />
+            <AppText variant="caption" className="text-text-subtle ml-1">
+              Made with love in India
+            </AppText>
+          </View>
+          <AppText variant="caption" className="text-text-subtle opacity-70">
+            Siddhanta Shikamani App • Version 1.0.0
           </AppText>
         </View>
-      </View>
-    </ScreenContainer>
+
+      </ScrollView>
+    </View>
   );
 }

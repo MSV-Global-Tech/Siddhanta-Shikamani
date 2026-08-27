@@ -21,9 +21,6 @@ export default function ReadingScreen() {
   const bottomInset = Math.max(insets.bottom, 8);
 
   const settings = useAppStore((state) => state.settings);
-  const addBookmark = useAppStore((state) => state.addBookmark);
-  const removeBookmark = useAppStore((state) => state.removeBookmark);
-  const isBookmarkedFn = useAppStore((state) => state.isBookmarked);
 
   const {
     chapter,
@@ -38,32 +35,6 @@ export default function ReadingScreen() {
   
   // Track manual scroll to prevent viewableItems update from overriding jumps temporarily
   const isJumping = useRef(false);
-
-  const handleBookmark = useCallback((verseId: string, verseNumber: number) => {
-    if (!chapter) return;
-    const isBookmarked = isBookmarkedFn(chapter.id, verseId);
-    
-    if (isBookmarked) {
-      const existingBm = useAppStore
-        .getState()
-        .bookmarks.find(
-          (b) => b.chapterId === chapter.id && b.verseId === verseId
-        );
-      if (existingBm) {
-        removeBookmark(existingBm.id);
-        haptics.warning();
-      }
-    } else {
-      addBookmark({
-        chapterId: chapter.id,
-        verseId,
-        chapterTitle: chapter.title,
-        verseNumber,
-        note: '',
-      });
-      haptics.success();
-    }
-  }, [chapter, isBookmarkedFn, addBookmark, removeBookmark]);
 
   const goToVerse = useCallback((index: number) => {
     haptics.selection();
@@ -125,7 +96,7 @@ export default function ReadingScreen() {
   return (
     <ScreenContainer edges={['top']}>
       <Header
-        title={`${LOCAL_STRINGS.pariccheda} ${toKannadaNumerals(chapter.number)}`}
+        title={chapter.parichheda.title}
         subtitle={chapter.title}
         showBack
         onBack={() => router.back()}
@@ -163,8 +134,6 @@ export default function ReadingScreen() {
                 showSanskrit={settings.showSanskrit}
                 showTranslation={settings.showTranslation}
                 showCommentary={settings.showCommentary}
-                isBookmarked={isBookmarkedFn(chapter.id, item.id)}
-                onBookmark={() => handleBookmark(item.id, item.verseNumber)}
                 fontSize={fontSize}
               />
             </View>

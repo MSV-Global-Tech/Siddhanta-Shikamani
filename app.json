@@ -3,6 +3,15 @@
     "name": "Siddhanta Shikamani",
     "slug": "siddhanta-shikamani",
     "version": "1.0.0",
+    "updates": {
+      "url": "https://u.expo.dev/a2b562d6-8625-43bd-b9cc-bef1582c1050",
+      "enabled": true,
+      "fallbackToCacheTimeout": 0,
+      "checkAutomatically": "ON_LOAD"
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
     "orientation": "portrait",
     "icon": "./assets/logo.png",
     "userInterfaceStyle": "light",

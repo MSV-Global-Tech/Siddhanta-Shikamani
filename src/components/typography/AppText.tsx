@@ -29,19 +29,19 @@ interface AppTextProps extends TextProps {
 }
 
 const variantStyles: Record<TextVariant, { size: string; leading: string; tracking: string }> = {
-  display: { size: 'text-4xl-kan', leading: 'leading-[44px]', tracking: 'tracking-tight' },
-  heading1: { size: 'text-3xl-kan', leading: 'leading-[38px]', tracking: 'tracking-tight' },
-  heading2: { size: 'text-2xl-kan', leading: 'leading-[32px]', tracking: 'tracking-tight' },
-  heading3: { size: 'text-xl-kan', leading: 'leading-[28px]', tracking: 'tracking-normal' },
-  title: { size: 'text-lg-kan', leading: 'leading-[24px]', tracking: 'tracking-normal' },
-  subtitle: { size: 'text-base-kan', leading: 'leading-[22px]', tracking: 'tracking-wide' },
-  bodyLarge: { size: 'text-base-kan', leading: 'leading-[24px]', tracking: 'tracking-normal' },
-  body: { size: 'text-sm-kan', leading: 'leading-[20px]', tracking: 'tracking-normal' },
-  bodySmall: { size: 'text-xs-kan', leading: 'leading-[18px]', tracking: 'tracking-normal' },
-  caption: { size: 'text-xs-kan', leading: 'leading-[16px]', tracking: 'tracking-wide' },
-  overline: { size: 'text-xs-kan', leading: 'leading-[16px]', tracking: 'tracking-wider' },
-  verse: { size: 'text-lg-kan', leading: 'leading-[32px]', tracking: 'tracking-wide' },
-  reading: { size: 'text-lg-kan', leading: 'leading-[34px]', tracking: 'tracking-normal' },
+  display: { size: 'text-4xl-kan', leading: 'leading-[56px]', tracking: 'tracking-tight' },
+  heading1: { size: 'text-3xl-kan', leading: 'leading-[50px]', tracking: 'tracking-tight' },
+  heading2: { size: 'text-2xl-kan', leading: 'leading-[44px]', tracking: 'tracking-tight' },
+  heading3: { size: 'text-xl-kan', leading: 'leading-[38px]', tracking: 'tracking-normal' },
+  title: { size: 'text-lg-kan', leading: 'leading-[34px]', tracking: 'tracking-normal' },
+  subtitle: { size: 'text-base-kan', leading: 'leading-[32px]', tracking: 'tracking-wide' },
+  bodyLarge: { size: 'text-base-kan', leading: 'leading-[34px]', tracking: 'tracking-normal' },
+  body: { size: 'text-sm-kan', leading: 'leading-[30px]', tracking: 'tracking-normal' },
+  bodySmall: { size: 'text-xs-kan', leading: 'leading-[28px]', tracking: 'tracking-normal' },
+  caption: { size: 'text-xs-kan', leading: 'leading-[26px]', tracking: 'tracking-wide' },
+  overline: { size: 'text-xs-kan', leading: 'leading-[26px]', tracking: 'tracking-wider' },
+  verse: { size: 'text-lg-kan', leading: 'leading-[42px]', tracking: 'tracking-wide' },
+  reading: { size: 'text-lg-kan', leading: 'leading-[44px]', tracking: 'tracking-normal' },
 };
 
 const weightFonts: Record<TextWeight, { sans: string; serif: string }> = {

@@ -71,18 +71,12 @@ export const defaultProfile: Profile = {
 
 interface AppState {
   settings: Settings;
-  bookmarks: Bookmark[];
   readingProgress: ReadingProgress[];
   profile: Profile;
   recentChapters: string[];
 
   updateSettings: (updates: Partial<Settings>) => void;
   resetSettings: () => void;
-
-  addBookmark: (bookmark: Omit<Bookmark, 'id' | 'createdAt'>) => void;
-  removeBookmark: (id: string) => void;
-  isBookmarked: (chapterId: string, verseId: string) => boolean;
-  clearBookmarks: () => void;
 
   updateReadingProgress: (chapterId: string, lastReadVerse: number, completed: boolean) => void;
   getReadingProgress: (chapterId: string) => ReadingProgress | undefined;
@@ -103,7 +97,6 @@ export const useAppStore = create<AppState>()(
   persist(
     (set, get) => ({
       settings: { ...defaultSettings },
-      bookmarks: [],
       readingProgress: [],
       profile: { ...defaultProfile },
       recentChapters: [],
@@ -117,34 +110,6 @@ export const useAppStore = create<AppState>()(
         set(() => ({
           settings: { ...defaultSettings },
         })),
-
-      addBookmark: (bookmarkData) => {
-        const exists = get().bookmarks.some(
-          (b) => b.chapterId === bookmarkData.chapterId && b.verseId === bookmarkData.verseId
-        );
-        if (exists) return;
-
-        const newBookmark: Bookmark = {
-          ...bookmarkData,
-          id: generateId(),
-          createdAt: Date.now(),
-        };
-
-        set((state) => ({
-          bookmarks: [newBookmark, ...state.bookmarks],
-        }));
-        get().checkAchievements();
-      },
-
-      removeBookmark: (id) =>
-        set((state) => ({
-          bookmarks: state.bookmarks.filter((b) => b.id !== id),
-        })),
-
-      isBookmarked: (chapterId, verseId) =>
-        get().bookmarks.some((b) => b.chapterId === chapterId && b.verseId === verseId),
-
-      clearBookmarks: () => set(() => ({ bookmarks: [] })),
 
       updateReadingProgress: (chapterId, lastReadVerse, completed) => {
         const existing = get().readingProgress.find((p) => p.chapterId === chapterId);
@@ -246,14 +211,13 @@ export const useAppStore = create<AppState>()(
 
       checkAchievements: () => {
         const state = get();
-        const { profile, bookmarks } = state;
+        const { profile } = state;
         const unlocked: string[] = [];
 
         if (profile.chaptersRead >= 1) unlocked.push('ach-1');
         if (profile.chaptersRead >= 5) unlocked.push('ach-2');
         if (profile.totalVersesRead >= 100) unlocked.push('ach-3');
         if (profile.readingStreak >= 7) unlocked.push('ach-4');
-        if (bookmarks.length >= 10) unlocked.push('ach-5');
 
         const uniqueChapters = new Set(
           state.readingProgress.filter((p) => p.completed).map((p) => p.chapterId)
@@ -277,7 +241,6 @@ export const useAppStore = create<AppState>()(
       resetAllData: () =>
         set(() => ({
           settings: { ...defaultSettings },
-          bookmarks: [],
           readingProgress: [],
           profile: { ...defaultProfile },
           recentChapters: [],
@@ -288,7 +251,6 @@ export const useAppStore = create<AppState>()(
       storage: createJSONStorage(() => storage),
       partialize: (state) => ({
         settings: state.settings,
-        bookmarks: state.bookmarks,
         readingProgress: state.readingProgress,
         profile: state.profile,
         recentChapters: state.recentChapters,

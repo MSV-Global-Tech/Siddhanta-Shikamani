@@ -1,12 +1,11 @@
-import React, { useState, useCallback } from 'react';
+import React from 'react';
 import { View, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { router, usePathname, useFocusEffect } from 'expo-router';
+import { router, usePathname } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { AppText } from '../typography/AppText';
 import { useHapticFeedback } from '@/hooks/useHapticFeedback';
 import { LOCAL_STRINGS } from '@/localization';
-import { useAppStore } from '@/store/useAppStore';
 
 interface TabItem {
   key: string;
@@ -31,14 +30,6 @@ const tabs: TabItem[] = [
     activeIcon: 'book',
     route: '/chapters',
   },
-
-  {
-    key: 'bookmarks',
-    label: LOCAL_STRINGS.bookmarks,
-    icon: 'bookmark-outline',
-    activeIcon: 'bookmark',
-    route: '/bookmarks',
-  },
   {
     key: 'profile',
     label: LOCAL_STRINGS.more,
@@ -52,13 +43,7 @@ export function BottomNavigation() {
   const pathname = usePathname();
   const haptics = useHapticFeedback();
   const insets = useSafeAreaInsets();
-  const [bookmarkCount, setBookmarkCount] = useState(() => useAppStore.getState().bookmarks.length);
 
-  useFocusEffect(
-    useCallback(() => {
-      setBookmarkCount(useAppStore.getState().bookmarks.length);
-    }, [])
-  );
 
   // ಸಿಸ್ಟಂ ನ್ಯಾವಿಗೇಶನ್‌ಗೆ ತಕ್ಕಂತೆ ಕೆಳ ಅಂತರ — ಬಟನ್/ಗೆಸ್ಚರ್ ಮೇಲೆ ಸರಿಯಾಗಿ ಕೂರುತ್ತದೆ
   const bottomPadding = Math.max(insets.bottom, 8);
@@ -82,8 +67,6 @@ export function BottomNavigation() {
     >
       {tabs.map((tab) => {
         const isActive = isRouteActive(tab.route);
-        const isBookmark = tab.key === 'bookmarks' && bookmarkCount > 0;
-
         return (
           <Pressable
             key={tab.key}
@@ -100,13 +83,6 @@ export function BottomNavigation() {
                 size={24}
                 color={isActive ? '#8A3324' : '#A88C74'}
               />
-              {isBookmark && !isActive && (
-                <View className="absolute -top-1.5 -right-2.5 min-w-[16px] h-[16px] bg-primary-default rounded-full items-center justify-center px-1">
-                  <AppText variant="caption" weight="bold" color="inverted" align="center" style={{ fontSize: 9, lineHeight: 12 }}>
-                    {bookmarkCount > 9 ? '9+' : bookmarkCount.toString()}
-                  </AppText>
-                </View>
-              )}
             </View>
             <AppText
               variant="caption"

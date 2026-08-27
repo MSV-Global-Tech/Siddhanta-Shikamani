@@ -80,12 +80,11 @@ export function Header({
             variant={subtitle ? 'title' : 'heading3'}
             weight={subtitle ? 'semibold' : 'semibold'}
             align="center"
-            numberOfLines={1}
           >
             {title}
           </AppText>
           {subtitle && (
-            <AppText variant="caption" color="muted" align="center" numberOfLines={1}>
+            <AppText variant="caption" color="muted" align="center">
               {subtitle}
             </AppText>
           )}
@@ -248,8 +247,6 @@ interface VerseContentProps {
   showSanskrit?: boolean;
   showTranslation?: boolean;
   showCommentary?: boolean;
-  isBookmarked?: boolean;
-  onBookmark?: () => void;
   fontSize?: number;
 }
 
@@ -261,8 +258,6 @@ export function VerseContent({
   showSanskrit = true,
   showTranslation = true,
   showCommentary = true,
-  isBookmarked = false,
-  onBookmark,
   fontSize = 20,
 }: VerseContentProps) {
   const haptics = useHapticFeedback();

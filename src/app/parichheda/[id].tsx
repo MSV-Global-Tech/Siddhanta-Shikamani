@@ -1,8 +1,10 @@
 import React, { useMemo } from 'react';
 import { View, Pressable, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { LinearGradient } from 'expo-linear-gradient';
 import { useLocalSearchParams, router } from 'expo-router';
-import { ScreenContainer, HStack } from '@/components/layouts/Containers';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { ScreenContainer } from '@/components/layouts/Containers';
 import { AppText } from '@/components/typography/AppText';
 import { CHAPTERS } from '@/data/chapters';
 import { LOCAL_STRINGS } from '@/localization';
@@ -14,9 +16,9 @@ import { useHapticFeedback } from '@/hooks/useHapticFeedback';
 export default function ParichhedaScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const haptics = useHapticFeedback();
+  const insets = useSafeAreaInsets();
   const readingProgress = useAppStore((state) => state.readingProgress);
 
-  // Get the parichheda info from the first chapter that has this ID
   const parichhedaInfo = useMemo(() => {
     const chapter = CHAPTERS.find(c => c.parichheda?.id === id);
     return chapter?.parichheda;
@@ -25,6 +27,8 @@ export default function ParichhedaScreen() {
   const chapters = useMemo(() => {
     return CHAPTERS.filter(c => c.parichheda?.id === id).sort((a, b) => a.number - b.number);
   }, [id]);
+
+  const totalShlokas = chapters.reduce((sum, c) => sum + c.versesCount, 0);
 
   const handleOpen = (chapterId: string) => {
     haptics.medium();
@@ -45,38 +49,86 @@ export default function ParichhedaScreen() {
   }
 
   return (
-    <ScreenContainer>
-      <View className="px-5 pt-4 pb-2">
-        <HStack justify="space-between" align="center" className="mb-5">
-          <Pressable
-            onPress={() => router.back()}
-            hitSlop={10}
-            className="w-11 h-11 rounded-full items-center justify-center bg-white shadow-sm border border-secondary-light/20"
+    <View style={{ flex: 1, backgroundColor: '#FAF6F1' }}>
+      {/* ── Hero gradient header ── */}
+      <LinearGradient
+        colors={['#5C1507', '#8A3324', '#B86040']}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 1 }}
+        style={{ paddingTop: insets.top + 8, paddingBottom: 28 }}
+      >
+        {/* Back button */}
+        <Pressable
+          onPress={() => router.back()}
+          hitSlop={10}
+          style={{
+            marginHorizontal: 20,
+            marginBottom: 20,
+            width: 40,
+            height: 40,
+            borderRadius: 20,
+            alignItems: 'center',
+            justifyContent: 'center',
+            backgroundColor: 'rgba(255,255,255,0.20)',
+          }}
+        >
+          <Ionicons name="arrow-back" size={22} color="#FFFFFF" />
+        </Pressable>
+
+        {/* Label pill */}
+        <View style={{ paddingHorizontal: 24 }}>
+          <View
+            style={{
+              alignSelf: 'flex-start',
+              borderRadius: 999,
+              paddingHorizontal: 12,
+              paddingVertical: 4,
+              marginBottom: 10,
+              backgroundColor: 'rgba(255,255,255,0.22)',
+            }}
           >
-            <Ionicons name="arrow-back" size={24} color="#3D2314" />
-          </Pressable>
+            <AppText variant="caption" weight="bold" color="inverted" className="uppercase tracking-widest">
+              {LOCAL_STRINGS.pariccheda}{parichhedaInfo.number ? ` ${toKannadaNumerals(parichhedaInfo.number)}` : ''}
+            </AppText>
+          </View>
+
+          {/* Full title — no truncation */}
           <AppText
-            variant="heading3"
+            variant="heading2"
             weight="bold"
-            align="center"
-            className="text-primary-dark font-serif-kan-bold flex-1 mx-2"
-            numberOfLines={2}
+            color="inverted"
+            className="font-serif-kan-bold"
+            style={{ lineHeight: 48 }}
           >
             {parichhedaInfo.title}
           </AppText>
-          <View className="w-11 h-11" />
-        </HStack>
-      </View>
 
+          {/* Stats row */}
+          <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 14, gap: 20 }}>
+            <View style={{ flexDirection: 'row', alignItems: 'center', gap: 5 }}>
+              <Ionicons name="book-outline" size={14} color="rgba(255,255,255,0.80)" />
+              <AppText variant="caption" color="inverted" style={{ opacity: 0.85 }}>
+                {toKannadaNumerals(chapters.length)} ಅಧ್ಯಾಯಗಳು
+              </AppText>
+            </View>
+            <View style={{ flexDirection: 'row', alignItems: 'center', gap: 5 }}>
+              <Ionicons name="list-outline" size={14} color="rgba(255,255,255,0.80)" />
+              <AppText variant="caption" color="inverted" style={{ opacity: 0.85 }}>
+                {toKannadaNumerals(totalShlokas)} {LOCAL_STRINGS.shlokas}
+              </AppText>
+            </View>
+          </View>
+        </View>
+      </LinearGradient>
+
+      {/* ── Chapter list ── */}
       <ScrollView
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ paddingHorizontal: 14, paddingBottom: 100 }}
+        contentContainerStyle={{ paddingHorizontal: 16, paddingTop: 16, paddingBottom: 100 }}
       >
-        <View className="flex-row flex-wrap">
-          {chapters.map((chapter) => renderChapterCard(chapter, readingProgress, handleOpen))}
-        </View>
+        {chapters.map((chapter) => renderChapterCard(chapter, readingProgress, handleOpen))}
       </ScrollView>
-    </ScreenContainer>
+    </View>
   );
 }
 
@@ -90,46 +142,55 @@ function renderChapterCard(chapter: Chapter, readingProgress: any[], handleOpen:
     : 0;
 
   return (
-    <View key={chapter.id} className="w-1/3 p-1.5">
-      <Pressable
-        onPress={() => handleOpen(chapter.id)}
-        className="bg-white rounded-3xl border border-secondary-light/40 shadow-soft items-center px-2 py-5"
-        style={({ pressed }) => ({ opacity: pressed ? 0.8 : 1 })}
-      >
-        <View className="w-14 h-14 rounded-full border-2 border-secondary-light/60 items-center justify-center mb-3 bg-secondary-subtle/60">
-          <View className="w-11 h-11 rounded-full border border-secondary-default/40 items-center justify-center bg-white">
-            <AppText
-              variant="title"
-              weight="bold"
-              className="text-primary-dark font-serif-kan-bold"
-            >
-              {toKannadaNumerals(chapter.number)}
+    <Pressable
+      key={chapter.id}
+      onPress={() => handleOpen(chapter.id)}
+      className="bg-white rounded-2xl border border-secondary-light/30 shadow-soft flex-row items-center px-4 py-4 mb-3"
+      style={({ pressed }) => ({ opacity: pressed ? 0.8 : 1 })}
+    >
+      {/* Number circle */}
+      <View className="w-14 h-14 rounded-full border-2 border-secondary-light/60 items-center justify-center bg-secondary-subtle/60 mr-4 shrink-0">
+        <View className="w-11 h-11 rounded-full border border-secondary-default/40 items-center justify-center bg-white">
+          <AppText variant="title" weight="bold" className="text-primary-dark font-serif-kan-bold">
+            {toKannadaNumerals(chapter.number)}
+          </AppText>
+        </View>
+      </View>
+
+      {/* Text block */}
+      <View className="flex-1">
+        <AppText variant="title" weight="semibold" className="text-primary-dark mb-0.5">
+          {chapter.title}
+        </AppText>
+        <AppText variant="caption" color="muted" className="mb-1.5" numberOfLines={2}>
+          {chapter.description}
+        </AppText>
+        <View className="flex-row items-center justify-between w-full mt-2">
+          <View className="flex-row items-center gap-1.5">
+            <AppText variant="body" weight="bold" style={{ color: '#000000' }}>
+              {toKannadaNumerals(chapter.versesCount)} {LOCAL_STRINGS.shlokas}
             </AppText>
+            {percent > 0 && (
+              <AppText variant="bodySmall" weight="bold" color="primary" className="ml-2">
+                {toKannadaNumerals(percent)}%
+              </AppText>
+            )}
+          </View>
+
+          <View className="flex-row items-center bg-secondary-subtle/40 px-3 py-1.5 rounded-full border border-secondary-light/20">
+            <AppText variant="bodySmall" weight="bold" style={{ color: '#000000', marginRight: 4 }}>
+              ಓದಿ
+            </AppText>
+            <Ionicons name="arrow-forward" size={14} color="#000000" />
           </View>
         </View>
 
-        <AppText
-          variant="bodySmall"
-          weight="semibold"
-          align="center"
-          numberOfLines={2}
-          className="text-primary-dark mb-1 h-9 flex-col justify-center"
-        >
-          {chapter.title}
-        </AppText>
-        <AppText variant="caption" color="muted" align="center" numberOfLines={1}>
-          {LOCAL_STRINGS.shlokas} {toKannadaNumerals(chapter.versesCount)}
-        </AppText>
-
         {percent > 0 && (
-          <View className="h-1 w-12 bg-background-subtle rounded-full overflow-hidden mt-2.5">
-            <View
-              className="h-full bg-secondary-default rounded-full"
-              style={{ width: `${percent}%` }}
-            />
+          <View className="h-1 bg-background-subtle rounded-full overflow-hidden mt-3 w-full">
+            <View className="h-full bg-primary-default rounded-full" style={{ width: `${percent}%` }} />
           </View>
         )}
-      </Pressable>
-    </View>
+      </View>
+    </Pressable>
   );
 }
