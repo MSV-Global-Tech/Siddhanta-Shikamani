@@ -11,10 +11,11 @@ import { toKannadaNumerals } from '@/utils';
 import { LOCAL_STRINGS } from '@/localization';
 
 interface HeaderProps {
-  title: string;
+  title?: string;
   showBack?: boolean;
   onBack?: () => void;
   rightContent?: React.ReactNode;
+  centerContent?: React.ReactNode;
   variant?: 'default' | 'transparent' | 'gradient';
   subtitle?: string;
   scrollY?: number;
@@ -25,6 +26,7 @@ export function Header({
   showBack = false,
   onBack,
   rightContent,
+  centerContent,
   variant = 'default',
   subtitle,
   scrollY = 0,
@@ -51,7 +53,7 @@ export function Header({
   return (
     <View
       className={clsx(
-        'px-6 py-4 border-b border-transparent',
+        'px-4 py-2.5 border-b border-transparent',
         variant !== 'gradient' && bgClass[variant],
         variant === 'default' && scrolled && 'border-border-light shadow-soft z-50'
       )}
@@ -75,20 +77,24 @@ export function Header({
             </Pressable>
           )}
         </View>
-        <VStack spacing="xs" className="items-center flex-1 mx-3">
-          <AppText
-            variant={subtitle ? 'title' : 'heading3'}
-            weight={subtitle ? 'semibold' : 'semibold'}
-            align="center"
-          >
-            {title}
-          </AppText>
-          {subtitle && (
-            <AppText variant="caption" color="muted" align="center">
-              {subtitle}
+        {centerContent ? (
+          centerContent
+        ) : (
+          <VStack spacing="xs" className="items-center flex-1 mx-3">
+            <AppText
+              variant={subtitle ? 'title' : 'heading3'}
+              weight={subtitle ? 'semibold' : 'semibold'}
+              align="center"
+            >
+              {title}
             </AppText>
-          )}
-        </VStack>
+            {subtitle && (
+              <AppText variant="caption" color="muted" align="center">
+                {subtitle}
+              </AppText>
+            )}
+          </VStack>
+        )}
         <View className="w-11 h-11 items-end justify-center">
           {rightContent}
         </View>
@@ -276,11 +282,12 @@ export function VerseContent({
             <AppText
               key={i}
               variant="verse"
+              weight="semibold"
               align="center"
-              className="text-primary-dark font-serif-kan-bold"
+              className="text-primary-dark font-kannada-semi"
               style={{
-                fontSize: 20,
-                lineHeight: 20 * 1.85,
+                fontSize: 19.5,
+                lineHeight: 19.5 * 1.85,
               }}
             >
               {line}

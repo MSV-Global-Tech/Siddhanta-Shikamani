@@ -148,7 +148,7 @@ export const LOCAL_STRINGS = {
   dailyShloka: 'ದೈನಂದಿನ ಶ್ಲೋಕ',
   readNow: 'ಓದಿ',
   pariccheda: 'ಪರಿಚ್ಛೇದ',
-  chaptersPariccheda: 'ಅಧ್ಯಾಯಗಳು (ಪರಿಚ್ಛೇದಗಳು)',
+  chaptersPariccheda: 'ಪರಿಚ್ಛೇದಗಳು (ಅಧ್ಯಾಯಗಳು)',
   shlokas: 'ಶ್ಲೋಕಗಳು',
   notes: 'ನೋಟ್‌ಗಳು',
   more: 'ಹೆಚ್ಚು',

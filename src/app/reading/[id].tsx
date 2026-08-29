@@ -93,13 +93,64 @@ export default function ReadingScreen() {
     );
   }
 
+  const parichhedaInfo = chapter.parichheda;
+  let parichhedaOrdinal = '';
+  let parichhedaName = '';
+
+  if (parichhedaInfo) {
+    if (parichhedaInfo.title.includes(' - ')) {
+      const parts = parichhedaInfo.title.split(' - ');
+      parichhedaOrdinal = `${parts[0].trim()} (${toKannadaNumerals(parichhedaInfo.number)})`;
+      parichhedaName = parts.slice(1).join(' - ').trim();
+    } else {
+      parichhedaOrdinal = `${LOCAL_STRINGS.pariccheda} (${toKannadaNumerals(parichhedaInfo.number)})`;
+      parichhedaName = parichhedaInfo.title;
+    }
+  }
+
   return (
     <ScreenContainer edges={['top']}>
       <Header
-        title={chapter.parichheda.title}
-        subtitle={chapter.title}
         showBack
         onBack={() => router.back()}
+        centerContent={
+          <View className="items-center justify-center flex-1 mx-1.5 px-1">
+            {parichhedaOrdinal ? (
+              <AppText
+                variant="bodySmall"
+                weight="bold"
+                className="text-secondary-dark tracking-wide"
+                align="center"
+                numberOfLines={1}
+                style={{ fontSize: 13, lineHeight: 18, marginBottom: 2 }}
+              >
+                {parichhedaOrdinal}
+              </AppText>
+            ) : null}
+            {parichhedaName ? (
+              <AppText
+                variant="bodySmall"
+                color="muted"
+                weight="semibold"
+                align="center"
+                numberOfLines={2}
+                style={{ fontSize: 13, lineHeight: 18, marginBottom: 2 }}
+              >
+                {parichhedaName}
+              </AppText>
+            ) : null}
+            <AppText
+              variant="heading3"
+              weight="bold"
+              align="center"
+              numberOfLines={2}
+              className="text-primary-dark font-kannada-bold mt-0.5"
+              style={{ fontSize: 18, lineHeight: 26, paddingHorizontal: 2 }}
+            >
+              {chapter.title}
+            </AppText>
+          </View>
+        }
         rightContent={
           <HStack spacing="xs">
             <IconButton
@@ -121,7 +172,7 @@ export default function ReadingScreen() {
           contentContainerStyle={{
             paddingHorizontal: 16,
             paddingTop: 12,
-            paddingBottom: 180,
+            paddingBottom: bottomInset + 30,
           }}
           onViewableItemsChanged={onViewableItemsChanged.current}
           viewabilityConfig={viewabilityConfig.current}
@@ -155,52 +206,6 @@ export default function ReadingScreen() {
             ) : null
           }
         />
-
-        <View
-          className="absolute bottom-0 left-0 right-0 px-5 pt-3 bg-white/95 backdrop-blur-xl border-t border-border-light"
-          style={{ paddingBottom: bottomInset }}
-        >
-          <View className="mb-2">
-            <ScrollView ref={scrollRef} horizontal showsHorizontalScrollIndicator={false}>
-              <View className="flex-row items-center py-1">
-                {chapter.content.map((verse, idx) => {
-                  const p = useAppStore.getState().getReadingProgress(chapter.id);
-                  const isRead = idx < (p?.lastReadVerse || 0);
-                  const isCurrent = idx === currentVerseIndex;
-
-                  return (
-                    <Pressable
-                      key={verse.id}
-                      onPress={() => goToVerse(idx)}
-                      className={clsx(
-                        'w-9 h-9 rounded-full items-center justify-center mr-2',
-                        isCurrent
-                          ? 'bg-primary-default shadow-soft'
-                          : isRead
-                          ? 'bg-primary-subtle shadow-none'
-                          : 'bg-background-soft border border-border-light shadow-none',
-                      )}
-                    >
-                      <AppText
-                        variant="caption"
-                        weight={isCurrent ? 'bold' : 'medium'}
-                        color={
-                          isCurrent
-                            ? 'inverted'
-                            : isRead
-                            ? 'primary'
-                            : 'muted'
-                        }
-                      >
-                        {toKannadaNumerals(idx + 1)}
-                      </AppText>
-                    </Pressable>
-                  );
-                })}
-              </View>
-            </ScrollView>
-          </View>
-        </View>
       </View>
 
       <Modal

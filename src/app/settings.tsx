@@ -1,542 +1,278 @@
-import React, { useState } from 'react';
-import { View, Pressable, Alert, Modal, ScrollView } from 'react-native';
+import React from 'react';
+import { View, ScrollView, Pressable, Linking, Share } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { clsx } from 'clsx';
-import { LinearGradient } from 'expo-linear-gradient';
-import { ScreenContainer, HStack, VStack } from '@/components/layouts/Containers';
+import { ScreenContainer, VStack } from '@/components/layouts/Containers';
 import { AppText } from '@/components/typography/AppText';
-import { SettingItem, SettingSwitch } from '@/components/inputs/Inputs';
-import { Button } from '@/components/buttons/Button';
+import { SettingSwitch } from '@/components/inputs/Inputs';
 import { Header } from '@/components/common/Common';
-import { useAppStore, defaultProfile } from '@/store/useAppStore';
-import { LOCAL_STRINGS } from '@/localization';
-import { toKannadaNumerals, haptics } from '@/utils';
-import { CANTO_KEYS } from '@/constants';
-import { storage } from '@/services/storage';
+import { useAppStore } from '@/store/useAppStore';
+import { useHapticFeedback } from '@/hooks/useHapticFeedback';
+
+const PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=com.msvglobaltech.siddhantashikamani';
 
 export default function SettingsScreen() {
   const insets = useSafeAreaInsets();
-  // ಸಿಸ್ಟಂ ನ್ಯಾವಿಗೇಶನ್‌ಗೆ ತಕ್ಕಂತೆ ಕೆಳ ಅಂತರ
   const bottomInset = Math.max(insets.bottom, 8);
-  const {
-    settings,
-    updateSettings,
-    resetSettings,
-    profile,
-    updateProfile,
-    resetAllData,
-    bookmarks,
-    readingProgress,
-    clearRecentChapters,
-  } = useAppStore();
+  const haptics = useHapticFeedback();
 
-  const [showResetConfirm, setShowResetConfirm] = useState(false);
-  const [showAbout, setShowAbout] = useState(false);
-  const [fontSize, setFontSize] = useState(settings.fontSize);
+  const { settings, updateSettings } = useAppStore();
 
-  const handleResetData = () => {
-    Alert.alert(
-      'ಎಲ್ಲಾ ಡೇಟಾವನ್ನು ರೀಸೆಟ್ ಮಾಡಿ',
-      'ಈ ಕ್ರಿಯೆಯು ಬುಕ್ಮಾರ್ಕ್‌ಗಳನ್ನು, ಪ್ರಗತಿಯನ್ನು ಮತ್ತು ಎಲ್ಲಾ ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ಸಂಪೂರ್ಣವಾಗಿ ಅಳಿಸುತ್ತದೆ. ಇದನ್ನು ಮುಂದುವರೆಸಬೇಕೇ?',
-      [
-        { text: 'ರದ್ದು', style: 'cancel' },
-        {
-          text: 'ರೀಸೆಟ್ ಮಾಡಿ',
-          style: 'destructive',
-          onPress: async () => {
-            await storage.clearAll();
-            resetAllData();
-            haptics.warning();
-            setShowResetConfirm(false);
-            setTimeout(() => {
-              router.replace('/');
-            }, 500);
-          },
-        },
-      ]
-    );
+  const handleInviteFriends = async () => {
+    haptics.light();
+    try {
+      await Share.share({
+        title: 'ಸಿದ್ಧಾಂತ ಶಿಖಾಮಣಿ',
+        message: 'ಸಿದ್ಧಾಂತ ಶಿಖಾಮಣಿ ಅಪ್ಲಿಕೇಶನ್ ಡೌನ್‌ಲೋಡ್ ಮಾಡಿ ಮತ್ತು ಆಧ್ಯಾತ್ಮಿಕ ಜ್ಞಾನದ ಮಾರ್ಗ ಕಂಡುಕೊಳ್ಳಿ!\n\n' + PLAY_STORE_URL,
+        url: PLAY_STORE_URL,
+      });
+    } catch (_) {}
   };
 
-  const fontSizeLabels: Record<number, string> = {
-    14: 'ಸಣ್ಣ',
-    16: 'ಸಾಮಾನ್ಯ',
-    17: 'ಸರಾಸರಿ',
-    19: 'ದೊಡ್ಡ',
-    21: 'ವಿಶಾಲ',
-    24: 'ಬಹಳ ದೊಡ್ಡ',
+  const handleRateApp = async () => {
+    haptics.light();
+    const supported = await Linking.canOpenURL(PLAY_STORE_URL);
+    if (supported) {
+      await Linking.openURL('market://details?id=com.msvglobaltech.siddhantashikamani');
+    } else {
+      await Linking.openURL(PLAY_STORE_URL);
+    }
   };
 
   return (
-    <ScreenContainer edges={['top']}>
+    <ScreenContainer edges={['top']} className="bg-[#F9F6F0]">
       <Header
-        title={LOCAL_STRINGS.settingsTitle}
+        title="ಸೆಟ್ಟಿಂಗ್‌ಗಳು"
         showBack
         onBack={() => router.back()}
       />
 
-      <View className="flex-1">
-        <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: bottomInset + 40 }}>
-          <View className="px-6 pt-4">
-            <View className="mb-7">
-              <View className="bg-white rounded-3xl overflow-hidden shadow-soft border border-border-light">
-                <AppText variant="overline" color="muted" weight="semibold" className="uppercase tracking-wider px-5 pt-5 pb-2">
-                  {LOCAL_STRINGS.display}
-                </AppText>
-
-                <SettingItem
-                  icon="text-outline"
-                  title={LOCAL_STRINGS.fontSize}
-                  description={fontSizeLabels[fontSize] || `${toKannadaNumerals(fontSize)}px`}
-                  borderTop={false}
-                  rightContent={
-                    <HStack spacing="xs">
-                      <Pressable
-                        onPress={() => {
-                          const next = Math.max(CANTO_KEYS.app.MIN_FONT_SIZE, fontSize - 1);
-                          setFontSize(next);
-                          updateSettings({ fontSize: next });
-                          haptics.light();
-                        }}
-                        className="w-9 h-9 rounded-xl items-center justify-center bg-background-soft"
-                        disabled={fontSize <= CANTO_KEYS.app.MIN_FONT_SIZE}
-                      >
-                        <Ionicons
-                          name="remove"
-                          size={18}
-                          color={fontSize <= CANTO_KEYS.app.MIN_FONT_SIZE ? '#D4BFA3' : '#7A5C48'}
-                        />
-                      </Pressable>
-                      <View className="w-14 h-9 rounded-xl items-center justify-center bg-primary-subtle">
-                        <AppText variant="bodySmall" weight="bold" color="primary">
-                          {toKannadaNumerals(fontSize)}
-                        </AppText>
-                      </View>
-                      <Pressable
-                        onPress={() => {
-                          const next = Math.min(CANTO_KEYS.app.MAX_FONT_SIZE, fontSize + 1);
-                          setFontSize(next);
-                          updateSettings({ fontSize: next });
-                          haptics.light();
-                        }}
-                        className="w-9 h-9 rounded-xl items-center justify-center bg-background-soft"
-                        disabled={fontSize >= CANTO_KEYS.app.MAX_FONT_SIZE}
-                      >
-                        <Ionicons
-                          name="add"
-                          size={18}
-                          color={fontSize >= CANTO_KEYS.app.MAX_FONT_SIZE ? '#D4BFA3' : '#7A5C48'}
-                        />
-                      </Pressable>
-                    </HStack>
-                  }
-                />
-
-                <SettingItem
-                  icon="reader-outline"
-                  title={LOCAL_STRINGS.fontFamily}
-                  description={settings.fontFamily === 'serif' ? 'ಸೆರಿಫ್ ಲಿಪಿ (ಓದಲು ಸೌಕರ್ಯ)' : 'ಸ್ಯಾನ್ಸ್-ಸೆರಿಫ್ ಲಿಪಿ (ಸಮಂಜಸವಾದ)'}
-                  rightContent={
-                    <Pressable
-                      onPress={() => {
-                        updateSettings({
-                          fontFamily: settings.fontFamily === 'serif' ? 'sans' : 'serif',
-                        });
-                        haptics.selection();
-                      }}
-                      className="w-[76px] h-10 rounded-2xl bg-background-soft p-1"
-                    >
-                      <View
-                        className={clsx(
-                          'w-[34px] h-8 rounded-xl bg-primary-default items-center justify-center shadow-soft transition-transform',
-                          settings.fontFamily === 'serif' ? 'translate-x-0' : 'translate-x-9',
-                        )}
-                      >
-                        <AppText
-                          variant="caption"
-                          weight="bold"
-                          color="inverted"
-                        >
-                          {settings.fontFamily === 'serif' ? 'ಸ್' : 'ಎಸ್'}
-                        </AppText>
-                      </View>
-                    </Pressable>
-                  }
-                />
-
-                <SettingItem
-                  icon="globe-outline"
-                  title={LOCAL_STRINGS.language}
-                  description="ಕನ್ನಡ (ನಿಶ್ಚಿತ)"
-                />
-              </View>
-            </View>
-
-            <View className="mb-7">
-              <View className="bg-white rounded-3xl overflow-hidden shadow-soft border border-border-light">
-                <AppText variant="overline" color="muted" weight="semibold" className="uppercase tracking-wider px-5 pt-5 pb-2">
-                  {LOCAL_STRINGS.reading}
-                </AppText>
-
-                <SettingItem
-                  icon="language-outline"
-                  title={LOCAL_STRINGS.showSanskrit}
-                  borderTop={false}
-                  rightContent={
-                    <SettingSwitch
-                      value={settings.showSanskrit}
-                      onValueChange={(v) => updateSettings({ showSanskrit: v })}
-                    />
-                  }
-                />
-
-                <SettingItem
-                  icon="document-text-outline"
-                  title={LOCAL_STRINGS.showTranslation}
-                  rightContent={
-                    <SettingSwitch
-                      value={settings.showTranslation}
-                      onValueChange={(v) => updateSettings({ showTranslation: v })}
-                    />
-                  }
-                />
-
-                <SettingItem
-                  icon="chatbox-ellipses-outline"
-                  title={LOCAL_STRINGS.showCommentary}
-                  rightContent={
-                    <SettingSwitch
-                      value={settings.showCommentary}
-                      onValueChange={(v) => updateSettings({ showCommentary: v })}
-                    />
-                  }
-                />
-
-                <SettingItem
-                  icon="save-outline"
-                  title={LOCAL_STRINGS.autoSave}
-                  description="ನೀವು ಓದುವ ಪ್ರತಿ ಶ್ಲೋಕವನ್ನು ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಉಳಿಸಿ"
-                  rightContent={
-                    <SettingSwitch
-                      value={settings.autoSaveProgress}
-                      onValueChange={(v) => updateSettings({ autoSaveProgress: v })}
-                    />
-                  }
-                />
-              </View>
-            </View>
-
-            <View className="mb-7">
-              <View className="bg-white rounded-3xl overflow-hidden shadow-soft border border-border-light">
-                <AppText variant="overline" color="muted" weight="semibold" className="uppercase tracking-wider px-5 pt-5 pb-2">
-                  {LOCAL_STRINGS.general}
-                </AppText>
-
-                <SettingItem
-                  icon="radio-button-on-outline"
-                  title={LOCAL_STRINGS.vibration}
-                  description={LOCAL_STRINGS.vibrationDesc}
-                  borderTop={false}
-                  rightContent={
-                    <SettingSwitch
-                      value={settings.vibrationEnabled}
-                      onValueChange={(v) => updateSettings({ vibrationEnabled: v })}
-                    />
-                  }
-                />
-
-                <SettingItem
-                  icon="refresh-outline"
-                  title="ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ಮರಳಿ ಸ್ಥಾಪಿಸಿ"
-                  description="ಎಲ್ಲಾ ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ಪೂರ್ವನಿಯೋಜಿತ ಮೌಲ್ಯಗಳಿಗೆ ಮರಳಿಸಿ"
-                  onPress={() => {
-                    Alert.alert(
-                      'ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ರೀಸೆಟ್ ಮಾಡಿ',
-                      'ಎಲ್ಲಾ ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ಪೂರ್ವನಿಯೋಜಿತ ಮೌಲ್ಯಗಳಿಗೆ ಮರಳಿಸಲಾಗುತ್ತದೆ. ಖಚಿತವೇ?',
-                      [
-                        { text: 'ರದ್ದು', style: 'cancel' },
-                        {
-                          text: 'ರೀಸೆಟ್ ಮಾಡಿ',
-                          style: 'destructive',
-                          onPress: () => {
-                            resetSettings();
-                            setFontSize(17);
-                            haptics.success();
-                          },
-                        },
-                      ]
-                    );
-                  }}
-                />
-
-                <SettingItem
-                  icon="trash-bin-outline"
-                  title="ಇತ್ತೀಚಿನ ಅಧ್ಯಾಯಗಳನ್ನು ತೆರವುಗೊಳಿಸಿ"
-                  description={`${toKannadaNumerals(useAppStore.getState().recentChapters.length)} ಇತ್ತೀಚಿನ ವಾಚನಗಳು`}
-                  onPress={() => {
-                    clearRecentChapters();
-                    haptics.success();
-                  }}
-                />
-
-                <SettingItem
-                  icon="alert-circle-outline"
-                  title="ಎಲ್ಲಾ ಡೇಟಾವನ್ನು ರೀಸೆಟ್ ಮಾಡಿ"
-                  description="ಬುಕ್ಮಾರ್ಕ್‌ಗಳು, ಪ್ರಗತಿ ಮತ್ತು ಸೆಟ್ಟಿಂಗ್‌ಗಳು - ಎಲ್ಲವನ್ನೂ ಅಳಿಸಿ"
-                  danger
-                  onPress={() => setShowResetConfirm(true)}
-                />
-              </View>
-            </View>
-
-            <View className="mb-7">
-              <View className="bg-white rounded-3xl overflow-hidden shadow-soft border border-border-light">
-                <AppText variant="overline" color="muted" weight="semibold" className="uppercase tracking-wider px-5 pt-5 pb-2">
-                  ಮಾಹಿತಿ
-                </AppText>
-
-                <SettingItem
-                  icon="information-circle-outline"
-                  title="ಪ್ರಗತಿ ಸಾರಾಂಶ"
-                  description={`${toKannadaNumerals(readingProgress.filter((p) => p.completed).length)} ಅಧ್ಯಾಯಗಳು • ${toKannadaNumerals(bookmarks.length)} ಬುಕ್ಮಾರ್ಕ್‌ಗಳು`}
-                  borderTop={false}
-                />
-
-                <SettingItem
-                  icon="book-outline"
-                  title="ಪಠ್ಯ ಮಾಹಿತಿ"
-                  description={`8 ಅಧ್ಯಾಯಗಳು • ${toKannadaNumerals(47 + 72 + 43 + 42 + 29 + 47 + 30 + 28)} ಶ್ಲೋಕಗಳು`}
-                />
-
-                <SettingItem
-                  icon="help-circle-outline"
-                  title={LOCAL_STRINGS.about}
-                  description="ಅಪ್ಲಿಕೇಶನ್ ಬಗ್ಗೆ ಹೆಚ್ಚು ತಿಳಿಯಿರಿ"
-                  onPress={() => setShowAbout(true)}
-                />
-
-                <SettingItem
-                  icon="share-social-outline"
-                  title={LOCAL_STRINGS.shareApp}
-                  description="ಸ್ನೇಹಿತರೊಂದಿಗೆ ಹಂಚಿಕೊಳ್ಳಿ"
-                  onPress={() => haptics.light()}
-                />
-
-                <SettingItem
-                  icon="star-outline"
-                  title={LOCAL_STRINGS.rateApp}
-                  description="5 ನಕ್ಷತ್ರಗಳನ್ನು ನೀಡಿ"
-                  onPress={() => haptics.light()}
-                />
-              </View>
-            </View>
-
-            <View className="mb-7">
-              <View className="bg-white rounded-3xl overflow-hidden shadow-soft border border-border-light">
-                <AppText variant="overline" color="muted" weight="semibold" className="uppercase tracking-wider px-5 pt-5 pb-2">
-                  ಕಾನೂನು
-                </AppText>
-
-                <SettingItem
-                  icon="shield-checkmark-outline"
-                  title={LOCAL_STRINGS.privacyPolicy}
-                  borderTop={false}
-                  onPress={() => haptics.light()}
-                />
-
-                <SettingItem
-                  icon="document-text-outline"
-                  title={LOCAL_STRINGS.termsOfService}
-                  onPress={() => haptics.light()}
-                />
-              </View>
-            </View>
-
-            <Pressable
-              onPress={() => setShowAbout(true)}
-              className="items-center mb-5"
-            >
-              <LinearGradient
-                colors={['#A0522D', '#7A2E22']}
-                start={{ x: 0, y: 0 }}
-                end={{ x: 1, y: 1 }}
-                className="w-16 h-16 rounded-[22px] items-center justify-center mb-3"
-                style={{
-                  shadowColor: '#8A3324',
-                  shadowOffset: { width: 0, height: 8 },
-                  shadowOpacity: 0.3,
-                  shadowRadius: 16,
-                  elevation: 10,
-                }}
-              >
-                <Ionicons name="book" size={28} color="#FFFFFF" />
-              </LinearGradient>
-              <AppText variant="title" weight="bold">
-                {LOCAL_STRINGS.appName}
-              </AppText>
-              <AppText variant="caption" color="muted">
-                {LOCAL_STRINGS.version} 1.0.0
-              </AppText>
-            </Pressable>
-          </View>
-        </ScrollView>
-      </View>
-
-      <Modal
-        visible={showResetConfirm}
-        animationType="fade"
-        transparent
-        onRequestClose={() => setShowResetConfirm(false)}
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{ paddingBottom: bottomInset + 40 }}
       >
-        <View className="flex-1 items-center justify-center px-8">
-          <Pressable
-            className="absolute top-0 left-0 right-0 bottom-0 bg-black/50"
-            onPress={() => setShowResetConfirm(false)}
-          />
-          <View className="bg-white rounded-3xl p-6 w-full max-w-sm relative z-10 shadow-elevated">
-            <View className="w-16 h-16 rounded-2xl bg-[#FBEAE7] items-center justify-center mb-5 self-center">
-              <Ionicons name="alert-circle-outline" size={32} color="#C0392B" />
-            </View>
-            <AppText variant="title" weight="bold" align="center" className="mb-2">
-              ಖಚಿತವೇ?
+        {/* ── 1. ಓದುವಿಕೆ / Reading ──────────────────────── */}
+        <View className="px-4 mt-6">
+          <VStack spacing="xs" style={{ marginBottom: 16 }}>
+            <AppText variant="heading3" weight="bold" className="text-[#3D2314]">
+              ಓದುವಿಕೆ
             </AppText>
-            <AppText variant="body" color="muted" align="center" className="mb-6">
-              {bookmarks.length} ಬುಕ್ಮಾರ್ಕ್‌ಗಳು, {readingProgress.length} ಪ್ರಗತಿ ದಾಖಲೆಗಳು ಮತ್ತು ಎಲ್ಲಾ ಸೆಟ್ಟಿಂಗ್‌ಗಳು ಸಂಪೂರ್ಣವಾಗಿ ಅಳಿಸಲಾಗುತ್ತವೆ.
-            </AppText>
-            <HStack spacing="sm">
-              <Button
-                variant="outline"
-                className="flex-1"
-                onPress={() => setShowResetConfirm(false)}
-              >
-                ರದ್ದು
-              </Button>
-              <Button
-                variant="primary"
-                className="flex-1"
-                icon="trash-outline"
-                onPress={handleResetData}
-              >
-                ರೀಸೆಟ್
-              </Button>
-            </HStack>
-          </View>
-        </View>
-      </Modal>
+            <AppText style={{ color: '#9B7B6B', fontSize: 11 }}>Reading Preferences</AppText>
+          </VStack>
 
-      <Modal
-        visible={showAbout}
-        animationType="slide"
-        transparent
-        onRequestClose={() => setShowAbout(false)}
-      >
-        <View className="flex-1 justify-end">
-          <Pressable
-            className="absolute top-0 left-0 right-0 bottom-0 bg-black/40"
-            onPress={() => setShowAbout(false)}
-          />
           <View
-            className="bg-white rounded-t-[32px] p-6 relative z-10 max-h-[85%]"
-            style={{ paddingBottom: bottomInset + 24 }}
+            className="bg-[#FFFBF5] rounded-2xl overflow-hidden"
+            style={{
+              shadowColor: '#000',
+              shadowOffset: { width: 0, height: 2 },
+              shadowOpacity: 0.08,
+              shadowRadius: 12,
+              elevation: 4,
+            }}
           >
-            <View className="w-12 h-1.5 rounded-full bg-border-strong self-center mb-6" />
-
-            <View className="items-center mb-6">
-              <LinearGradient
-                colors={['#A0522D', '#7A2E22']}
-                start={{ x: 0, y: 0 }}
-                end={{ x: 1, y: 1 }}
-                className="w-20 h-20 rounded-[28px] items-center justify-center mb-4"
-                style={{
-                  shadowColor: '#8A3324',
-                  shadowOffset: { width: 0, height: 10 },
-                  shadowOpacity: 0.35,
-                  shadowRadius: 20,
-                  elevation: 14,
-                }}
+            {/* Sanskrit */}
+            <View className="flex-row items-center px-5 py-3.5 border-b border-amber-100">
+              <View
+                className="w-12 h-12 rounded-xl items-center justify-center mr-4"
+                style={{ backgroundColor: '#FDF0E8' }}
               >
-                <Ionicons name="book" size={36} color="#FFFFFF" />
-              </LinearGradient>
-              <AppText variant="heading2" weight="bold" className="mb-1">
-                {LOCAL_STRINGS.appName}
-              </AppText>
-              <AppText variant="body" color="muted" align="center" className="mb-1">
-                {LOCAL_STRINGS.appDescription}
-              </AppText>
-              <AppText variant="caption" color="subtle">
-                {LOCAL_STRINGS.version} 1.0.0
-              </AppText>
+                <Ionicons name="language-outline" size={22} color="#8A3324" />
+              </View>
+              <View className="flex-1 mr-3">
+                <AppText weight="semibold" style={{ color: '#3D2314', fontSize: 15 }}>
+                  ಸಂಸ್ಕೃತ ಶ್ಲೋಕ
+                </AppText>
+                <AppText style={{ color: '#6B5040', fontSize: 12 }}>Show Sanskrit Verse</AppText>
+              </View>
+              <SettingSwitch
+                value={settings.showSanskrit}
+                onValueChange={(v) => updateSettings({ showSanskrit: v })}
+              />
             </View>
 
-            <View className="h-px bg-border-light mb-6" />
+            {/* Translation */}
+            <View className="flex-row items-center px-5 py-3.5 border-b border-amber-100">
+              <View
+                className="w-12 h-12 rounded-xl items-center justify-center mr-4"
+                style={{ backgroundColor: '#EEF5FF' }}
+              >
+                <Ionicons name="document-text-outline" size={22} color="#3949AB" />
+              </View>
+              <View className="flex-1 mr-3">
+                <AppText weight="semibold" style={{ color: '#3D2314', fontSize: 15 }}>
+                  ಕನ್ನಡ ಭಾವಾರ್ಥ
+                </AppText>
+                <AppText style={{ color: '#6B5040', fontSize: 12 }}>Show Kannada Translation</AppText>
+              </View>
+              <SettingSwitch
+                value={settings.showTranslation}
+                onValueChange={(v) => updateSettings({ showTranslation: v })}
+              />
+            </View>
 
-            <ScrollView showsVerticalScrollIndicator={false} className="max-h-[40vh] mb-6">
-              <VStack spacing="md">
-                <VStack spacing="xs">
-                  <AppText variant="title" weight="semibold">
-                    ನಮ್ಮ ಬಗ್ಗೆ
-                  </AppText>
-                  <AppText variant="body" color="muted" align="justify">
-                    ಸಿದ್ಧಾಂತ ಶಿಖಾಮಣಿ ಒಂದು ಪ್ರಮುಖ ಆಧ್ಯಾತ್ಮಿಕ ಮತ್ತು ದಾರ್ಶನಿಕ ಗ್ರಂಥವಾಗಿದ್ದು, ಮಾನವನಿಗೆ ಜ್ಞಾನ, ಕರ್ಮ ಮತ್ತು ಭಕ್ತಿಯ ಮಾರ್ಗಗಳನ್ನು ಬೋಧಿಸುತ್ತದೆ. ಈ ಅಪ್ಲಿಕೇಶನ್ ನಿಮಗೆ ಸೌಕರ್ಯಪೂರ್ವಕವಾಗಿ ಈ ಮಹತ್ವವಾದ ಬೋಧನೆಗಳನ್ನು ಓದಲು ಅನುಮತಿಸುತ್ತದೆ.
-                  </AppText>
-                </VStack>
 
-                <VStack spacing="xs">
-                  <AppText variant="title" weight="semibold">
-                    ವೈಶಿಷ್ಟ್ಯಗಳು
-                  </AppText>
-                  <View className="flex-row flex-wrap">
-                    {[
-                      'ಕನ್ನಡ ಭಾಷಾಂತರ',
-                      'ಬುಕ್ಮಾರ್ಕ್ ಸ್ಥಳಗಳು',
-                      'ಪ್ರಗತಿ ಟ್ರ್ಯಾಕಿಂಗ್',
-                      'ಸಾಧನೆಗಳು',
-                      'ಕಸ್ಟಮ್ ಫಾಂಟ್',
-                      'ಆಫ್ಲೈನ್ ಓದುವಿಕೆ',
-                    ].map((feature) => (
-                      <View key={feature} className="flex-row items-center mr-4 mb-2 w-[45%]">
-                        <Ionicons name="checkmark-circle" size={14} color="#4B8B3B" />
-                        <AppText variant="caption" color="muted" className="ml-1.5 flex-1">
-                          {feature}
-                        </AppText>
-                      </View>
-                    ))}
-                  </View>
-                </VStack>
-
-                <VStack spacing="xs">
-                  <AppText variant="title" weight="semibold">
-                    {LOCAL_STRINGS.developerInfo}
-                  </AppText>
-                  <HStack spacing="sm">
-                    <View className="w-10 h-10 rounded-xl bg-primary-subtle items-center justify-center">
-                      <Ionicons name="business-outline" size={18} color="#8A3324" />
-                    </View>
-                    <VStack spacing="xs">
-                      <AppText variant="body" weight="semibold">
-                        ಎಂ.ಎಸ್.ವಿ ಗ್ಲೋಬಲ್ ಟೆಕ್
-                      </AppText>
-                      <AppText variant="bodySmall" color="muted">
-                        MSV Global Tech Apps
-                      </AppText>
-                    </VStack>
-                  </HStack>
-                </VStack>
-              </VStack>
-            </ScrollView>
-
-            <Button
-              variant="gradient"
-              fullWidth
-              icon="close"
-              onPress={() => setShowAbout(false)}
-            >
-              ಮುಚ್ಚಿ
-            </Button>
+            {/* Auto Save */}
+            <View className="flex-row items-center px-5 py-3.5">
+              <View
+                className="w-12 h-12 rounded-xl items-center justify-center mr-4"
+                style={{ backgroundColor: '#FEF9EC' }}
+              >
+                <Ionicons name="save-outline" size={22} color="#B4832E" />
+              </View>
+              <View className="flex-1 mr-3">
+                <AppText weight="semibold" style={{ color: '#3D2314', fontSize: 15 }}>
+                  ಸ್ವಯಂ ಪ್ರಗತಿ ಉಳಿಸಿ
+                </AppText>
+                <AppText style={{ color: '#6B5040', fontSize: 12 }}>Auto-save Reading Progress</AppText>
+              </View>
+              <SettingSwitch
+                value={settings.autoSaveProgress}
+                onValueChange={(v) => updateSettings({ autoSaveProgress: v })}
+              />
+            </View>
           </View>
         </View>
-      </Modal>
+
+        {/* ── 2. ಅಪ್ಲಿಕೇಶನ್ ಮಾಹಿತಿ / App ──────────────────────── */}
+        <View className="px-4 mt-6">
+          <VStack spacing="xs" style={{ marginBottom: 16 }}>
+            <AppText variant="heading3" weight="bold" className="text-[#3D2314]">
+              ಅಪ್ಲಿಕೇಶನ್
+            </AppText>
+            <AppText style={{ color: '#9B7B6B', fontSize: 11 }}>App & Support</AppText>
+          </VStack>
+
+          <View
+            className="bg-[#FFFBF5] rounded-2xl overflow-hidden"
+            style={{
+              shadowColor: '#000',
+              shadowOffset: { width: 0, height: 2 },
+              shadowOpacity: 0.08,
+              shadowRadius: 12,
+              elevation: 4,
+            }}
+          >
+            {[
+              {
+                label: 'ಸ್ನೇಹಿತರನ್ನು ಆಹ್ವಾನಿಸಿ',
+                sublabel: 'Invite Friends',
+                icon: 'people-outline' as const,
+                iconColor: '#10B981',
+                iconBg: '#ECFDF5',
+                action: handleInviteFriends,
+              },
+              {
+                label: 'ಅಪ್ಲಿಕೇಶನ್ ರೇಟ್ ಮಾಡಿ',
+                sublabel: 'Rate App',
+                icon: 'star-outline' as const,
+                iconColor: '#F59E0B',
+                iconBg: '#FFFBEB',
+                action: handleRateApp,
+              },
+              {
+                label: 'ವೆಬ್‌ಸೈಟ್ ಭೇಟಿ ನೀಡಿ',
+                sublabel: 'Visit Website',
+                icon: 'globe-outline' as const,
+                iconColor: '#2563EB',
+                iconBg: '#EFF6FF',
+                action: () => Linking.openURL('https://msvglobaltech.com'),
+              },
+              {
+                label: 'ನಮ್ಮನ್ನು ಸಂಪರ್ಕಿಸಿ',
+                sublabel: 'Contact Us',
+                icon: 'mail-outline' as const,
+                iconColor: '#DC2626',
+                iconBg: '#FEF2F2',
+                action: () => Linking.openURL('mailto:msvglobaltech@gmail.com'),
+              },
+            ].map((item, idx) => (
+              <Pressable
+                key={item.label}
+                onPress={item.action}
+                style={({ pressed }) => ({
+                  backgroundColor: pressed ? '#FFF5F0' : '#FFFBF5',
+                  opacity: pressed ? 0.9 : 1,
+                })}
+                className={idx < 3 ? 'border-b border-amber-100' : ''}
+              >
+                <View className="flex-row items-center px-5 py-3">
+                  <View
+                    className="w-12 h-12 rounded-xl items-center justify-center mr-4"
+                    style={{ backgroundColor: item.iconBg }}
+                  >
+                    <Ionicons name={item.icon} size={22} color={item.iconColor} />
+                  </View>
+                  <View className="flex-1">
+                    <AppText weight="semibold" style={{ color: '#3D2314', fontSize: 15 }}>
+                      {item.label}
+                    </AppText>
+                    <AppText style={{ color: '#6B5040', fontSize: 12 }}>{item.sublabel}</AppText>
+                  </View>
+                  <View className="w-8 h-8 rounded-full bg-gray-100 items-center justify-center">
+                    <Ionicons name="chevron-forward" size={18} color="#9CA3AF" />
+                  </View>
+                </View>
+              </Pressable>
+            ))}
+          </View>
+        </View>
+
+        {/* Footer */}
+        <View style={{ marginTop: 32, marginBottom: 16, marginHorizontal: 20 }}>
+          <View
+            style={{
+              backgroundColor: '#FFFBF5',
+              borderRadius: 20,
+              borderWidth: 1,
+              borderColor: '#EDD9A3',
+              paddingVertical: 20,
+              paddingHorizontal: 24,
+              alignItems: 'center',
+            }}
+          >
+            <View
+              style={{
+                width: 48,
+                height: 48,
+                borderRadius: 14,
+                backgroundColor: '#8A3324',
+                alignItems: 'center',
+                justifyContent: 'center',
+                marginBottom: 12,
+              }}
+            >
+              <Ionicons name="book" size={24} color="#FFFFFF" />
+            </View>
+
+            <AppText weight="bold" style={{ color: '#3D2314', fontSize: 15, marginBottom: 2 }}>
+              ಸಿದ್ಧಾಂತ ಶಿಖಾಮಣಿ
+            </AppText>
+            <AppText style={{ color: '#9B7B6B', fontSize: 11, marginBottom: 14 }}>
+              Siddhanta Shikamani App
+            </AppText>
+
+            <View style={{ height: 1, backgroundColor: '#EDD9A3', width: '100%', marginBottom: 14 }} />
+
+            <View style={{ flexDirection: 'row', alignItems: 'center', gap: 10 }}>
+              <View
+                style={{
+                  backgroundColor: '#FDF0E8',
+                  borderRadius: 20,
+                  paddingHorizontal: 14,
+                  paddingVertical: 5,
+                }}
+              >
+                <AppText weight="bold" style={{ color: '#8A3324', fontSize: 12 }}>
+                  v1.0.0
+                </AppText>
+              </View>
+              <AppText style={{ color: '#B0967A', fontSize: 11 }}>• MSV Global Tech</AppText>
+            </View>
+          </View>
+        </View>
+      </ScrollView>
     </ScreenContainer>
   );
 }
+

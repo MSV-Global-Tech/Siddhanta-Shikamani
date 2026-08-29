@@ -45,11 +45,11 @@ const variantStyles: Record<TextVariant, { size: string; leading: string; tracki
 };
 
 const weightFonts: Record<TextWeight, { sans: string; serif: string }> = {
-  light: { sans: 'font-kannada', serif: 'font-serif-kan' },
-  regular: { sans: 'font-kannada', serif: 'font-serif-kan' },
-  medium: { sans: 'font-kannada-medium', serif: 'font-serif-kan-bold' },
-  semibold: { sans: 'font-kannada-semi', serif: 'font-serif-kan-bold' },
-  bold: { sans: 'font-kannada-bold', serif: 'font-serif-kan-bold' },
+  light: { sans: 'font-kannada', serif: 'font-kannada' },
+  regular: { sans: 'font-kannada', serif: 'font-kannada' },
+  medium: { sans: 'font-kannada-medium', serif: 'font-kannada-medium' },
+  semibold: { sans: 'font-kannada-semi', serif: 'font-kannada-semi' },
+  bold: { sans: 'font-kannada-bold', serif: 'font-kannada-bold' },
 };
 
 const colorClasses: Record<string, string> = {

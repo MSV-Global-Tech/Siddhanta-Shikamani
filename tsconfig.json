@@ -8,8 +8,11 @@
         "src/*"
       ]
     },
+    "module": "ESNext",
+    "moduleResolution": "bundler",
     "jsx": "react-native",
     "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true,
     "types": [
       "react-native"
     ]

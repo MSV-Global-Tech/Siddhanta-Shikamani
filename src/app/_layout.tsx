@@ -45,6 +45,14 @@ export default function RootLayout() {
               name="settings"
               options={{
                 headerShown: false,
+                animation: 'slide_from_bottom',
+                presentation: 'fullScreenModal',
+              }}
+            />
+            <Stack.Screen
+              name="admin"
+              options={{
+                headerShown: false,
                 animation: 'slide_from_right',
               }}
             />

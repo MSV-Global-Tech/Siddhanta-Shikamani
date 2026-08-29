@@ -6,7 +6,7 @@ import { generateId } from '@/utils';
 
 const defaultSettings: Settings = {
   fontSize: 17,
-  fontFamily: 'serif',
+  fontFamily: 'sans',
   showSanskrit: true,
   showTranslation: true,
   showCommentary: true,

@@ -1,0 +1,24 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Chapters collection: Anyone can read, allow updates/writes
+    match /chapters/{chapterId} {
+      allow read: if true;
+      allow write: if true;
+    }
+    
+    // Metadata collection: Overview summary info
+    match /metadata/{document=**} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // Default rule for all other documents
+    match /{document=**} {
+      allow read: if true;
+      allow write: if true;
+    }
+  }
+}

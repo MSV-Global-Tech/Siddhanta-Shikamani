@@ -6,19 +6,29 @@ import { router } from 'expo-router';
 import { ScreenContainer, HStack } from '@/components/layouts/Containers';
 import { AppText } from '@/components/typography/AppText';
 import { CHAPTERS } from '@/data/chapters';
+import { getLocalChapterOverrides } from '@/services/firestoreService';
 import { LOCAL_STRINGS } from '@/localization';
-import { toKannadaNumerals, calculateProgress } from '@/utils';
+import { toKannadaNumerals } from '@/utils';
 import type { Chapter } from '@/types';
-import { useAppStore } from '@/store/useAppStore';
 import { useHapticFeedback } from '@/hooks/useHapticFeedback';
 
 export default function ChaptersScreen() {
   const haptics = useHapticFeedback();
-  const readingProgress = useAppStore((state) => state.readingProgress);
   const [searchQuery, setSearchQuery] = useState('');
-  
+  const [baseChapters, setBaseChapters] = useState<Chapter[]>(CHAPTERS);
+
+  React.useEffect(() => {
+    let isMounted = true;
+    getLocalChapterOverrides().then((overrides) => {
+      if (isMounted && Object.keys(overrides).length > 0) {
+        setBaseChapters(prev => prev.map(c => overrides[c.id] || c));
+      }
+    });
+    return () => { isMounted = false; };
+  }, []);
+
   const chapters = useMemo(() => {
-    let list = [...CHAPTERS].sort((a, b) => a.number - b.number);
+    let list = [...baseChapters].sort((a, b) => a.number - b.number);
     if (searchQuery.trim()) {
       const q = searchQuery.trim().toLowerCase();
       list = list.filter(c => 
@@ -31,7 +41,7 @@ export default function ChaptersScreen() {
       );
     }
     return list;
-  }, [searchQuery]);
+  }, [baseChapters, searchQuery]);
 
   // Group chapters by parichheda
   const groupedChapters = useMemo(() => {
@@ -75,8 +85,10 @@ export default function ChaptersScreen() {
             variant="title"
             weight="bold"
             align="center"
-            className="text-primary-dark font-serif-kan-bold flex-1 mx-2"
+            className="text-primary-dark font-kannada-bold flex-1 mx-2"
             numberOfLines={1}
+            adjustsFontSizeToFit
+            minimumFontScale={0.7}
           >
             {LOCAL_STRINGS.chaptersPariccheda}
           </AppText>
@@ -105,16 +117,6 @@ export default function ChaptersScreen() {
             <View className="flex-row flex-wrap">
               {groupedChapters.groups.map((group) => {
                 const totalShlokas = group.chapters.reduce((sum, c) => sum + c.versesCount, 0);
-                
-                // Calculate progress
-                let totalVersesCompleted = 0;
-                group.chapters.forEach(chapter => {
-                  const progress = readingProgress.find((p) => p.chapterId === chapter.id);
-                  if (progress) {
-                    totalVersesCompleted += progress.completed ? chapter.versesCount : progress.lastReadVerse;
-                  }
-                });
-                const percent = totalShlokas > 0 ? calculateProgress(totalVersesCompleted, totalShlokas) : 0;
 
                 return (
                   <View key={group.parichheda?.id} className="w-1/3 p-1.5">
@@ -133,7 +135,7 @@ export default function ChaptersScreen() {
                           <AppText
                             variant="title"
                             weight="bold"
-                            className="text-primary-dark font-serif-kan-bold"
+                            className="text-primary-dark font-kannada-bold"
                           >
                             {group.parichheda?.number ? toKannadaNumerals(group.parichheda.number) : ''}
                           </AppText>
@@ -152,18 +154,9 @@ export default function ChaptersScreen() {
                       <AppText variant="caption" color="muted" align="center" numberOfLines={1}>
                         {LOCAL_STRINGS.shlokas} {toKannadaNumerals(totalShlokas)}
                       </AppText>
-
-                      {percent > 0 && (
-                        <View className="h-1 w-12 bg-background-subtle rounded-full overflow-hidden mt-2.5">
-                          <View
-                            className="h-full bg-secondary-default rounded-full"
-                            style={{ width: `${percent}%` }}
-                          />
-                        </View>
-                      )}
                     </Pressable>
                   </View>
-                )
+                );
               })}
             </View>
 
@@ -171,14 +164,14 @@ export default function ChaptersScreen() {
               <View className="mb-6">
                 {groupedChapters.groups.length > 0 && (
                   <View className="px-2 mb-3 mt-4">
-                    <AppText variant="title" weight="bold" className="text-primary-dark font-serif-kan-bold">
+                    <AppText variant="title" weight="bold" className="text-primary-dark font-kannada-bold">
                       ಇತರೆ ಪರಿಚ್ಛೇದಗಳು
                     </AppText>
                     <View className="w-12 h-0.5 bg-secondary-default mt-1 rounded-full" />
                   </View>
                 )}
                 <View className="flex-row flex-wrap">
-                  {groupedChapters.ungrouped.map((chapter) => renderChapterCard(chapter, readingProgress, handleOpen))}
+                  {groupedChapters.ungrouped.map((chapter) => renderChapterCard(chapter, handleOpen))}
                 </View>
               </View>
             )}
@@ -201,15 +194,7 @@ export default function ChaptersScreen() {
   );
 }
 
-function renderChapterCard(chapter: Chapter, readingProgress: any[], handleOpen: (id: string) => void) {
-  const progress = readingProgress.find((p) => p.chapterId === chapter.id);
-  const percent = progress
-    ? calculateProgress(
-      progress.completed ? chapter.versesCount : progress.lastReadVerse,
-      chapter.versesCount
-    )
-    : 0;
-
+function renderChapterCard(chapter: Chapter, handleOpen: (id: string) => void) {
   return (
     <View key={chapter.id} className="w-1/3 p-1.5">
       <Pressable
@@ -222,7 +207,7 @@ function renderChapterCard(chapter: Chapter, readingProgress: any[], handleOpen:
             <AppText
               variant="title"
               weight="bold"
-              className="text-primary-dark font-serif-kan-bold"
+              className="text-primary-dark font-kannada-bold"
             >
               {toKannadaNumerals(chapter.number)}
             </AppText>
@@ -241,15 +226,6 @@ function renderChapterCard(chapter: Chapter, readingProgress: any[], handleOpen:
         <AppText variant="caption" color="muted" align="center" numberOfLines={1}>
           {LOCAL_STRINGS.shlokas} {toKannadaNumerals(chapter.versesCount)}
         </AppText>
-
-        {percent > 0 && (
-          <View className="h-1 w-12 bg-background-subtle rounded-full overflow-hidden mt-2.5">
-            <View
-              className="h-full bg-secondary-default rounded-full"
-              style={{ width: `${percent}%` }}
-            />
-          </View>
-        )}
       </Pressable>
     </View>
   );

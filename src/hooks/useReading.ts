@@ -1,11 +1,27 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { useAppStore } from '@/store/useAppStore';
 import { CHAPTERS } from '@/data/chapters';
+import { getChapterById } from '@/services/firestoreService';
 import type { Chapter } from '@/types';
 import { haptics } from '@/utils';
 
 export function useReading(chapterId: string) {
-  const chapter = CHAPTERS.find((c) => c.id === chapterId);
+  const [chapter, setChapter] = useState<Chapter | null>(() => {
+    return CHAPTERS.find((c) => c.id === chapterId) || null;
+  });
+
+  useEffect(() => {
+    let isMounted = true;
+    getChapterById(chapterId).then((freshChapter) => {
+      if (isMounted && freshChapter) {
+        setChapter(freshChapter);
+      }
+    });
+    return () => {
+      isMounted = false;
+    };
+  }, [chapterId]);
+
   const progress = useAppStore((state) => state.getReadingProgress(chapterId));
   const updateProgress = useAppStore((state) => state.updateReadingProgress);
   const addRecent = useAppStore((state) => state.addRecentChapter);

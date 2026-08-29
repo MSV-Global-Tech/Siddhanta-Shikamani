@@ -509,7 +509,7 @@ export const parichheda14Chapters: Chapter[] = [
         ]
     },
     {
-        id: 'ch-14-04',
+        id: 'ch-14-05',
         number: 44,
         title: 'ಅಥ ಸಹಭೋಜನಸ್ಥಲಮ್',
         subtitle: 'ಸಹಭೋಜನಸ್ಥಲವು',

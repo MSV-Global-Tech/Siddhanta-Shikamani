@@ -9,10 +9,13 @@ import { CHAPTERS } from '@/data/chapters';
 import { useAppStore } from '@/store/useAppStore';
 import { LOCAL_STRINGS } from '@/localization';
 import { toKannadaNumerals, calculateProgress } from '@/utils';
+import { useHapticFeedback } from '@/hooks/useHapticFeedback';
 
 export default function HomeScreen() {
   const router = useRouter();
+  const haptics = useHapticFeedback();
   const { width: screenWidth } = useWindowDimensions();
+
   const [readingProgress, setReadingProgress] = useState(() => useAppStore.getState().readingProgress);
   const [recentChapters, setRecentChapters] = useState(() => useAppStore.getState().recentChapters);
   const [profile, setProfile] = useState(() => useAppStore.getState().profile);
@@ -30,44 +33,42 @@ export default function HomeScreen() {
   const quoteImageWidth = screenWidth - 40; // px-5 ಅಂಚು (20 + 20)
   const quoteImageHeight = quoteImageWidth * (603 / 1277);
 
-  const totalVerses = CHAPTERS.reduce((sum, c) => sum + c.versesCount, 0);
-
   const continueChapterId =
     recentChapters[0] || readingProgress.find((p) => !p.completed)?.chapterId || CHAPTERS[0].id;
   const continueChapter = CHAPTERS.find((c) => c.id === continueChapterId) || CHAPTERS[0];
   const continueProgress = useAppStore.getState().getReadingProgress(continueChapterId);
   const continueVerseNumber = continueProgress?.lastReadVerse || 1;
 
+  const navigateToSettings = () => {
+    haptics.light();
+    router.push('/settings');
+  };
+
   return (
     <ScreenContainer scroll>
       <View className="px-5 pt-4 pb-8">
-        {/* ಶೀರ್ಷಿಕೆ ಪಟ್ಟಿ — ಮೆನು, ಹೆಸರು, ಗಂಟೆ */}
+        {/* ಶೀರ್ಷಿಕೆ ಪಟ್ಟಿ — ಮೆನು, ಹೆಸರು, ಬಲ ಭಾಗ ಸ್ಪೇಸರ್ */}
         <HStack justify="space-between" align="center" className="mb-6">
           <Pressable
-            onPress={() => router.push('/settings')}
-            hitSlop={10}
-            className="w-11 h-11 rounded-full items-center justify-center"
+            onPress={navigateToSettings}
+            hitSlop={12}
+            className="w-11 h-11 rounded-full items-center justify-center bg-amber-50/80 border border-amber-200/60 shadow-sm"
           >
-            <Ionicons name="menu" size={26} color="#3D2314" />
+            <Ionicons name="menu" size={24} color="#8A3324" />
           </Pressable>
           <AppText
             variant="heading3"
             weight="bold"
             align="center"
-            className="text-primary-dark font-serif-kan-bold flex-1 mx-2"
+            className="text-primary-dark font-kannada-bold flex-1 mx-2"
             numberOfLines={1}
           >
             {LOCAL_STRINGS.appName}
           </AppText>
-          <Pressable
-            hitSlop={10}
-            className="w-11 h-11 rounded-full items-center justify-center"
-          >
-            <Ionicons name="notifications-outline" size={24} color="#3D2314" />
-          </Pressable>
+          <View className="w-11 h-11" />
         </HStack>
 
-        {/* ಗುರುವಾಣಿ ಕಾರ್ಡ್ — ಬಸವಣ್ಣನವರ ವಾಣಿ ಚಿತ್ರ (1277×603 ಪೂರ್ಣ ಚಿತ್ರ) */}
+        {/* ಗುರುವಾಣಿ ಕಾರ್ಡ್ — ಬಸವಣ್ಣನವರ ವಾಣಿ ಚಿತ್ರ */}
         <View className="mb-7 items-center">
           <Image
             source={require('../../../assets/front.jpg')}
@@ -75,43 +76,6 @@ export default function HomeScreen() {
             style={{ width: quoteImageWidth, height: quoteImageHeight, borderRadius: 14 }}
           />
         </View>
-
-        {/* ಮುಂದುವರಿಸಿ ಓದಿ */}
-        <HStack justify="space-between" align="center" className="mb-4">
-          <AppText variant="heading3" weight="bold">
-            Continue Reading
-          </AppText>
-        </HStack>
-        <Pressable
-          onPress={() => router.push(`/reading/${continueChapter.id}`)}
-          className="bg-white rounded-3xl p-5 border border-border-light shadow-soft mb-7"
-          style={({ pressed }) => ({ opacity: pressed ? 0.85 : 1 })}
-        >
-          <HStack justify="space-between" align="center">
-            <HStack spacing="sm" className="flex-1 mr-3">
-              <View className="w-12 h-12 rounded-2xl bg-primary-subtle items-center justify-center">
-                <Ionicons name="play" size={20} color="#8A3324" />
-              </View>
-              <VStack spacing="xs" className="flex-1 justify-center">
-                <AppText variant="caption" weight="bold" color="secondary-dark">
-                  {LOCAL_STRINGS.continueReading}
-                </AppText>
-                <AppText variant="body" weight="semibold" numberOfLines={1}>
-                  {LOCAL_STRINGS.pariccheda} {toKannadaNumerals(continueChapter.number)} • {LOCAL_STRINGS.verse} {toKannadaNumerals(continueVerseNumber)}
-                </AppText>
-              </VStack>
-            </HStack>
-            <Ionicons name="chevron-forward" size={20} color="#A88C74" />
-          </HStack>
-          <View className="h-1.5 bg-background-subtle rounded-full overflow-hidden mt-4">
-            <View
-              className="h-full bg-primary-default rounded-full"
-              style={{
-                width: `${calculateProgress(continueVerseNumber, continueChapter.versesCount)}%`,
-              }}
-            />
-          </View>
-        </Pressable>
 
         {/* ತ್ವರಿತ ಪ್ರವೇಶ */}
         <HStack justify="space-between" align="center" className="mb-4">
@@ -146,13 +110,13 @@ export default function HomeScreen() {
                 weight="semibold"
                 style={{ fontSize: 10, lineHeight: 14 }}
               >
-                ({toKannadaNumerals(CHAPTERS.length)} ಪರಿಚ್ಛೇದಗಳು)
+                (21 ಪರಿಚ್ಛೇದಗಳು)
               </AppText>
             </Pressable>
           </View>
           <View className="flex-1 px-1">
             <Pressable
-              onPress={() => router.push('/settings')}
+              onPress={navigateToSettings}
               className="bg-white rounded-2xl border border-border-light shadow-soft items-center px-2 py-3"
               style={({ pressed }) => ({ opacity: pressed ? 0.8 : 1 })}
             >
@@ -180,6 +144,43 @@ export default function HomeScreen() {
             </Pressable>
           </View>
         </View>
+
+        {/* ಮುಂದುವರಿಸಿ ಓದಿ */}
+        <HStack justify="space-between" align="center" className="mb-4">
+          <AppText variant="heading3" weight="bold">
+            Continue Reading
+          </AppText>
+        </HStack>
+        <Pressable
+          onPress={() => router.push(`/reading/${continueChapter.id}`)}
+          className="bg-white rounded-3xl p-5 border border-border-light shadow-soft mb-7"
+          style={({ pressed }) => ({ opacity: pressed ? 0.85 : 1 })}
+        >
+          <HStack justify="space-between" align="center">
+            <HStack spacing="sm" className="flex-1 mr-3">
+              <View className="w-12 h-12 rounded-2xl bg-primary-subtle items-center justify-center">
+                <Ionicons name="play" size={20} color="#8A3324" />
+              </View>
+              <VStack spacing="xs" className="flex-1 justify-center">
+                <AppText variant="caption" weight="bold" color="secondary-dark">
+                  {LOCAL_STRINGS.continueReading}
+                </AppText>
+                <AppText variant="body" weight="semibold" numberOfLines={1}>
+                  {LOCAL_STRINGS.pariccheda} {toKannadaNumerals(continueChapter.number)} • {LOCAL_STRINGS.verse} {toKannadaNumerals(continueVerseNumber)}
+                </AppText>
+              </VStack>
+            </HStack>
+            <Ionicons name="chevron-forward" size={20} color="#A88C74" />
+          </HStack>
+          <View className="h-[3px] bg-[#F0E6D8] rounded-full overflow-hidden mt-4">
+            <View
+              className="h-full bg-[#8A3324]/80 rounded-full"
+              style={{
+                width: `${calculateProgress(continueVerseNumber, continueChapter.versesCount)}%`,
+              }}
+            />
+          </View>
+        </Pressable>
 
         {/* ಗ್ರಂಥ ಪರಿಚಯ (Book Overview) */}
         <View className="bg-white rounded-3xl border border-secondary-light/40 shadow-soft overflow-hidden mb-7">
