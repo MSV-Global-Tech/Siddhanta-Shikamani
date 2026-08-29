@@ -19,13 +19,22 @@ const PLAY_STORE_URL =
 
 const WHATS_NEW = [
   {
+    version: '1.0.1',
+    date: 'ಆಗಸ್ಟ್ ೨೦೨೬',
+    changes: [
+      '✨ ಹೊಸ ವಿನ್ಯಾಸದ ಸೆಟ್ಟಿಂಗ್‌ಗಳು ಮತ್ತು ಪ್ರೊಫೈಲ್ ಇಂಟರ್‌ಫೇಸ್',
+      '🌐 ಕನ್ನಡ ಮತ್ತು ಇಂಗ್ಲಿಷ್ ದ್ವಿಭಾಷಾ ಲೇಬಲ್‌ಗಳು',
+      '⚡ ಆಡಳಿತ ಡ್ಯಾಶ್‌ಬೋರ್ಡ್ ಮತ್ತು ಕ್ಲೌಡ್ ಸಿಂಕ್ ಸುಧಾರಣೆಗಳು',
+      '📖 ಶ್ಲೋಕ ಓದುವ ಅನುಭವದ ಸರಳೀಕರಣ',
+    ],
+  },
+  {
     version: '1.0.0',
     date: 'ಆಗಸ್ಟ್ ೨೦೨೬',
     changes: [
       '🎉 ಸಿದ್ಧಾಂತ ಶಿಖಾಮಣಿ ಅಪ್ಲಿಕೇಶನ್‌ನ ಮೊದಲ ಆವೃತ್ತಿ ಬಿಡುಗಡೆ',
-      '📖 ೮ ಪರಿಚ್ಛೇದಗಳು ಮತ್ತು ೩೩೮ ಶ್ಲೋಕಗಳು',
+      '📖 ೨೧ ಪರಿಚ್ಛೇದಗಳು ಮತ್ತು ಶ್ಲೋಕಗಳು',
       '🔖 ಬುಕ್ಮಾರ್ಕ್ ಮತ್ತು ಪ್ರಗತಿ ಟ್ರ್ಯಾಕಿಂಗ್',
-      '🎨 ಕಸ್ಟಮ್ ಫಾಂಟ್ ಮತ್ತು ಥೀಮ್ ಆಯ್ಕೆಗಳು',
       '📴 ಆಫ್ಲೈನ್ ಓದುವಿಕೆ ಬೆಂಬಲ',
     ],
   },
@@ -198,9 +207,7 @@ export default function ProfileScreen() {
                 key={item.label}
                 onPress={() => {
                   haptics.light();
-                  if ('action' in item && item.action) {
-                    item.action();
-                  } else if ('route' in item && item.route) {
+                  if (item.route) {
                     router.push(item.route as any);
                   }
                 }}
@@ -421,7 +428,7 @@ export default function ProfileScreen() {
                 paddingHorizontal: 14,
                 paddingVertical: 5,
               }}>
-                <AppText weight="bold" style={{ color: '#8A3324', fontSize: 12 }}>v1.0.0</AppText>
+                <AppText weight="bold" style={{ color: '#8A3324', fontSize: 12 }}>v1.0.1</AppText>
               </View>
               <AppText style={{ color: '#B0967A', fontSize: 11 }}>• MSV Global Tech</AppText>
             </View>
@@ -471,7 +478,7 @@ export default function ProfileScreen() {
                 {LOCAL_STRINGS.appDescription}
               </AppText>
               <AppText variant="caption" color="subtle">
-                {LOCAL_STRINGS.version} 1.0.0
+                {LOCAL_STRINGS.version} 1.0.1
               </AppText>
             </View>
 

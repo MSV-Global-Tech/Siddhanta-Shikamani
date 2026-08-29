@@ -98,7 +98,7 @@ async function uploadData() {
       totalParichhedas: 21,
       totalVerses: totalVerses,
       lastUpdated: new Date().toISOString(),
-      version: '1.0.0'
+      version: '1.0.1'
     });
     console.log('\nUploaded metadata overview document to metadata/overview');
   } catch (err: any) {

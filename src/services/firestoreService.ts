@@ -5,7 +5,7 @@ import { CHAPTERS as LOCAL_CHAPTERS } from '@/data/chapters';
 import { storage } from './storage';
 
 const CHAPTERS_COLLECTION = 'chapters';
-const OVERRIDES_KEY = '@siddhanta_custom_chapters';
+const OVERRIDES_KEY = '@siddhanta_admin_overrides_v2';
 
 /**
  * Fetch all custom locally overridden chapters.
@@ -20,67 +20,34 @@ export async function getLocalChapterOverrides(): Promise<Record<string, Chapter
 }
 
 /**
- * Fetch all chapters from Firestore with automatic fallback to local bundled data.
+ * Fetch all chapters with bundled local data as primary source of truth,
+ * merged with any custom in-app admin overrides.
  */
 export async function getChapters(): Promise<Chapter[]> {
   try {
-    const chaptersQuery = query(collection(db, CHAPTERS_COLLECTION), orderBy('number', 'asc'));
-    const snapshot = await getDocs(chaptersQuery);
-
-    if (snapshot.empty) {
-      console.warn('No chapters found in Firestore, using bundled local data.');
-      return LOCAL_CHAPTERS;
-    }
-
-    const remoteChapters: Chapter[] = [];
-    snapshot.forEach((docSnap) => {
-      remoteChapters.push(docSnap.data() as Chapter);
-    });
-
-    return remoteChapters.sort((a, b) => a.number - b.number);
+    const overrides = await getLocalChapterOverrides();
+    return LOCAL_CHAPTERS.map((ch) => overrides[ch.id] || ch);
   } catch (error) {
-    console.error('Failed to fetch chapters from Firestore, falling back to local data:', error);
     return LOCAL_CHAPTERS;
   }
 }
 
 /**
- * Fetch a single chapter by ID from Firestore with fallback to local bundled data.
+ * Fetch a single chapter by ID with bundled local data as primary,
+ * falling back to local admin overrides if available.
  */
 export async function getChapterById(chapterId: string): Promise<Chapter | null> {
   try {
-    // 1. Fetch from Firestore for latest admin updates
-    const docRef = doc(db, CHAPTERS_COLLECTION, chapterId);
-    const docSnap = await getDoc(docRef);
-
-    if (docSnap.exists()) {
-      const data = docSnap.data() as Chapter;
-      // Cache locally on user's device for fast subsequent offline reading
-      try {
-        const overrides = await getLocalChapterOverrides();
-        overrides[chapterId] = data;
-        await storage.setJSON(OVERRIDES_KEY, overrides);
-      } catch {}
-      return data;
-    }
-
-    // 2. If not found in remote doc, check local overrides/cache
+    // 1. Check if user made custom edits via in-app Admin
     const overrides = await getLocalChapterOverrides();
     if (overrides[chapterId]) {
       return overrides[chapterId];
     }
 
-    // 3. Fallback to bundled local data
+    // 2. Return latest bundled local code (source of truth for code edits)
     const local = LOCAL_CHAPTERS.find((c) => c.id === chapterId);
     return local || null;
   } catch (error) {
-    // Network offline or error: load from local cache first, then bundled
-    try {
-      const overrides = await getLocalChapterOverrides();
-      if (overrides[chapterId]) {
-        return overrides[chapterId];
-      }
-    } catch {}
     const local = LOCAL_CHAPTERS.find((c) => c.id === chapterId);
     return local || null;
   }
