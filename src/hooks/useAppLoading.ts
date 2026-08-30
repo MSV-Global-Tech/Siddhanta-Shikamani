@@ -40,32 +40,16 @@ export function useAppLoading() {
 
   useEffect(() => {
     let cancelled = false;
-    async function prepare() {
-      try {
-        if (fontsLoaded || fontError) {
-          // Hide native splash immediately so custom JS splash takes over seamlessly
-          try {
-            await SplashScreen.hideAsync();
-          } catch (e) {
-            // ignore
-          }
-          if (!cancelled) setAppIsReady(true);
-          return;
-        }
-      } catch (e) {
-        console.warn(e);
-        if (!cancelled) setAppIsReady(true);
-      }
+    if (fontsLoaded || fontError) {
+      if (!cancelled) setAppIsReady(true);
     }
-    prepare();
 
-    // Safety fallback: force ready after 5s even if fonts hang
-    timeoutRef.current = setTimeout(async () => {
+    // Safety fallback: force ready after 4s even if fonts hang
+    timeoutRef.current = setTimeout(() => {
       if (!cancelled) {
-        try { await SplashScreen.hideAsync(); } catch (e) { /* ignore */ }
         setAppIsReady(true);
       }
-    }, 5000);
+    }, 4000);
 
     return () => {
       cancelled = true;
@@ -73,8 +57,15 @@ export function useAppLoading() {
     };
   }, [fontsLoaded, fontError]);
 
-  // Kept for API compatibility but hideAsync is now called in the effect above
-  const onLayoutRootView = useCallback(() => {}, []);
+  const onLayoutRootView = useCallback(async () => {
+    if (appIsReady) {
+      try {
+        await SplashScreen.hideAsync();
+      } catch (e) {
+        // ignore
+      }
+    }
+  }, [appIsReady]);
 
   return {
     appIsReady,

@@ -54,23 +54,24 @@ export async function getChapterById(chapterId: string): Promise<Chapter | null>
 }
 
 /**
- * Save / Update a chapter to Firestore and local storage.
+ * Save / Update a single chapter to Firestore as an active remote hotfix.
  */
 export async function saveChapterToFirestore(chapter: Chapter): Promise<{ success: boolean; error?: string }> {
   try {
+    const payload = JSON.parse(JSON.stringify({
+      ...chapter,
+      versesCount: chapter.content.length,
+      isRemoteEdit: true,
+      updatedAt: new Date().toISOString(),
+    }));
+
     // 1. Save to local overrides for instant offline availability
     const overrides = await getLocalChapterOverrides();
-    overrides[chapter.id] = chapter;
+    overrides[chapter.id] = payload;
     await storage.setJSON(OVERRIDES_KEY, overrides);
 
     // 2. Upload cleanly to Firestore
     const docRef = doc(db, CHAPTERS_COLLECTION, chapter.id);
-    const payload = JSON.parse(JSON.stringify({
-      ...chapter,
-      versesCount: chapter.content.length,
-      updatedAt: new Date().toISOString(),
-    }));
-
     await setDoc(docRef, payload, { merge: true });
     return { success: true };
   } catch (error: any) {
@@ -78,6 +79,45 @@ export async function saveChapterToFirestore(chapter: Chapter): Promise<{ succes
     return {
       success: false,
       error: error?.message || 'Failed to save to Firestore. Saved locally only.',
+    };
+  }
+}
+
+/**
+ * Upload all 21 local code chapters to Firestore in batches.
+ * Synchronizes the entire local codebase with Firebase.
+ */
+export async function syncAllChaptersToFirestore(
+  onProgress?: (current: number, total: number) => void
+): Promise<{ success: boolean; count: number; error?: string }> {
+  try {
+    let successCount = 0;
+    const total = LOCAL_CHAPTERS.length;
+
+    for (let i = 0; i < total; i++) {
+      const chapter = LOCAL_CHAPTERS[i];
+      const docRef = doc(db, CHAPTERS_COLLECTION, chapter.id);
+      const payload = JSON.parse(JSON.stringify({
+        ...chapter,
+        versesCount: chapter.content.length,
+        isRemoteEdit: false,
+        updatedAt: new Date().toISOString(),
+      }));
+
+      await setDoc(docRef, payload, { merge: true });
+      successCount++;
+      if (onProgress) {
+        onProgress(successCount, total);
+      }
+    }
+
+    return { success: true, count: successCount };
+  } catch (error: any) {
+    console.error('Failed to sync all chapters to Firestore:', error);
+    return {
+      success: false,
+      count: 0,
+      error: error?.message || 'Failed to sync to Firestore',
     };
   }
 }
@@ -97,6 +137,32 @@ export async function saveChapterLocally(chapter: Chapter): Promise<boolean> {
   } catch (error) {
     console.error('Error saving chapter locally:', error);
     return false;
+  }
+}
+
+/**
+ * Background check if a specific chapter has a remote hotfix on Firestore.
+ */
+export async function checkRemoteChapterHotfix(chapterId: string): Promise<Chapter | null> {
+  try {
+    const docRef = doc(db, CHAPTERS_COLLECTION, chapterId);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      const data = docSnap.data() as Chapter & { isRemoteEdit?: boolean };
+      if (data.isRemoteEdit) {
+        // Cache this hotfix locally for offline reading
+        try {
+          const overrides = await getLocalChapterOverrides();
+          overrides[chapterId] = data;
+          await storage.setJSON(OVERRIDES_KEY, overrides);
+        } catch {}
+        return data;
+      }
+    }
+    return null;
+  } catch {
+    return null;
   }
 }
 

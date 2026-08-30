@@ -1,22 +1,35 @@
 import { useState, useCallback, useEffect } from 'react';
 import { useAppStore } from '@/store/useAppStore';
 import { CHAPTERS } from '@/data/chapters';
-import { getChapterById } from '@/services/firestoreService';
+import { checkRemoteChapterHotfix, getLocalChapterOverrides } from '@/services/firestoreService';
 import type { Chapter } from '@/types';
 import { haptics } from '@/utils';
 
 export function useReading(chapterId: string) {
-  const [chapter, setChapter] = useState<Chapter | null>(() => {
-    return CHAPTERS.find((c) => c.id === chapterId) || null;
-  });
+  const baseChapter = CHAPTERS.find((c) => c.id === chapterId) || null;
+  const [chapter, setChapter] = useState<Chapter | null>(baseChapter);
 
   useEffect(() => {
+    // 1. Immediate sync with bundled code
+    const bundled = CHAPTERS.find((c) => c.id === chapterId) || null;
+    setChapter(bundled);
+
     let isMounted = true;
-    getChapterById(chapterId).then((freshChapter) => {
-      if (isMounted && freshChapter) {
-        setChapter(freshChapter);
+
+    // 2. Check cached local admin overrides
+    getLocalChapterOverrides().then((overrides) => {
+      if (isMounted && overrides[chapterId]) {
+        setChapter(overrides[chapterId]);
       }
     });
+
+    // 3. Background check Firestore for live hotfix
+    checkRemoteChapterHotfix(chapterId).then((hotfix) => {
+      if (isMounted && hotfix) {
+        setChapter(hotfix);
+      }
+    });
+
     return () => {
       isMounted = false;
     };

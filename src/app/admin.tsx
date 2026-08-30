@@ -21,6 +21,7 @@ import {
   saveChapterToFirestore,
   saveChapterLocally,
   getLocalChapterOverrides,
+  syncAllChaptersToFirestore,
 } from '@/services/firestoreService';
 import type { Chapter, ChapterVerse } from '@/types';
 import { toKannadaNumerals, haptics } from '@/utils';
@@ -46,7 +47,37 @@ export default function AdminScreen() {
   // Editing State
   const [editingChapter, setEditingChapter] = useState<Chapter | null>(null);
   const [isSaving, setIsSaving] = useState(false);
+  const [isSyncingAll, setIsSyncingAll] = useState(false);
+  const [syncProgress, setSyncProgress] = useState({ current: 0, total: 0 });
   const [statusMessage, setStatusMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+
+  const handleSyncAll = async () => {
+    Alert.alert(
+      'ಕ್ಲೌಡ್ ಸಿಂಕ್ (Sync All to Cloud)',
+      'ಕೋಡ್‌ನಲ್ಲಿರುವ ಎಲ್ಲಾ ೨೧ ಪರಿಚ್ಛೇದಗಳ ಹೊಸ ಡೇಟಾವನ್ನು ಫೈರ್‌ಬೇಸ್ ಕ್ಲೌಡ್‌ಗೆ ಅಪ್‌ಲೋಡ್ ಮಾಡುವುದೇ?',
+      [
+        { text: 'ರದ್ದು (Cancel)', style: 'cancel' },
+        {
+          text: 'ಸಿಂಕ್ ಮಾಡಿ (Sync)',
+          onPress: async () => {
+            haptics.medium();
+            setIsSyncingAll(true);
+            const res = await syncAllChaptersToFirestore((current, total) => {
+              setSyncProgress({ current, total });
+            });
+            setIsSyncingAll(false);
+            if (res.success) {
+              haptics.success();
+              Alert.alert('ಯಶಸ್ವಿ!', `ಎಲ್ಲಾ ${toKannadaNumerals(res.count)} ಅಧ್ಯಾಯಗಳು ಕ್ಲೌಡ್‌ಗೆ ಸಿಂಕ್ ಆಗಿವೆ.`);
+            } else {
+              haptics.error();
+              Alert.alert('ದೋಷ', res.error || 'ಕ್ಲೌಡ್ ಸಿಂಕ್ ವಿಫಲವಾಗಿದೆ.');
+            }
+          },
+        },
+      ]
+    );
+  };
 
   // Load any existing local overrides on mount
   useEffect(() => {
@@ -557,19 +588,39 @@ export default function AdminScreen() {
           </View>
         </View>
 
-        <Pressable
-          hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
-          onPress={() => {
-            haptics.light();
-            setIsAuthenticated(false);
-          }}
-          className="bg-amber-100 px-3 py-1.5 rounded-xl flex-row items-center flex-shrink-0"
-        >
-          <Ionicons name="log-out-outline" size={16} color="#8A3324" />
-          <AppText weight="bold" style={{ color: '#8A3324', fontSize: 12, marginLeft: 4 }}>
-            ನಿರ್ಗಮಿಸಿ
-          </AppText>
-        </Pressable>
+        <View className="flex-row items-center gap-2">
+          <Pressable
+            hitSlop={{ top: 12, bottom: 12, left: 8, right: 8 }}
+            onPress={handleSyncAll}
+            disabled={isSyncingAll}
+            className="bg-[#8A3324] px-3 py-1.5 rounded-xl flex-row items-center flex-shrink-0 shadow-sm"
+          >
+            {isSyncingAll ? (
+              <ActivityIndicator size="small" color="#FFFFFF" />
+            ) : (
+              <>
+                <Ionicons name="cloud-upload-outline" size={15} color="#FFFFFF" />
+                <AppText weight="bold" style={{ color: '#FFFFFF', fontSize: 12, marginLeft: 4 }}>
+                  ಸಿಂಕ್ ಆಲ್
+                </AppText>
+              </>
+            )}
+          </Pressable>
+
+          <Pressable
+            hitSlop={{ top: 12, bottom: 12, left: 8, right: 8 }}
+            onPress={() => {
+              haptics.light();
+              setIsAuthenticated(false);
+            }}
+            className="bg-amber-100 px-3 py-1.5 rounded-xl flex-row items-center flex-shrink-0"
+          >
+            <Ionicons name="log-out-outline" size={16} color="#8A3324" />
+            <AppText weight="bold" style={{ color: '#8A3324', fontSize: 12, marginLeft: 4 }}>
+              ನಿರ್ಗಮಿಸಿ
+            </AppText>
+          </Pressable>
+        </View>
       </View>
 
       {/* Search & Filter Bar */}

@@ -6,7 +6,6 @@ import { router } from 'expo-router';
 import { ScreenContainer, HStack } from '@/components/layouts/Containers';
 import { AppText } from '@/components/typography/AppText';
 import { CHAPTERS } from '@/data/chapters';
-import { getLocalChapterOverrides } from '@/services/firestoreService';
 import { LOCAL_STRINGS } from '@/localization';
 import { toKannadaNumerals } from '@/utils';
 import type { Chapter } from '@/types';
@@ -15,20 +14,9 @@ import { useHapticFeedback } from '@/hooks/useHapticFeedback';
 export default function ChaptersScreen() {
   const haptics = useHapticFeedback();
   const [searchQuery, setSearchQuery] = useState('');
-  const [baseChapters, setBaseChapters] = useState<Chapter[]>(CHAPTERS);
-
-  React.useEffect(() => {
-    let isMounted = true;
-    getLocalChapterOverrides().then((overrides) => {
-      if (isMounted && Object.keys(overrides).length > 0) {
-        setBaseChapters(prev => prev.map(c => overrides[c.id] || c));
-      }
-    });
-    return () => { isMounted = false; };
-  }, []);
 
   const chapters = useMemo(() => {
-    let list = [...baseChapters].sort((a, b) => a.number - b.number);
+    let list = [...CHAPTERS].sort((a, b) => a.number - b.number);
     if (searchQuery.trim()) {
       const q = searchQuery.trim().toLowerCase();
       list = list.filter(c => 
@@ -41,7 +29,7 @@ export default function ChaptersScreen() {
       );
     }
     return list;
-  }, [baseChapters, searchQuery]);
+  }, [searchQuery]);
 
   // Group chapters by parichheda
   const groupedChapters = useMemo(() => {

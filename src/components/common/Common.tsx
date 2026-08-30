@@ -65,22 +65,24 @@ export function Header({
         },
       ]}
     >
-      <HStack justify="space-between" align="center">
+      <HStack justify="space-between" align="center" className="w-full">
         <View className="w-11 h-11 items-start justify-center">
           {showBack && (
             <Pressable
               onPress={handleBack}
               hitSlop={12}
-              className="w-11 h-11 rounded-full items-center justify-center bg-background-soft"
+              className="w-10 h-10 rounded-full items-center justify-center bg-background-soft"
             >
               <Ionicons name="arrow-back" size={20} color="#3D2314" />
             </Pressable>
           )}
         </View>
         {centerContent ? (
-          centerContent
+          <View className="flex-1 items-center justify-center px-1">
+            {centerContent}
+          </View>
         ) : (
-          <VStack spacing="xs" className="items-center flex-1 mx-3">
+          <VStack spacing="xs" className="items-center flex-1 mx-2">
             <AppText
               variant={subtitle ? 'title' : 'heading3'}
               weight={subtitle ? 'semibold' : 'semibold'}
@@ -277,8 +279,8 @@ export function VerseContent({
       </View>
 
       {showSanskrit && sanskrit && (
-        <View className="bg-secondary-subtle/60 rounded-2xl px-5 py-3 mb-3 items-center">
-          {sanskrit.split('\n').map((line, i) => (
+        <View className="bg-secondary-subtle/60 rounded-2xl px-4 py-3.5 mb-3 items-center">
+          {sanskrit.split('\n').filter((l) => l.trim().length > 0).map((line, i) => (
             <AppText
               key={i}
               variant="verse"
@@ -286,11 +288,11 @@ export function VerseContent({
               align="center"
               className="text-primary-dark font-kannada-semi"
               style={{
-                fontSize: 19.5,
-                lineHeight: 19.5 * 1.85,
+                fontSize: 18.5,
+                lineHeight: 18.5 * 1.85,
               }}
             >
-              {line}
+              {line.trim()}
             </AppText>
           ))}
         </View>

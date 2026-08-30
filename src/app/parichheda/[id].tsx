@@ -7,7 +7,6 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ScreenContainer } from '@/components/layouts/Containers';
 import { AppText } from '@/components/typography/AppText';
 import { CHAPTERS } from '@/data/chapters';
-import { getLocalChapterOverrides } from '@/services/firestoreService';
 import { LOCAL_STRINGS } from '@/localization';
 import { toKannadaNumerals } from '@/utils';
 import type { Chapter } from '@/types';
@@ -17,22 +16,11 @@ export default function ParichhedaScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const haptics = useHapticFeedback();
   const insets = useSafeAreaInsets();
-  const [baseChapters, setBaseChapters] = React.useState<Chapter[]>(CHAPTERS);
-
-  React.useEffect(() => {
-    let isMounted = true;
-    getLocalChapterOverrides().then((overrides) => {
-      if (isMounted && Object.keys(overrides).length > 0) {
-        setBaseChapters(prev => prev.map(c => overrides[c.id] || c));
-      }
-    });
-    return () => { isMounted = false; };
-  }, []);
 
   const parichhedaInfo = useMemo(() => {
-    const chapter = baseChapters.find(c => c.parichheda?.id === id);
+    const chapter = CHAPTERS.find(c => c.parichheda?.id === id);
     return chapter?.parichheda;
-  }, [baseChapters, id]);
+  }, [id]);
 
   const { parichhedaOrdinal, parichhedaName } = useMemo(() => {
     if (!parichhedaInfo) return { parichhedaOrdinal: '', parichhedaName: '' };
@@ -50,8 +38,8 @@ export default function ParichhedaScreen() {
   }, [parichhedaInfo]);
 
   const chapters = useMemo(() => {
-    return baseChapters.filter(c => c.parichheda?.id === id).sort((a, b) => a.number - b.number);
-  }, [baseChapters, id]);
+    return CHAPTERS.filter(c => c.parichheda?.id === id).sort((a, b) => a.number - b.number);
+  }, [id]);
 
   const totalShlokas = chapters.reduce((sum, c) => sum + c.versesCount, 0);
 

@@ -1,5 +1,5 @@
 import React, { useState, useRef, useCallback } from 'react';
-import { View, FlatList, Pressable, Modal, ScrollView } from 'react-native';
+import { View, FlatList, Pressable, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useLocalSearchParams, router } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -7,7 +7,7 @@ import { clsx } from 'clsx';
 import { ScreenContainer, HStack, VStack } from '@/components/layouts/Containers';
 import { AppText } from '@/components/typography/AppText';
 import { Header, VerseContent } from '@/components/common/Common';
-import { IconButton, Button } from '@/components/buttons/Button';
+import { Button } from '@/components/buttons/Button';
 import { useReading } from '@/hooks/useReading';
 import { useAppStore } from '@/store/useAppStore';
 import { LOCAL_STRINGS } from '@/localization';
@@ -29,9 +29,7 @@ export default function ReadingScreen() {
     onVerseViewed,
   } = useReading(id || '');
 
-  const [showSettings, setShowSettings] = useState(false);
   const [showToc, setShowToc] = useState(false);
-  const [fontSize, setFontSize] = useState(settings.fontSize);
   
   // Track manual scroll to prevent viewableItems update from overriding jumps temporarily
   const isJumping = useRef(false);
@@ -114,7 +112,7 @@ export default function ReadingScreen() {
         showBack
         onBack={() => router.back()}
         centerContent={
-          <View className="items-center justify-center flex-1 mx-1.5 px-1">
+          <View className="items-center justify-center">
             {parichhedaOrdinal ? (
               <AppText
                 variant="bodySmall"
@@ -152,14 +150,56 @@ export default function ReadingScreen() {
           </View>
         }
         rightContent={
-          <HStack spacing="xs">
-            <IconButton
-              icon="settings-outline"
-              variant="ghost"
-              size="sm"
-              onPress={() => setShowSettings(true)}
-            />
-          </HStack>
+          <Pressable
+            onPress={() => {
+              haptics.selection();
+              useAppStore.getState().updateSettings({
+                showTranslation: !settings.showTranslation,
+              });
+            }}
+            hitSlop={8}
+            className="items-center justify-center"
+            accessibilityRole="switch"
+            accessibilityState={{ checked: settings.showTranslation }}
+            accessibilityLabel="ಭಾವಾರ್ಥ ಆನ್/ಆಫ್"
+          >
+            <AppText
+              weight="bold"
+              style={{
+                fontSize: 10,
+                lineHeight: 12,
+                marginBottom: 2,
+                color: settings.showTranslation ? '#8A3324' : '#9E948A',
+              }}
+            >
+              ಭಾ
+            </AppText>
+            <View
+              style={{
+                width: 28,
+                height: 16,
+                borderRadius: 9999,
+                padding: 1.5,
+                backgroundColor: settings.showTranslation ? '#8A3324' : '#D1C7BD',
+                justifyContent: 'center',
+                alignItems: settings.showTranslation ? 'flex-end' : 'flex-start',
+              }}
+            >
+              <View
+                style={{
+                  width: 13,
+                  height: 13,
+                  borderRadius: 9999,
+                  backgroundColor: '#FFFFFF',
+                  shadowColor: '#000',
+                  shadowOffset: { width: 0, height: 1 },
+                  shadowOpacity: 0.2,
+                  shadowRadius: 1.5,
+                  elevation: 1.5,
+                }}
+              />
+            </View>
+          </Pressable>
         }
       />
 
@@ -185,7 +225,7 @@ export default function ReadingScreen() {
                 showSanskrit={settings.showSanskrit}
                 showTranslation={settings.showTranslation}
                 showCommentary={settings.showCommentary}
-                fontSize={fontSize}
+                fontSize={settings.fontSize}
               />
             </View>
           )}
@@ -207,136 +247,6 @@ export default function ReadingScreen() {
           }
         />
       </View>
-
-      <Modal
-        visible={showSettings}
-        animationType="slide"
-        transparent
-        onRequestClose={() => setShowSettings(false)}
-      >
-        <View className="flex-1 justify-end">
-          <Pressable
-            className="absolute top-0 left-0 right-0 bottom-0 bg-black/40"
-            onPress={() => setShowSettings(false)}
-          />
-          <View
-            className="bg-white rounded-t-[32px] p-6 relative z-10"
-            style={{ paddingBottom: bottomInset + 24 }}
-          >
-            <View className="w-12 h-1.5 rounded-full bg-border-strong self-center mb-6" />
-
-            <HStack justify="space-between" className="mb-6">
-              <AppText variant="heading3" weight="bold">
-                ಓದುವಿಕೆ ಸೆಟ್ಟಿಂಗ್‌ಗಳು
-              </AppText>
-              <Pressable
-                onPress={() => setShowSettings(false)}
-                className="w-10 h-10 rounded-full items-center justify-center bg-background-soft"
-              >
-                <Ionicons name="close" size={18} color="#7A5C48" />
-              </Pressable>
-            </HStack>
-
-            <VStack spacing="lg">
-              <View>
-                <HStack justify="space-between" className="mb-3">
-                  <AppText variant="title" weight="semibold">
-                    {LOCAL_STRINGS.fontSize}
-                  </AppText>
-                  <View className="bg-primary-subtle rounded-xl px-3 py-1">
-                    <AppText variant="bodySmall" weight="semibold" color="primary">
-                      {toKannadaNumerals(fontSize)}px
-                    </AppText>
-                  </View>
-                </HStack>
-                <View className="flex-row items-center justify-between gap-4">
-                  <Pressable
-                    onPress={() => setFontSize(Math.max(14, fontSize - 1))}
-                    className="w-12 h-12 rounded-2xl bg-background-soft items-center justify-center"
-                  >
-                    <Ionicons name="remove" size={22} color="#7A5C48" />
-                  </Pressable>
-                  <View className="flex-1 h-2 bg-background-subtle rounded-full">
-                    <View
-                      className="h-full bg-primary-default rounded-full"
-                      style={{
-                        width: `${((fontSize - 14) / 10) * 100}%`,
-                      }}
-                    />
-                  </View>
-                  <Pressable
-                    onPress={() => setFontSize(Math.min(24, fontSize + 1))}
-                    className="w-12 h-12 rounded-2xl bg-background-soft items-center justify-center"
-                  >
-                    <Ionicons name="add" size={22} color="#7A5C48" />
-                  </Pressable>
-                </View>
-              </View>
-
-              <View className="h-px bg-border-light" />
-
-              {[
-                {
-                  key: 'showSanskrit',
-                  label: LOCAL_STRINGS.showSanskrit,
-                  value: settings.showSanskrit,
-                },
-                {
-                  key: 'showTranslation',
-                  label: LOCAL_STRINGS.showTranslation,
-                  value: settings.showTranslation,
-                },
-                {
-                  key: 'showCommentary',
-                  label: LOCAL_STRINGS.showCommentary,
-                  value: settings.showCommentary,
-                },
-              ].map((item) => (
-                <Pressable
-                  key={item.key}
-                  onPress={() => {
-                    haptics.light();
-                    useAppStore.getState().updateSettings({
-                      [item.key]: !item.value,
-                    } as any);
-                  }}
-                  className="flex-row items-center justify-between"
-                >
-                  <AppText variant="body" weight="medium">
-                    {item.label}
-                  </AppText>
-                  <View
-                    className={clsx(
-                      'w-13 h-8 rounded-full p-1 transition-all',
-                      item.value ? 'bg-primary-default' : 'bg-border-strong',
-                    )}
-                  >
-                    <View
-                      className={clsx(
-                        'w-6 h-6 rounded-full bg-white shadow-soft transition-transform',
-                        item.value ? 'translate-x-5' : 'translate-x-0',
-                      )}
-                    />
-                  </View>
-                </Pressable>
-              ))}
-            </VStack>
-
-            <Button
-              variant="gradient"
-              fullWidth
-              icon="checkmark"
-              className="mt-8"
-              onPress={() => {
-                useAppStore.getState().updateSettings({ fontSize });
-                setShowSettings(false);
-              }}
-            >
-              ವಾಸ್ತವಗೊಳಿಸಿ
-            </Button>
-          </View>
-        </View>
-      </Modal>
     </ScreenContainer>
   );
 }
