@@ -264,7 +264,7 @@ export default function SettingsScreen() {
                 }}
               >
                 <AppText weight="bold" style={{ color: '#8A3324', fontSize: 12 }}>
-                  v1.0.1
+                  v1.0.2
                 </AppText>
               </View>
               <AppText style={{ color: '#B0967A', fontSize: 11 }}>• MSV Global Tech</AppText>

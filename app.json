@@ -2,9 +2,9 @@
   "expo": {
     "name": "Siddhanta Shikamani",
     "slug": "siddhanta-shikamani",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "updates": {
-      "url": "https://u.expo.dev/a2b562d6-8625-43bd-b9cc-bef1582c1050",
+      "url": "https://u.expo.dev/7358bf6d-e559-464c-9222-17186b1c3e56",
       "enabled": true,
       "fallbackToCacheTimeout": 0,
       "checkAutomatically": "ON_LOAD"
@@ -24,11 +24,11 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.msvglobaltech.siddhantashikamani",
-      "buildNumber": "6"
+      "buildNumber": "7"
     },
     "android": {
       "package": "com.msvglobaltech.siddhantashikamani",
-      "versionCode": 6,
+      "versionCode": 8,
       "adaptiveIcon": {
         "foregroundImage": "./assets/logo.png",
         "backgroundColor": "#FFFFFF"
@@ -66,8 +66,9 @@
     "extra": {
       "router": {},
       "eas": {
-        "projectId": "a2b562d6-8625-43bd-b9cc-bef1582c1050"
+        "projectId": "7358bf6d-e559-464c-9222-17186b1c3e56"
       }
-    }
+    },
+    "owner": "msvglobaltech-08"
   }
 }

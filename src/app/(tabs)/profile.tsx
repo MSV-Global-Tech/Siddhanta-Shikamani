@@ -19,6 +19,15 @@ const PLAY_STORE_URL =
 
 const WHATS_NEW = [
   {
+    version: '1.0.2',
+    date: 'ಆಗಸ್ಟ್ ೨೦೨೬',
+    changes: [
+      '🔘 ಶ್ಲೋಕ ಓದುವ ಪುಟದಲ್ಲಿ ನೇರ ಭಾವಾರ್ಥ ಆನ್/ಆಫ್ ಟಾಗಲ್ ಸ್ವಿಚ್',
+      '⚡ ಅಪ್ಲಿಕೇಶನ್ ಆರಂಭದಲ್ಲಿ ಸುಗಮ, ತ್ವರಿತ ಲೋಡಿಂಗ್ ಮತ್ತು ಕಾರ್ಯಕ್ಷಮತೆ ಸುಧಾರಣೆ',
+      '🎨 ಸುಧಾರಿತ ಹೆಡರ್ ಅಳವಡಿಕೆ ಮತ್ತು ವಿನ್ಯಾಸ ನವೀಕರಣಗಳು',
+    ],
+  },
+  {
     version: '1.0.1',
     date: 'ಆಗಸ್ಟ್ ೨೦೨೬',
     changes: [
@@ -428,7 +437,7 @@ export default function ProfileScreen() {
                 paddingHorizontal: 14,
                 paddingVertical: 5,
               }}>
-                <AppText weight="bold" style={{ color: '#8A3324', fontSize: 12 }}>v1.0.1</AppText>
+                <AppText weight="bold" style={{ color: '#8A3324', fontSize: 12 }}>v1.0.2</AppText>
               </View>
               <AppText style={{ color: '#B0967A', fontSize: 11 }}>• MSV Global Tech</AppText>
             </View>
@@ -478,7 +487,7 @@ export default function ProfileScreen() {
                 {LOCAL_STRINGS.appDescription}
               </AppText>
               <AppText variant="caption" color="subtle">
-                {LOCAL_STRINGS.version} 1.0.1
+                {LOCAL_STRINGS.version} 1.0.2
               </AppText>
             </View>
 

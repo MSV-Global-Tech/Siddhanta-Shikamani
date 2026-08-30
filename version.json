@@ -1,5 +1,5 @@
 {
-  "version": "1.0.1",
-  "buildNumber": 6,
-  "releaseNotes": "UI enhancements, bilingual labels, and performance updates"
+  "version": "1.0.2",
+  "buildNumber": 7,
+  "releaseNotes": "UI enhancements, clean Bhavartha header toggle, and instant startup"
 }
