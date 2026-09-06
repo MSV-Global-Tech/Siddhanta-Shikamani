@@ -3,6 +3,76 @@ import type { Chapter } from '@/types';
 export const parichheda16Chapters: Chapter[] = [
     {
         id: 'ch-16-01',
+        number: 53,
+        title: 'ಅಥ ಮಾಹೇಶ್ವರಸ್ಥಲಮ್',
+        subtitle: 'ಮಾಹೇಶ್ವರಸ್ಥಲಾಂತರ್ಗತವಾದ ನವವಿಧ ಲಿಂಗಸ್ಥಲಗಳ ಪ್ರಸಂಗವು',
+        description: 'ಅಥ ಮಾಹೇಶ್ವರಸ್ಥಲಮ್',
+        versesCount: 4,
+        category: 'ಮಾಹೇಶ್ವರಸ್ಥಲಮ್',
+        colophon: 'ಇತಿ ಮಾಹೇಶ್ವರಸ್ಥಲಾಂತರ್ಗತ ನವವಿಧಲಿಂಗಸ್ಥಲಪ್ರಸಂಗಃ',
+
+        parichheda: {
+            id: 'p-16',
+            number: 16,
+            title: 'ಷೋಡಶಃ ಪರಿಚ್ಛೇದಃ - ಮಾಹೇಶ್ವರಸ್ಥಲಾಂತರ್ಗತ ನವವಿಧಲಿಂಗಸ್ಥಲಪ್ರಸಂಗಃ'
+        },
+
+        content: [
+            {
+                id: 'v-16-01',
+                verseNumber: 1,
+                sanskrit:
+                    'ಸ್ಥಲಾನಾಂ ನವಕಂ ಪ್ರೋಕ್ತಮ್\n' +
+                    'ಭಕ್ತಸ್ಥಲಸಮಾಶ್ರಯಮ್ |\n' +
+                    'ಮಾಹೇಶ್ವರಸ್ಥಲೇ ಸಿದ್ಧಮ್\n' +
+                    'ಸ್ಥಲಭೇದಂ ವದಸ್ವ ಮೇ || 16-1',
+
+                translation:
+                    'ಭಕ್ತಸ್ಥಲವನ್ನು ಆಶ್ರಯಿಸಿಕೊಂಡ ಒಂಬತ್ತು ಸ್ಥಲಗಳು (ಲಿಂಗಸ್ಥಲಗಳು) ನಿನ್ನಿಂದ ಹೇಳಲ್ಪಟ್ಟವು. ಮಾಹೇಶ್ವರಸ್ಥಲದಲ್ಲಿರುವ ಸ್ಥಲಭೇದವನ್ನು ನನಗೆ ಹೇಳುವಂತಹವನಾಗು.'
+            },
+
+            {
+                id: 'v-16-02',
+                verseNumber: 2,
+                sanskrit:
+                    'ಮಾಹೇಶ್ವರಸ್ಥಲೇ ಸಂತಿ\n' +
+                    'ಸ್ಥಲಾನಿ ನವ ತಾಪಸ |\n' +
+                    'ಕ್ರಿಯಾಗಮಸ್ಥಲಂ ಪೂರ್ವಮ್\n' +
+                    'ತತೋ ಭಾವಾಗಮಸ್ಥಲಮ್ || 16-2',
+
+                translation:
+                    'ಹೇ ತಪಸ್ವಿಯಾದ ಅಗಸ್ತ್ಯನೇ, ಮಾಹೇಶ್ವರಸ್ಥಲದಲ್ಲಿ ಒಂಬತ್ತು ಸ್ಥಲಗಳಿವೆ. ಅವುಗಳಲ್ಲಿ ಮೊದಲನೆಯದು ಕ್ರಿಯಾಗಮಸ್ಥಲ. ಅನಂತರ ಭಾವಾಗಮಸ್ಥಲ.'
+            },
+
+            {
+                id: 'v-16-03',
+                verseNumber: 3,
+                sanskrit:
+                    'ಜ್ಞಾನಾಗಮಸ್ಥಲಂ ಚಾಥ\n' +
+                    'ಸಕಾಯಸ್ಥಲಮೀರಿತಮ್ |\n' +
+                    'ತತೋಽಕಾಯಸ್ಥಲಂ ಪ್ರೋಕ್ತಮ್\n' +
+                    'ಪರಕಾಯಸ್ಥಲಂ ತತಃ || 16-3',
+
+                translation:
+                    'ಅನಂತರ ಜ್ಞಾನಾಗಮಸ್ಥಲ. ಅದರ ನಂತರ ಸಕಾಯಸ್ಥಲವೆಂದು ಹೇಳಲ್ಪಟ್ಟಿದೆ. ತದನಂತರ ಅಕಾಯಸ್ಥಲ ಮತ್ತು ನಂತರ ಪರಕಾಯಸ್ಥಲ.'
+            },
+
+            {
+                id: 'v-16-04',
+                verseNumber: 4,
+                sanskrit:
+                    'ಧರ್ಮಾಚಾರಸ್ಥಲಂ ಚಾಥ\n' +
+                    'ಭಾವಾಚಾರಸ್ಥಲಂ ತತಃ |\n' +
+                    'ಜ್ಞಾನಾಚಾರಸ್ಥಲಂ ಚೇತಿ\n' +
+                    'ಕ್ರಮಾದೇಷಾಂ ವಿಧಿರೋಚ್ಯತೇ || 16-4',
+
+                translation:
+                    'ತರುವಾಯ ಧರ್ಮಾಚಾರಸ್ಥಲ, ಅದರ ನಂತರ ಭಾವಾಚಾರಸ್ಥಲ ಮತ್ತು ಜ್ಞಾನಾಚಾರಸ್ಥಲ. ಹೀಗೆ ಕ್ರಮವಾಗಿ ಇವುಗಳ ಭೇದವನ್ನು ವಿವರಿಸಲಾಗುವುದು.'
+            }
+        ],
+    },
+    {
+        id: 'ch-16-02',
         number: 54,
         title: 'ಅಥ ಕ್ರಿಯಾಗಮಸ್ಥಲಮ್',
         subtitle: 'ಇಗ ಕ್ರಿಯಾಗಮಸ್ಥಲವು (10 ಶ್ಲೋಕಗಳು)',
@@ -20,8 +90,8 @@ export const parichheda16Chapters: Chapter[] = [
 
         content: [
             {
-                id: 'v-16-54',
-                verseNumber: 54,
+                id: 'v-16-05',
+                verseNumber: 5,
                 sanskrit:
                     'ಶಿವೋ ಹಿ ಪರಮಃ ಸಾಕ್ಷಾತ್\n' +
                     'ಪೂಜಾ ತಸ್ಯ ಕ್ರಿಯೋಚ್ಯತೇ |\n' +
@@ -33,10 +103,10 @@ export const parichheda16Chapters: Chapter[] = [
             },
 
             {
-                id: 'v-16-55',
-                verseNumber: 55,
+                id: 'v-16-06',
+                verseNumber: 6,
                 sanskrit:
-                    'ಪ್ರಕಾಶತೇ ಯಥಾ ವಹ್ನಿಃ\n' +
+                    'ಪ್ರಕಾಶತೇ ಯಥಾ ನಾಗ್ನಿಃ\n' +
                     'ಅರಣ್ಯಾಂ ಮಥನಂ ವಿನಾ |\n' +
                     'ಕ್ರಿಯಾಂ ವಿನಾ ತಥಾಂತಸ್ಥೋ\n' +
                     'ನ ಪ್ರಕಾಶೋ ಭವೇಚ್ಛಿವಃ || 16-6',
@@ -46,8 +116,8 @@ export const parichheda16Chapters: Chapter[] = [
             },
 
             {
-                id: 'v-16-56',
-                verseNumber: 56,
+                id: 'v-16-07',
+                verseNumber: 7,
                 sanskrit:
                     'ನ ಯಥಾ ವಿಧಿಲೋಪಃ ಸ್ಯಾತ್\n' +
                     'ಯಥಾ ದೇವಃ ಪ್ರಸೀದತಿ |\n' +
@@ -59,10 +129,10 @@ export const parichheda16Chapters: Chapter[] = [
             },
 
             {
-                id: 'v-16-57',
-                verseNumber: 57,
+                id: 'v-16-08',
+                verseNumber: 8,
                 sanskrit:
-                    'ವಿಧಿಃ ಶಿವನಿಯೋಗೋಽಯಂ\n' +
+                    'ವಿಧಿಃ ಶಿವನಿಯೋಗೋಽಯಮ್\n' +
                     'ತಸ್ಮಾದ್ ವಿಹಿತಕರ್ಮಣಿ |\n' +
                     'ಶಿವಾರಾಧನಬುದ್ಧ್ಯೈವ\n' +
                     'ನಿರತಃ ಸ್ಯಾದ್ ವಿಚಕ್ಷಣಃ || 16-8',
@@ -72,8 +142,8 @@ export const parichheda16Chapters: Chapter[] = [
             },
 
             {
-                id: 'v-16-58',
-                verseNumber: 58,
+                id: 'v-16-09',
+                verseNumber: 9,
                 sanskrit:
                     'ಗುರೋರಾದೇಶಮಾಸಾದ್ಯ\n' +
                     'ಪೂಜಯೇತ್ ಪರಮೇಶ್ವರಮ್ |\n' +
@@ -85,8 +155,8 @@ export const parichheda16Chapters: Chapter[] = [
             },
 
             {
-                id: 'v-16-59',
-                verseNumber: 59,
+                id: 'v-16-10',
+                verseNumber: 10,
                 sanskrit:
                     'ಸದಾ ಶಿವಾರ್ಚನೋಪಾಯ-\n' +
                     'ಸಾಮಗ್ರೀವ್ಯಗ್ರಮಾನಸಃ |\n' +
@@ -98,8 +168,8 @@ export const parichheda16Chapters: Chapter[] = [
             },
 
             {
-                id: 'v-16-60',
-                verseNumber: 60,
+                id: 'v-16-11',
+                verseNumber: 11,
                 sanskrit:
                     'ಅಂಧಪಂಗುವದನ್ಯೋನ್ಯ-\n' +
                     'ಸಾಪೇಕ್ಷೇ ಜ್ಞಾನಕರ್ಮಣೀ |\n' +
@@ -111,10 +181,10 @@ export const parichheda16Chapters: Chapter[] = [
             },
 
             {
-                id: 'v-16-61',
-                verseNumber: 61,
+                id: 'v-16-12',
+                verseNumber: 12,
                 sanskrit:
-                    'ಜ್ಞಾನೇ ಸಿದ್ಧೇಽಪಿ ವಿದુષಾಮ್\n' +
+                    'ಜ್ಞಾನೇ ಸಿದ್ಧೇಽಪಿ ವಿದುಷಾಮ್\n' +
                     'ಕರ್ಮಾಪಿ ವಿನಿಯುಜ್ಯತೇ |\n' +
                     'ಫಲಾಭಿಸಂಧಿರಹಿತಮ್\n' +
                     'ತಸ್ಮಾತ್ ಕರ್ಮ ನ ಸಂತ್ಯಜೇತ್ || 16-12',
@@ -124,8 +194,8 @@ export const parichheda16Chapters: Chapter[] = [
             },
 
             {
-                id: 'v-16-62',
-                verseNumber: 62,
+                id: 'v-16-13',
+                verseNumber: 13,
                 sanskrit:
                     'ಆಚಾರ ಏವ ಸರ್ವೇಷಾಮ್\n' +
                     'ಅಲಂಕಾರಾಯ ಕಲ್ಪ್ಯತೇ |\n' +
@@ -137,8 +207,8 @@ export const parichheda16Chapters: Chapter[] = [
             },
 
             {
-                id: 'v-16-63',
-                verseNumber: 63,
+                id: 'v-16-14',
+                verseNumber: 14,
                 sanskrit:
                     'ಜ್ಞಾನೇನಾಚಾರಯುಕ್ತೇನ\n' +
                     'ಪ್ರಸೀದತಿ ಮಹೇಶ್ವರಃ |\n' +
@@ -152,7 +222,7 @@ export const parichheda16Chapters: Chapter[] = [
     },
 
     {
-        id: 'ch-16-02',
+        id: 'ch-16-03',
         number: 55,
         title: 'ಅಥ ಭಾವಾಗಮಸ್ಥಲಮ್',
         subtitle: 'ಇಗ ಭಾವಾಗಮಸ್ಥಲವು (9 ಶ್ಲೋಕಗಳು)',
@@ -170,8 +240,8 @@ export const parichheda16Chapters: Chapter[] = [
 
         content: [
             {
-                id: 'v-16-64',
-                verseNumber: 64,
+                id: 'v-16-15',
+                verseNumber: 15,
                 sanskrit:
                     'ಭಾವಚಿಹ್ನಾನಿ ವಿದುಷೋ\n' +
                     'ಯಾನಿ ಸಂತಿ ವಿರಾಗಿಣಃ |\n' +
@@ -183,11 +253,11 @@ export const parichheda16Chapters: Chapter[] = [
             },
 
             {
-                id: 'v-16-65',
-                verseNumber: 65,
+                id: 'v-16-16',
+                verseNumber: 16,
                 sanskrit:
                     'ಶಿವೋಽಹಮಿತಿ ಭಾವೋಽಪಿ\n' +
-                    'ಶಿವತ್ವಾಪತ್ತಿಕಾರಣಮ್ |\n' +
+                    'ಶಿವತಾಪತ್ತಿಕಾರಣಮ್ |\n' +
                     'ನ ಜ್ಞಾನಮಾತ್ರಂ ನಾಚಾರೋ\n' +
                     'ಭಾವಯುಕ್ತಃ ಶಿವೋ ಭವೇತ್ || 16-16',
 
@@ -196,12 +266,12 @@ export const parichheda16Chapters: Chapter[] = [
             },
 
             {
-                id: 'v-16-66',
-                verseNumber: 66,
+                id: 'v-16-17',
+                verseNumber: 17,
                 sanskrit:
                     'ಜ್ಞಾನಂ ವಸ್ತುಪರಿಚ್ಛೇದೋ\n' +
                     'ಧ್ಯಾನಂ ತದ್ಭಾವಕಾರಣಮ್ |\n' +
-                    'ತಸ್ಮಾಜ್ಜ್ಞಾತೇ ಮಹಾದೇವೇ\n' +
+                    'ತಸ್ಮಾದ್ ಜ್ಞಾತೇ ಮಹಾದೇವೇ\n' +
                     'ಧ್ಯಾನಯುಕ್ತೋ ಭವೇತ್ ಸುಧೀಃ || 16-17',
 
                 translation:
@@ -209,8 +279,8 @@ export const parichheda16Chapters: Chapter[] = [
             },
 
             {
-                id: 'v-16-67',
-                verseNumber: 67,
+                id: 'v-16-18',
+                verseNumber: 18,
                 sanskrit:
                     'ಅಂತರ್ಬಹಿಶ್ಚ ಸರ್ವತ್ರ\n' +
                     'ಪರಿಪೂರ್ಣಂ ಮಹೇಶ್ವರಮ್ |\n' +
@@ -222,8 +292,8 @@ export const parichheda16Chapters: Chapter[] = [
             },
 
             {
-                id: 'v-16-68',
-                verseNumber: 68,
+                id: 'v-16-19',
+                verseNumber: 19,
                 sanskrit:
                     'ಅರ್ಥಹೀನಾ ಯಥಾ ವಾಣೀ\n' +
                     'ಪತಿಹೀನಾ ಯಥಾ ಸತೀ |\n' +
@@ -235,8 +305,8 @@ export const parichheda16Chapters: Chapter[] = [
             },
 
             {
-                id: 'v-16-69',
-                verseNumber: 69,
+                id: 'v-16-20',
+                verseNumber: 20,
                 sanskrit:
                     'ಚಕ್ಷುರ್ಹೀನೋ ಯಥಾ ರೂಪಂ\n' +
                     'ನ ಕಿಂಚಿದ್ವೀಕ್ಷಿತುಂ ಕ್ಷಮಃ |\n' +
@@ -248,8 +318,8 @@ export const parichheda16Chapters: Chapter[] = [
             },
 
             {
-                id: 'v-16-70',
-                verseNumber: 70,
+                id: 'v-16-21',
+                verseNumber: 21,
                 sanskrit:
                     'ಭಾವಶುದ್ಧೇನ ಮನಸಾ\n' +
                     'ಪೂಜಯೇತ್ ಪರಮೇಷ್ಠಿನಮ್ |\n' +
@@ -261,23 +331,23 @@ export const parichheda16Chapters: Chapter[] = [
             },
 
             {
-                id: 'v-16-71',
-                verseNumber: 71,
+                id: 'v-16-22',
+                verseNumber: 22,
                 sanskrit:
                     'ನೈರಂತರ್ಯೇಣ ಸಂಪನ್ನೇ\n' +
-                    'ಭಾವೇ ಧ್ಯಾಯೇತ್ ಶಿವಂ ಪ್ರತಿ |\n' +
-                    'ತದ್ಭಾವೋ ಜಾಯತೇ ಯದ್ವತ್\n' +
-                    'ಕೃಮೇಃ ಕೀಟಸ್ಯ ಚಿಂತನಾತ್ || 16-22',
+                    'ಭಾವೇ ಧ್ಯಾತುಂ ಶಿವಂ ಪ್ರತಿ |\n' +
+                    'ತದ್ ಭಾವೋ ಜಾಯತೇ ಯದ್ವತ್\n' +
+                    'ಕ್ರಿಮೇಃ ಕೀಟಸ್ಯ ಚಿಂತನಾತ್ || 16-22',
 
                 translation:
                     'ಯಾವ ರೀತಿಯಾಗಿ ಭ್ರಮರದ ಚಿಂತನೆಯಿಂದ ಕೀಟಕ್ಕೆ ಭ್ರಮರದ ಭಾವವು ಉಂಟಾಗುವುದೋ, ಅದರಂತೆ ಶಿವನನ್ನು ಕುರಿತು ನಿರಂತರವಾಗಿ ತನ್ನ ಭಾವನೆಯಲ್ಲಿ ಧ್ಯಾನವು ಸಂಪನ್ನವಾಗಲು ಅವನಿಗೆ ಶಿವತ್ವವೇ ಪ್ರಾಪ್ತವಾಗುತ್ತದೆ.'
             },
 
             {
-                id: 'v-16-72',
-                verseNumber: 72,
+                id: 'v-16-23',
+                verseNumber: 23,
                 sanskrit:
-                    'ನಿಷ್ಕಲಂಕಂ ನಿರಾಕಾರಂ\n' +
+                    'ನಿಷ್ಕಲಂಕಂ ನಿರಾಕಾರಮ್\n' +
                     'ಪರಬ್ರಹ್ಮ ಶಿವಾಭಿಧಮ್ |\n' +
                     'ನಿಧ್ಯಾತುಮಸಮರ್ಥೋಽಪಿ\n' +
                     'ತದ್ವಿಭೂತಿಂ ವಿಭಾವಯೇತ್ || 16-23',
@@ -289,7 +359,7 @@ export const parichheda16Chapters: Chapter[] = [
     },
 
     {
-        id: 'ch-16-03',
+        id: 'ch-16-04',
         number: 56,
         title: 'ಅಥ ಜ್ಞಾನಾಗಮಸ್ಥಲಮ್',
         subtitle: 'ಇಗ ಜ್ಞಾನಾಗಮಸ್ಥಲವು (11 ಶ್ಲೋಕಗಳು)',
@@ -307,8 +377,8 @@ export const parichheda16Chapters: Chapter[] = [
 
         content: [
             {
-                id: 'v-16-73',
-                verseNumber: 73,
+                id: 'v-16-24',
+                verseNumber: 24,
                 sanskrit:
                     'ಪರಸ್ಯ ಜ್ಞಾನಚಿಹ್ನಾನಿ\n' +
                     'ಯಾನಿ ಸಂತಿ ಶರೀರಿಣಾಮ್ |\n' +
@@ -320,12 +390,12 @@ export const parichheda16Chapters: Chapter[] = [
             },
 
             {
-                id: 'v-16-74',
-                verseNumber: 74,
+                id: 'v-16-25',
+                verseNumber: 25,
                 sanskrit:
                     'ಭಾವೇನ ಕಿಂ ಫಲಂ ಪುಂಸಾಮ್\n' +
                     'ಕರ್ಮಣಾ ವಾ ಕಿಮಿಷ್ಯತೇ |\n' +
-                    'ಭಾವಕರ್ಮಸಮಾಯುಕ್ತಂ\n' +
+                    'ಭಾವಕರ್ಮಸಮಾಯುಕ್ತಮ್\n' +
                     'ಜ್ಞಾನಮೇವ ವಿಮುಕ್ತಿದಮ್ || 16-25',
 
                 translation:
@@ -333,8 +403,8 @@ export const parichheda16Chapters: Chapter[] = [
             },
 
             {
-                id: 'v-16-75',
-                verseNumber: 75,
+                id: 'v-16-26',
+                verseNumber: 26,
                 sanskrit:
                     'ಕೇವಲಂ ಕರ್ಮಮಾತ್ರೇಣ\n' +
                     'ಜನ್ಮಕೋಟಿಶತೈರಪಿ |\n' +
@@ -346,8 +416,8 @@ export const parichheda16Chapters: Chapter[] = [
             },
 
             {
-                id: 'v-16-76',
-                verseNumber: 76,
+                id: 'v-16-27',
+                verseNumber: 27,
                 sanskrit:
                     'ಜ್ಞಾನಹೀನಂ ಸದಾ ಕರ್ಮ\n' +
                     'ಪುಂಸಾಂ ಸಂಸಾರಕಾರಣಮ್ |\n' +
@@ -359,8 +429,8 @@ export const parichheda16Chapters: Chapter[] = [
             },
 
             {
-                id: 'v-16-77',
-                verseNumber: 77,
+                id: 'v-16-28',
+                verseNumber: 28,
                 sanskrit:
                     'ಫಲಂ ಕ್ರಿಯಾವತಾಂ ಪುಂಸಾಮ್\n' +
                     'ಸ್ವರ್ಗಾದ್ಯಂ ನಶ್ವರಂ ಯತಃ |\n' +
@@ -372,8 +442,8 @@ export const parichheda16Chapters: Chapter[] = [
             },
 
             {
-                id: 'v-16-78',
-                verseNumber: 78,
+                id: 'v-16-29',
+                verseNumber: 29,
                 sanskrit:
                     'ಶಾಸ್ತ್ರಾಭ್ಯಾಸಾದಿಯತ್ನೇನ\n' +
                     'ಸದ್ಗುರೋರುಪದೇಶತಃ |\n' +
@@ -385,8 +455,8 @@ export const parichheda16Chapters: Chapter[] = [
             },
 
             {
-                id: 'v-16-79',
-                verseNumber: 79,
+                id: 'v-16-30',
+                verseNumber: 30,
                 sanskrit:
                     'ಜ್ಞಾನಂ ಪರಶಿವಾದ್ವೈತ-\n' +
                     'ಪರಿಪಾಕವಿನಿಶ್ಚಯಃ |\n' +
@@ -398,10 +468,10 @@ export const parichheda16Chapters: Chapter[] = [
             },
 
             {
-                id: 'v-16-80',
-                verseNumber: 80,
+                id: 'v-16-31',
+                verseNumber: 31,
                 sanskrit:
-                    'ಶಿವಾತ್ಮಕಮಿದಂ ಸರ್ವಂ\n' +
+                    'ಶಿವಾತ್ಮಕಮಿದಂ ಸರ್ವಮ್\n' +
                     'ಶಿವಾದನ್ಯನ್ನ ವಿದ್ಯತೇ |\n' +
                     'ಶಿವೋಽಹಮಿತಿ ಯಾ ಬುದ್ಧಿಃ\n' +
                     'ತದೇವ ಜ್ಞಾನಮುತ್ತಮಮ್ || 16-31',
@@ -411,8 +481,8 @@ export const parichheda16Chapters: Chapter[] = [
             },
 
             {
-                id: 'v-16-81',
-                verseNumber: 81,
+                id: 'v-16-32',
+                verseNumber: 32,
                 sanskrit:
                     'ಅಂಧೋ ಯಥಾ ಪುರಸ್ಥಾನಿ\n' +
                     'ವಸ್ತೂನಿ ಚ ನ ಪಶ್ಯತಿ |\n' +
@@ -424,8 +494,8 @@ export const parichheda16Chapters: Chapter[] = [
             },
 
             {
-                id: 'v-16-82',
-                verseNumber: 82,
+                id: 'v-16-33',
+                verseNumber: 33,
                 sanskrit:
                     'ಶಿವಸ್ಯ ದರ್ಶನಾತ್ ಪುಂಸಾಮ್\n' +
                     'ಜನ್ಮರೋಗನಿವರ್ತನಮ್ |\n' +
@@ -437,8 +507,8 @@ export const parichheda16Chapters: Chapter[] = [
             },
 
             {
-                id: 'v-16-83',
-                verseNumber: 83,
+                id: 'v-16-34',
+                verseNumber: 34,
                 sanskrit:
                     'ದೀಪಂ ವಿನಾ ಯಥಾ ಗೇಹೇ\n' +
                     'ನಾಂಧಕಾರೋ ನಿವರ್ತತೇ |\n' +
@@ -452,7 +522,7 @@ export const parichheda16Chapters: Chapter[] = [
     },
 
     {
-        id: 'ch-16-04',
+        id: 'ch-16-05',
         number: 57,
         title: 'ಅಥ ಸಕಾಯಸ್ಥಲಮ್',
         subtitle: 'ಇಗ ಸಕಾಯಸ್ಥಲವು (8 ಶ್ಲೋಕಗಳು)',
@@ -470,10 +540,10 @@ export const parichheda16Chapters: Chapter[] = [
 
         content: [
             {
-                id: 'v-16-84',
-                verseNumber: 84,
+                id: 'v-16-35',
+                verseNumber: 35,
                 sanskrit:
-                    'ಪರಸ್ಯ ಯಾ ತನುರ್ಜ್ಞೇಯಾಽಽ-\n' +
+                    'ಪರಸ್ಯ ಯಾ ತನುರ್ಜ್ಞೇಯಾಽ-\n' +
                     'ದೇಹಕರ್ಮಾಭಿಮಾನಿನಃ |\n' +
                     'ತಯಾ ಸಕಾಯೋ ಲೋಕೋಽಯಂ\n' +
                     'ತದಾತ್ಮತ್ವನಿರೂಪಣಾತ್ || 16-35',
@@ -483,8 +553,8 @@ export const parichheda16Chapters: Chapter[] = [
             },
 
             {
-                id: 'v-16-85',
-                verseNumber: 85,
+                id: 'v-16-36',
+                verseNumber: 36,
                 sanskrit:
                     'ಕಾಯಂ ವಿನಾ ಸಮಸ್ತಾನಾಮ್\n' +
                     'ನ ಕ್ರಿಯಾ ನ ಚ ಭಾವನಾ |\n' +
@@ -496,8 +566,8 @@ export const parichheda16Chapters: Chapter[] = [
             },
 
             {
-                id: 'v-16-86',
-                verseNumber: 86,
+                id: 'v-16-37',
+                verseNumber: 37,
                 sanskrit:
                     'ಶಿವೈಕಜ್ಞಾನಯುಕ್ತಸ್ಯ\n' +
                     'ಯೋಗಿನೋಽಪಿ ಮಹಾತ್ಮನಃ |\n' +
@@ -509,8 +579,8 @@ export const parichheda16Chapters: Chapter[] = [
             },
 
             {
-                id: 'v-16-87',
-                verseNumber: 87,
+                id: 'v-16-38',
+                verseNumber: 38,
                 sanskrit:
                     'ಕಾಷ್ಠಂ ವಿನಾ ಯಥಾ ವಹ್ನಿಃ\n' +
                     'ಜಾಯತೇ ನ ಪ್ರಕಾಶವಾನ್ |\n' +
@@ -522,8 +592,8 @@ export const parichheda16Chapters: Chapter[] = [
             },
 
             {
-                id: 'v-16-88',
-                verseNumber: 88,
+                id: 'v-16-39',
+                verseNumber: 39,
                 sanskrit:
                     'ಮೂರ್ತ್ಯಾತ್ಮನೈವ ದೇವಸ್ಯ\n' +
                     'ಯಥಾ ಪೂಜ್ಯತ್ವಕಲ್ಪನಾ |\n' +
@@ -535,8 +605,8 @@ export const parichheda16Chapters: Chapter[] = [
             },
 
             {
-                id: 'v-16-89',
-                verseNumber: 89,
+                id: 'v-16-40',
+                verseNumber: 40,
                 sanskrit:
                     'ನಿಷ್ಕಲೋ ಹಿ ಮಹಾದೇವಃ\n' +
                     'ಪರಿಪೂರ್ಣಃ ಸದಾಶಿವಃ |\n' +
@@ -548,8 +618,8 @@ export const parichheda16Chapters: Chapter[] = [
             },
 
             {
-                id: 'v-16-90',
-                verseNumber: 90,
+                id: 'v-16-41',
+                verseNumber: 41,
                 sanskrit:
                     'ಬ್ರಹ್ಮಾದ್ಯಾ ದೇವತಾಃ ಸರ್ವಾಃ\n' +
                     'ಮುನಯೋಽಪಿ ಮುಮುಕ್ಷವಃ |\n' +
@@ -561,13 +631,13 @@ export const parichheda16Chapters: Chapter[] = [
             },
 
             {
-                id: 'v-16-91',
-                verseNumber: 91,
+                id: 'v-16-42',
+                verseNumber: 42,
                 sanskrit:
                     'ತಪೋ ಹಿ ಮೂಲಂ ಸರ್ವಾಸಾಮ್\n' +
-                    'ಸಿದ್ಧೀನಾಂ ಯಜ್ಞಜಗತ್ತ್ರಯೇ |\n' +
+                    'ಸಿದ್ಧೀನಾಂ ಯಜ್ಞಗತ್ತ್ರಯೇ |\n' +
                     'ತಪಸ್ತತ್ಕಾಯಮೂಲಂ ಹಿ\n' +
-                    'ತಸ್ಮಾತ್ ಕాయం ನ ಸಂತ್ಯಜೇತ್ || 16-42',
+                    'ತಸ್ಮಾತ್ ಕಾಯಂ ನ ಸಂತ್ಯಜೇತ್ || 16-42',
 
                 translation:
                     'ಮೂರು ಲೋಕಗಳಲ್ಲಿರುವ ಸಕಲ ಸಿದ್ಧಿಗಳಿಗೂ ತಪಸ್ಸೇ ಮೂಲಸಾಧನವಾಗಿದೆ. ಆ ತಪಸ್ಸಿಗೆ ಕಾಯವೇ ಮುಖ್ಯವಾದುದು. ಆದ್ದರಿಂದ ಜ್ಞಾನಿಯಾದವನು ಶರೀರವನ್ನು ಬಿಡಕೂಡದು.'
@@ -576,7 +646,7 @@ export const parichheda16Chapters: Chapter[] = [
     },
 
     {
-        id: 'ch-16-05',
+        id: 'ch-16-06',
         number: 58,
         title: 'ಅಥ ಅಕಾಯಸ್ಥಲಮ್',
         subtitle: 'ಇಗ ಅಕಾಯಸ್ಥಲವು (6 ಶ್ಲೋಕಗಳು)',
@@ -594,8 +664,8 @@ export const parichheda16Chapters: Chapter[] = [
 
         content: [
             {
-                id: 'v-16-92',
-                verseNumber: 92,
+                id: 'v-16-43',
+                verseNumber: 43,
                 sanskrit:
                     'ಔಪಚಾರಿಕದೇಹಿತ್ವಾತ್\n' +
                     'ಜಗದಾತ್ಮತ್ವಭಾವನಾತ್ |\n' +
@@ -607,8 +677,8 @@ export const parichheda16Chapters: Chapter[] = [
             },
 
             {
-                id: 'v-16-93',
-                verseNumber: 93,
+                id: 'v-16-44',
+                verseNumber: 44,
                 sanskrit:
                     'ಪರಸ್ಯ ದೇಹಯೋಗೇಽಪಿ\n' +
                     'ನ ದೇಹಾಶ್ರಯವಿಕ್ರಿಯಾ |\n' +
@@ -620,8 +690,8 @@ export const parichheda16Chapters: Chapter[] = [
             },
 
             {
-                id: 'v-16-94',
-                verseNumber: 94,
+                id: 'v-16-45',
+                verseNumber: 45,
                 sanskrit:
                     'ಪರಲಿಂಗೇ ವಿಲೀನಸ್ಯ\n' +
                     'ಪರಮಾನಂದಚಿನ್ಮಯೇ |\n' +
@@ -633,8 +703,8 @@ export const parichheda16Chapters: Chapter[] = [
             },
 
             {
-                id: 'v-16-95',
-                verseNumber: 95,
+                id: 'v-16-46',
+                verseNumber: 46,
                 sanskrit:
                     'ದೇಹಾಭಿಮಾನಹೀನಸ್ಯ\n' +
                     'ಶಿವಭಾವೇ ಸ್ಥಿತಾತ್ಮನಃ |\n' +
@@ -646,8 +716,8 @@ export const parichheda16Chapters: Chapter[] = [
             },
 
             {
-                id: 'v-16-96',
-                verseNumber: 96,
+                id: 'v-16-47',
+                verseNumber: 47,
                 sanskrit:
                     'ಶಿವಜ್ಞಾನೈಕನಿಷ್ಠಸ್ಯ\n' +
                     'ನಾಹಂಕಾರಭವಭ್ರಮಃ |\n' +
@@ -659,8 +729,8 @@ export const parichheda16Chapters: Chapter[] = [
             },
 
             {
-                id: 'v-16-97',
-                verseNumber: 97,
+                id: 'v-16-48',
+                verseNumber: 48,
                 sanskrit:
                     'ನ ಮನುಷ್ಯೋ ನ ದೇವೋಽಹಮ್\n' +
                     'ನ ಯಕ್ಷೋ ನೈವ ರಾಕ್ಷಸಃ |\n' +
@@ -673,7 +743,7 @@ export const parichheda16Chapters: Chapter[] = [
         ]
     },
     {
-        id: 'ch-16-06',
+        id: 'ch-16-07',
         number: 59,
         title: 'ಅಥ ಪರಕಾಯಸ್ಥಲಮ್',
         subtitle: 'ಇಗ ಪರಕಾಯಸ್ಥಲವು (9 ಶ್ಲೋಕಗಳು)',
@@ -707,7 +777,7 @@ export const parichheda16Chapters: Chapter[] = [
                 id: 'v-16-50',
                 verseNumber: 50,
                 sanskrit:
-                    'ಪರಬ್ರಹ್ಮವಪುಃ ಪೂರ್ವಸ್ಯ\n' +
+                    'ಪರಬ್ರಹ್ಮವಪುರ್ಯಸ್ಯ\n' +
                     'ಪ್ರಬೋಧಾನಂದಭಾಸುರಮ್ |\n' +
                     'ಪ್ರಾಕೃತೇನ ಶರೀರೇಣ\n' +
                     'ಕಿಮೇತೇನಾಸ್ಯ ಜಾಯತೇ || 16-50',
@@ -720,8 +790,8 @@ export const parichheda16Chapters: Chapter[] = [
                 id: 'v-16-51',
                 verseNumber: 51,
                 sanskrit:
-                    'ಸಮ್ಯಗ್ಜ್ಞಾನಾಗ್ನಿಸಂದಗ್ಧ-\n' +
-                    'ಜನ್ಮಬೀಜಕಲೇವರಃ |\n' +
+                    'ಸಮ್ಯಗ್‌ಜ್ಞಾನಾಗ್ನಿಸಂದ-\n' +
+                    'ಗ್ಧಜನ್ಮಬೀಜಕಲೇವರಃ |\n' +
                     'ಶಿವತತ್ತ್ವಾವಲಂಬೀ ಯಃ\n' +
                     'ಪರಕಾಯಃ ಸ ಉಚ್ಯತೇ || 16-51',
 
@@ -747,7 +817,7 @@ export const parichheda16Chapters: Chapter[] = [
                 verseNumber: 53,
                 sanskrit:
                     'ಪರಾಹಂತಾಮನುಪ್ರಾಪ್ಯ\n' +
-                    'ಪಶ್ಯೇದ್ವಿಶ್ವಂ ಚಿದಾತ್ಮಕಮ್ |\n' +
+                    'ಪಶ್ಯೇದ್ ವಿಶ್ವಂ ಚಿದಾತ್ಮಕಮ್  |\n' +
                     'ಸದೇಹೋಽತಿಭ್ರಮಸ್ತಸ್ಯ\n' +
                     'ನಿಶ್ಚಿತಾ ಹಿ ಶಿವಾತ್ಮತಾ || 16-53',
 
@@ -759,7 +829,7 @@ export const parichheda16Chapters: Chapter[] = [
                 id: 'v-16-54',
                 verseNumber: 54,
                 sanskrit:
-                    'ಸ್ವಸ್ವರೂಪಂ ಚಿದಾಕಾರಂ\n' +
+                    'ಸ್ವಸ್ವರೂಪಂ ಚಿದಾಕಾರಮ್\n' +
                     'ಜ್ಯೋತಿಃ ಸಾಕ್ಷಾದ್ವಿಚಿಂತಯನ್ |\n' +
                     'ದೇಹವಾನಪಿ ನಿರ್ದೇಹೋ\n' +
                     'ಜೀವನ್ಮುಕ್ತೋ ಹಿ ಸಾಧಕಃ || 16-54',
@@ -788,7 +858,7 @@ export const parichheda16Chapters: Chapter[] = [
                     'ಆತ್ಮಜ್ಞಾನಾವಸಾನಂ ಹಿ\n' +
                     'ಸಂಸಾರಪರಿಪೀಡನಮ್ |\n' +
                     'ಸೂರ್ಯೋದಯೇಽಪಿ ಕಿಂ ಲೋಕಃ\n' +
-                    'ತಿಮಿರೇಣೋಪರುಧ್ಯತೇ || 16-56',
+                    'ತಿಮಿರೇಣೋಪರುದ್ಧ್ಯತೇ || 16-56',
 
                 translation:
                     'ಆತ್ಮಜ್ಞಾನವು ಉಂಟಾಗುವವರೆಗೆ ಮಾತ್ರ ಸಂಸಾರದ ಪೀಡೆಯು ಇರುತ್ತದೆ. ಸೂರ್ಯೋದಯವಾದ ನಂತರವೂ ಲೋಕವು ಕತ್ತಲೆಯಿಂದ ಆವೃತವಾಗಿರುವುದಿಲ್ಲವೋ, ಅದೇ ರೀತಿಯಲ್ಲಿ ಆತ್ಮಜ್ಞಾನೋದಯದ ನಂತರ ಸಂಸಾರದ ಬಾಧೆಯು ಇರುವುದಿಲ್ಲ.'
@@ -800,7 +870,7 @@ export const parichheda16Chapters: Chapter[] = [
                 sanskrit:
                     'ದೇಹಾಭಿಮಾನನಿರ್ಮುಕ್ತಃ\n' +
                     'ಕಲಾತೀತಪದಾಶ್ರಯಃ |\n' +
-                    'ಕಥಂ ಯಾತಿ ಪರಿಚ್ಛೇದಂ\n' +
+                    'ಕಥಂ ಯಾತಿ ಪರಿಚ್ಛೇದಮ್\n' +
                     'ಶರೀರೇಷು ಮಹಾಬುಧಃ || 16-57',
 
                 translation:
@@ -809,7 +879,7 @@ export const parichheda16Chapters: Chapter[] = [
         ]
     },
     {
-        id: 'ch-16-7',
+        id: 'ch-16-08',
         number: 60,
         title: 'ಅಥ ಧರ್ಮಾಚಾರಸ್ಥಲಮ್',
         subtitle: 'ಇಗ ಧರ್ಮಾಚಾರಸ್ಥಲವು (9 ಶ್ಲೋಕಗಳು)',
@@ -831,7 +901,7 @@ export const parichheda16Chapters: Chapter[] = [
                 verseNumber: 58,
                 sanskrit:
                     'ತಸ್ಯೈವ ಪರಕಾಯಸ್ಯ\n' +
-                    'ಸಮಾಚಾರೋ ಯ ಈಷ್ಯತೇ |\n' +
+                    'ಸಮಾಚಾರೋ ಯ ಇಷ್ಯತೇ|\n' +
                     'ಸ ಧರ್ಮಃ ಸರ್ವಲೋಕಾನಾಮ್\n' +
                     'ಉಪಕಾರಾಯ ಕಲ್ಪ್ಯತೇ || 16-58',
 
@@ -856,7 +926,7 @@ export const parichheda16Chapters: Chapter[] = [
                 id: 'v-16-60',
                 verseNumber: 60,
                 sanskrit:
-                    'ಶಿವೇನ ವಿಹಿತೋ ಯಸ್ಮಾದ್\n' +
+                    'ಶಿವೇನ ವಿಹಿತೋ ಯಸ್ಮಾತ್\n' +
                     'ಆಗಮೈರ್ಧರ್ಮಸಂಗ್ರಹಃ |\n' +
                     'ತಸ್ಮಾತ್ತಮಾಚರನ್ ವಿದ್ವಾನ್\n' +
                     'ತತ್ಪ್ರಸಾದಾಯ ಕಲ್ಪ್ಯತೇ || 16-60',
@@ -883,7 +953,7 @@ export const parichheda16Chapters: Chapter[] = [
                 verseNumber: 62,
                 sanskrit:
                     'ಆತ್ಮವತ್ ಸರ್ವಭೂತಾನಿ\n' +
-                    'ಸಂಪಶ್ಯೇದ್ಯೋಗವಿತ್ತಮಃ |\n' +
+                    'ಸಂಪಶ್ಯೇದ್ ಯೋಗವಿತ್ತಮಃ |\n' +
                     'ಜಗದೇಕಾತ್ಮತಾಭಾವಾತ್\n' +
                     'ನಿಗ್ರಹಾದಿವಿರೋಧತಃ || 16-62',
 
@@ -945,7 +1015,7 @@ export const parichheda16Chapters: Chapter[] = [
         ]
     },
     {
-        id: 'ch-16-8',
+        id: 'ch-16-09',
         number: 61,
         title: 'ಅಥ ಭಾವಾಚಾರಸ್ಥಲಮ್',
         subtitle: 'ಇಗ ಭಾವಾಚಾರಸ್ಥಲವು (9 ಶ್ಲೋಕಗಳು)',
@@ -966,7 +1036,7 @@ export const parichheda16Chapters: Chapter[] = [
                 id: 'v-16-67',
                 verseNumber: 67,
                 sanskrit:
-                    'ಭಾವ ಏವಾಸ್ಯ ಸರ್ವೇಷಾಂ\n' +
+                    'ಭಾವ ಏವಾಸ್ಯ ಸರ್ವೇಷಾಮ್\n' +
                     'ಭಾವಾಚಾರಃ ಪ್ರಕೀರ್ತಿತಃ |\n' +
                     'ಭಾವೋ ಮಾನಸಚೇಷ್ಟಾತ್ಮಾ\n' +
                     'ಪರಿಪೂರ್ಣಃ ಶಿವಾಶ್ರಯಃ || 16-67',
@@ -981,7 +1051,7 @@ export const parichheda16Chapters: Chapter[] = [
                 sanskrit:
                     'ಭಾವನಾವಿಹಿತಂ ಕರ್ಮ\n' +
                     'ಪಾವನಾದಪಿ ಪಾವನಮ್ |\n' +
-                    'ತಸ್ಮಾದ್ಭಾವನಯಾ ಯುಕ್ತಂ\n' +
+                    'ತಸ್ಮಾದ್ಭಾವನಯಾ ಯುಕ್ತಮ್\n' +
                     'ಪರಧರ್ಮಂ ಸಮಾಚರೇತ್ || 16-68',
 
                 translation:
@@ -1005,7 +1075,7 @@ export const parichheda16Chapters: Chapter[] = [
                 id: 'v-16-70',
                 verseNumber: 70,
                 sanskrit:
-                    'ಶಿವಭಾವನಯಾ ಸರ್ವಂ\n' +
+                    'ಶಿವಭಾವನಯಾ ಸರ್ವಮ್\n' +
                     'ನಿತ್ಯನೈಮಿತ್ತಿಕಾದಿಕಮ್ |\n' +
                     'ಕುರ್ವನ್ನಪಿ ಮಹಾಯೋಗೀ\n' +
                     'ಗುಣದೋಷೈರ್ನ ಬಾಧ್ಯತೇ || 16-70',
@@ -1018,9 +1088,9 @@ export const parichheda16Chapters: Chapter[] = [
                 id: 'v-16-71',
                 verseNumber: 71,
                 sanskrit:
-                    'ಅಂತಃಪ್ರಕಾಶಮಾನಸ್ಯ\n' +
-                    'ಸಂವಿತ್ಸೂರ್ಯಸ್ಯ ಸಂತತಮ್ |\n' +
-                    'ಭಾವೇನ ಯದುಪಸ್ಥಾನಂ\n' +
+                    'ಅಂತಃ ಪ್ರಕಾಶಮಾನಸ್ಯ\n' +
+                    'ಸಂವಿತ್ಸೂರ್ಯಸ್ಯ ಸಂತತಮ್|\n' +
+                    'ಭಾವೇನ ಯದುಪಸ್ಥಾನಮ್\n' +
                     'ತತ್ಸಂಧ್ಯಾವಂದನಂ ವಿದುಃ || 16-71',
 
                 translation:
@@ -1031,8 +1101,8 @@ export const parichheda16Chapters: Chapter[] = [
                 id: 'v-16-72',
                 verseNumber: 72,
                 sanskrit:
-                    'ಆತ್ಮಜ್ಯೋತಿಷಿ ಸರ್ವೇಷಾಂ\n' +
-                    'ವಿಷಯಾಣಾಂ ಸಮರ್ಪಣಮ್ |\n' +
+                    'ಆತ್ಮಜ್ಯೋತಿಷಿ ಸರ್ವೇಷಾಮ್\n' +
+                    'ವಿಷಯಾಣಾಂ ಸಮರ್ಪಣಮ್|\n' +
                     'ಅಂತರ್ಮುಖೇನ ಭಾವೇನ\n' +
                     'ಹೋಮಕರ್ಮೇತಿ ಗೀಯತೇ || 16-72',
 
@@ -1057,7 +1127,7 @@ export const parichheda16Chapters: Chapter[] = [
                 id: 'v-16-74',
                 verseNumber: 74,
                 sanskrit:
-                    'ಶಿವೇ ನಿವೇಶ್ಯ ಸಕಲಂ\n' +
+                    'ಶಿವೇ ನಿವೇಶ್ಯ ಸಕಲಮ್\n' +
                     'ಕಾರ್ಯಾಕಾರ್ಯಂ ವಿವೇಕತಃ |\n' +
                     'ವರ್ತತೇ ಯೋ ಮಹಾಭಾಗಃ\n' +
                     'ಸ ಸಂಗರಹಿತೋ ಭವೇತ್ || 16-74',
@@ -1072,7 +1142,7 @@ export const parichheda16Chapters: Chapter[] = [
                 sanskrit:
                     'ಆತ್ಮಾನಮಖಿಲಂ ವಸ್ತು\n' +
                     'ಶಿವಮಾನಂದಚಿನ್ಮಯಮ್ |\n' +
-                    'ಏಕಭಾವೇನ ಸತತಂ\n' +
+                    'ಏಕಭಾವೇನ ಸತತಮ್\n' +
                     'ಸಂಪಶ್ಯನ್ನೇವ ಪಶ್ಯತಿ || 16-75',
 
                 translation:
@@ -1081,7 +1151,7 @@ export const parichheda16Chapters: Chapter[] = [
         ]
     },
     {
-        id: 'ch-16-9',
+        id: 'ch-16-10',
         number: 62,
         title: 'ಅಥ ಜ್ಞಾನಾಚಾರಸ್ಥಲಮ್',
         subtitle: 'ಇಗ ಜ್ಞಾನಾಚಾರಸ್ಥಲವು (9 ಶ್ಲೋಕಗಳು)',
@@ -1117,7 +1187,7 @@ export const parichheda16Chapters: Chapter[] = [
                 sanskrit:
                     'ಶಿವಾದ್ವೈತಪರಂ ಜ್ಞಾನಮ್\n' +
                     'ಜ್ಞಾನಮಿತ್ಯುಚ್ಯತೇ ಬುಧೈಃ |\n' +
-                    'ಸಿದ್ಧೇರ್ವಾಪ್ಯಸಿದ್ಧೇರ್ವಾ\n' +
+                    'ಸಿದ್ಧೇನ ವಾಪ್ಯಸಿದ್ಧೇನ\n' +
                     'ಫಲಂ ಜ್ಞಾನಾಂತರೇಣ ಕಿಮ್ || 16-77',
 
                 translation:
@@ -1130,7 +1200,7 @@ export const parichheda16Chapters: Chapter[] = [
                 sanskrit:
                     'ನಿರ್ಮಲಂ ಹಿ ಶಿವಜ್ಞಾನಮ್\n' +
                     'ನಿಃಶ್ರೇಯಸಕರಂ ಪರಮ್ |\n' +
-                    'ರಾಗದ್ವೇಷಾದಿಕಲುಷಂ\n' +
+                    'ರಾಗದ್ವೇಷಾದಿಕಲುಷಮ್\n' +
                     'ಭೂಯಃ ಸಂಸೃತಿಕಾರಣಮ್ || 16-78',
 
                 translation:
@@ -1143,7 +1213,7 @@ export const parichheda16Chapters: Chapter[] = [
                 sanskrit:
                     'ಪರಿಪೂರ್ಣಂ ಮಹಾಜ್ಞಾನಮ್\n' +
                     'ಪರತತ್ತ್ವಪ್ರಕಾಶಕಮ್ |\n' +
-                    'ಅವಲಂಬ್ಯ ಪ್ರವರ್ತ್ತೋ ಯೋ\n' +
+                    'ಅವಲಂಬ್ಯ ಪ್ರವೃತ್ತೋ ಯೋ\n' +
                     'ಜ್ಞಾನಾಚಾರಃ ಸ ಉಚ್ಯತೇ || 16-79',
 
                 translation:
@@ -1169,7 +1239,7 @@ export const parichheda16Chapters: Chapter[] = [
                 sanskrit:
                     'ಜ್ಞಾನಂ ಮುಕ್ತಿಪ್ರದಂ ಪ್ರಾಪ್ಯ\n' +
                     'ಗುರುದೃಷ್ಟಿಪ್ರಸಾದತಃ |\n' +
-                    'ಕಃ ಕುರ್ಯಾತ್ ಕರ್ಮಕಾಪಣ್ಯೇ\n' +
+                    'ಕಃ ಕುರ್ಯಾತ್ ಕರ್ಮಕಾರ್ಪಣ್ಯೇ\n' +
                     'ವಾಂಛಾಂ ಸಂಸಾರವರ್ಧನೇ || 16-81',
 
                 translation:
@@ -1180,10 +1250,10 @@ export const parichheda16Chapters: Chapter[] = [
                 id: 'v-16-82',
                 verseNumber: 82,
                 sanskrit:
-                    'ಕರ್ಮ ಜ್ಞಾನಾಗ್ನಿನಾ ದಗ್ಧಂ\n' +
+                    'ಕರ್ಮ ಜ್ಞಾನಾಗ್ನಿನಾ ದಗ್ಧಮ್\n' +
                     'ನ ಪ್ರರೋಹೇತ್ ಕಥಂಚನ |\n' +
                     'ಯದಾಹುಃ ಸಂಸೃತೇರ್ಮೂಲಮ್\n' +
-                    'ಪ್ರವಾಹಾನುಪಗತಂ ಬುಧಾಃ || 16-82',
+                    'ಪ್ರವಾಹಾನುಗತಂ ಬುಧಾಃ || 16-82',
 
                 translation:
                     'ಶಿವಾದ್ವೈತ ಜ್ಞಾನವೆಂಬ ಅಗ್ನಿಯಲ್ಲಿ ಸುಟ್ಟುಹೋದ ಕರ್ಮವು ಮತ್ತೆಂದೂ ಮೊಳಕೆಯೊಡೆಯುವುದಿಲ್ಲ. ಸಂಸಾರಕ್ಕೆ ಮೂಲಕಾರಣವೆಂದು ವಿದ್ವಾಂಸರು ಹೇಳುವ ಮತ್ತು ಅನಾದಿಯಿಂದ ದೇಹವನ್ನು ಅನುಸರಿಸಿಕೊಂಡು ಬಂದಿರುವ ಆ ಕರ್ಮವು ಜ್ಞಾನಾಗ್ನಿಯಲ್ಲಿ ದಹಿಸಲ್ಪಟ್ಟ ನಂತರ ಮತ್ತೆ ಯಾವ ಕಾರಣಕ್ಕೂ ಮೊಳಕೆಯೊಡೆಯುವುದಿಲ್ಲ.'
@@ -1194,7 +1264,7 @@ export const parichheda16Chapters: Chapter[] = [
                 verseNumber: 83,
                 sanskrit:
                     'ಜ್ಞಾನೇನ ಹೀನಃ ಪುರುಷಃ\n' +
-                    'ಕರ್ಮಣಾ ಬಧ್ಯತೇ ಸದಾ |\n' +
+                    'ಕರ್ಮಣಾ ಬದ್ಧ್ಯ ತೇ ಸದಾ |\n' +
                     'ಜ್ಞಾನಿನಃ ಕರ್ಮಸಂಕಲ್ಪಾ\n' +
                     'ಭವಂತಿ ಕಿಲ ನಿಷ್ಫಲಾಃ || 16-83',
 
