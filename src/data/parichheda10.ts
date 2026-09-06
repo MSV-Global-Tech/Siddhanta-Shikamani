@@ -4,6 +4,8 @@ export const parichheda10Chapters: Chapter[] = [
     {
         id: 'ch-10-01',
         number: 16,
+        isIntro: true,
+        badgeLabel: 'ॐ',
         title: 'ಮಾಹೇಶ್ವರಸ್ಥಲಮ್',
         subtitle: 'ಮಾಹೇಶ್ವರಸ್ಥಲವು (7 ಶ್ಲೋಕಗಳು)',
         description: 'ಮಾಹೇಶ್ವರಸ್ಥಲಪ್ರಸಂಗಃ',
@@ -126,7 +128,7 @@ export const parichheda10Chapters: Chapter[] = [
         parichheda: {
             id: 'p-10',
             number: 10,
-            title: 'ದಶಮಃ ಪರಿಚ್ಛೇದಃ'
+            title: 'ದಶಮಃ ಪರಿಚ್ಛೇದಃ - ಮಾಹೇಶ್ವರಸ್ಯ ನವವಿಧಸ್ಥಲಪ್ರಸಂಗಃ'
         },
 
         content: [
@@ -315,7 +317,7 @@ export const parichheda10Chapters: Chapter[] = [
         parichheda: {
             id: 'p-10',
             number: 10,
-            title: 'ದಶಮಃ ಪರಿಚ್ಛೇದಃ'
+            title: 'ದಶಮಃ ಪರಿಚ್ಛೇದಃ - ಮಾಹೇಶ್ವರಸ್ಯ ನವವಿಧಸ್ಥಲಪ್ರಸಂಗಃ'
         },
 
         content: [
@@ -438,7 +440,7 @@ export const parichheda10Chapters: Chapter[] = [
         ]
     },
     {
-        id: 'ch-10-18',
+        id: 'ch-10-04',
         number: 18,
         title: 'ಅಥ ಪೂರ್ವಾಶ್ರಯನಿರಸನಸ್ಥಲಮ್',
         subtitle: 'ಪೂರ್ವಾಶ್ರಯನಿರಸನಸ್ಥಲವು (9 ಶ್ಲೋಕಗಳು)',
@@ -451,7 +453,7 @@ export const parichheda10Chapters: Chapter[] = [
         parichheda: {
             id: 'p-10',
             number: 10,
-            title: 'ದಶಮಃ ಪರಿಚ್ಛೇದಃ'
+            title: 'ದಶಮಃ ಪರಿಚ್ಛೇದಃ - ಮಾಹೇಶ್ವರಸ್ಯ ನವವಿಧಸ್ಥಲಪ್ರಸಂಗಃ'
         },
 
         content: [
@@ -574,7 +576,7 @@ export const parichheda10Chapters: Chapter[] = [
         ]
     },
     {
-        id: 'ch-10-19',
+        id: 'ch-10-05',
         number: 19,
         title: 'ಅಥ ಸರ್ವಾದ್ವೈತನಿರಸನಸ್ಥಲಮ್',
         subtitle: 'ಸರ್ವಾದ್ವೈತನಿರಸನಸ್ಥಲವು (7 ಶ್ಲೋಕಗಳು)',
@@ -587,7 +589,7 @@ export const parichheda10Chapters: Chapter[] = [
         parichheda: {
             id: 'p-10',
             number: 10,
-            title: 'ದಶಮಃ ಪರಿಚ್ಛೇದಃ'
+            title: 'ದಶಮಃ ಪರಿಚ್ಛೇದಃ - ಮಾಹೇಶ್ವರಸ್ಯ ನವವಿಧಸ್ಥಲಪ್ರಸಂಗಃ'
         },
 
         content: [
@@ -684,7 +686,7 @@ export const parichheda10Chapters: Chapter[] = [
         ]
     },
     {
-        id: 'ch-10-20',
+        id: 'ch-10-06',
         number: 20,
         title: 'ಅಥ ಆಹ್ವಾನನಿರಸನಸ್ಥಲಮ್',
         subtitle: 'ಆಹ್ವಾನನಿರಸನಸ್ಥಲವು (4 ಶ್ಲೋಕಗಳು)',
@@ -697,7 +699,7 @@ export const parichheda10Chapters: Chapter[] = [
         parichheda: {
             id: 'p-10',
             number: 10,
-            title: 'ದಶಮಃ ಪರಿಚ್ಛೇದಃ'
+            title: 'ದಶಮಃ ಪರಿಚ್ಛೇದಃ - ಮಾಹೇಶ್ವರಸ್ಯ ನವವಿಧಸ್ಥಲಪ್ರಸಂಗಃ'
         },
 
         content: [
@@ -755,7 +757,7 @@ export const parichheda10Chapters: Chapter[] = [
         ]
     },
     {
-        id: 'ch-10-21',
+        id: 'ch-10-07',
         number: 21,
         title: 'ಅಥ ಅಷ್ಟಮೂರ್ತಿನಿರಸನಸ್ಥಲಮ್',
         subtitle: 'ಅಷ್ಟಮೂರ್ತಿನಿರಸನಸ್ಥಲವು (7 ಶ್ಲೋಕಗಳು)',
@@ -768,7 +770,7 @@ export const parichheda10Chapters: Chapter[] = [
         parichheda: {
             id: 'p-10',
             number: 10,
-            title: 'ದಶಮಃ ಪರಿಚ್ಛೇದಃ'
+            title: 'ದಶಮಃ ಪರಿಚ್ಛೇದಃ - ಮಾಹೇಶ್ವರಸ್ಯ ನವವಿಧಸ್ಥಲಪ್ರಸಂಗಃ'
         },
 
         content: [
@@ -865,7 +867,7 @@ export const parichheda10Chapters: Chapter[] = [
         ]
     },
     {
-        id: 'ch-10-22',
+        id: 'ch-10-08',
         number: 22,
         title: 'ಅಥ ಸರ್ವಗತ್ವನಿರಸನಸ್ಥಲಮ್',
         subtitle: 'ಸರ್ವಗತ್ವನಿರಸನಸ್ಥಲವು (7 ಶ್ಲೋಕಗಳು)',
@@ -878,7 +880,7 @@ export const parichheda10Chapters: Chapter[] = [
         parichheda: {
             id: 'p-10',
             number: 10,
-            title: 'ದಶಮಃ ಪರಿಚ್ಛೇದಃ'
+            title: 'ದಶಮಃ ಪರಿಚ್ಛೇದಃ - ಮಾಹೇಶ್ವರಸ್ಯ ನವವಿಧಸ್ಥಲಪ್ರಸಂಗಃ'
         },
 
         content: [
@@ -975,7 +977,7 @@ export const parichheda10Chapters: Chapter[] = [
         ]
     },
     {
-        id: 'ch-10-23',
+        id: 'ch-10-09',
         number: 23,
         title: 'ಅಥ ಶಿವಜಗನ್ಮಯಸ್ಥಲಮ್',
         subtitle: 'ಶಿವಜಗನ್ಮಯಸ್ಥಲವು (9 ಶ್ಲೋಕಗಳು)',
@@ -988,7 +990,7 @@ export const parichheda10Chapters: Chapter[] = [
         parichheda: {
             id: 'p-10',
             number: 10,
-            title: 'ದಶಮಃ ಪರಿಚ್ಛೇದಃ'
+            title: 'ದಶಮಃ ಪರಿಚ್ಛೇದಃ - ಮಾಹೇಶ್ವರಸ್ಯ ನವವಿಧಸ್ಥಲಪ್ರಸಂಗಃ'
         },
 
         content: [
@@ -1111,7 +1113,7 @@ export const parichheda10Chapters: Chapter[] = [
         ]
     },
     {
-        id: 'ch-10-24',
+        id: 'ch-10-10',
         number: 24,
         title: 'ಅಥ ಭಕ್ತದೇಹಿಕಲಿಂಗಸ್ಥಲಮ್',
         subtitle: 'ಭಕ್ತದೇಹಿಕಲಿಂಗಸ್ಥಲವು (7 ಶ್ಲೋಕಗಳು)',
@@ -1124,7 +1126,7 @@ export const parichheda10Chapters: Chapter[] = [
         parichheda: {
             id: 'p-10',
             number: 10,
-            title: 'ದಶಮಃ ಪರಿಚ್ಛೇದಃ'
+            title: 'ದಶಮಃ ಪರಿಚ್ಛೇದಃ - ಮಾಹೇಶ್ವರಸ್ಯ ನವವಿಧಸ್ಥಲಪ್ರಸಂಗಃ'
         },
 
         content: [

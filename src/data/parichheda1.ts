@@ -78,7 +78,7 @@ export const parichheda1Chapters: Chapter[] = [
     parichheda: {
       id: 'p-01',
       number: 1,
-      title: 'ಪ್ರಥಮಃ ಪರಿಚ್ಛೇದಃ - ಮಂಗಳಾಚರಣಾನುಕ್ರಮಪ್ರಸಂಗಃ'
+      title: 'ಪ್ರಥಮಃ ಪರಿಚ್ಛೇದಃ - ಮಂಗಲಾಚರಣಾನುಕ್ರಮಪ್ರಸಂಗಃ'
     },
     content: [
       {
@@ -130,7 +130,7 @@ export const parichheda1Chapters: Chapter[] = [
     parichheda: {
       id: 'p-01',
       number: 1,
-      title: 'ಪ್ರಥಮಃ ಪರಿಚ್ಛೇದಃ - ಮಂಗಳಾಚರಣಾನುಕ್ರಮಪ್ರಸಂಗಃ'
+      title: 'ಪ್ರಥಮಃ ಪರಿಚ್ಛೇದಃ - ಮಂಗಲಾಚರಣಾನುಕ್ರಮಪ್ರಸಂಗಃ'
     },
     content: [
       {
@@ -194,7 +194,7 @@ export const parichheda1Chapters: Chapter[] = [
     parichheda: {
       id: 'p-01',
       number: 1,
-      title: 'ಪ್ರಥಮಃ ಪರಿಚ್ಛೇದಃ - ಮಂಗಳಾಚರಣಾನುಕ್ರಮಪ್ರಸಂಗಃ'
+      title: 'ಪ್ರಥಮಃ ಪರಿಚ್ಛೇದಃ - ಮಂಗಲಾಚರಣಾನುಕ್ರಮಪ್ರಸಂಗಃ'
     },
     content: [
       {

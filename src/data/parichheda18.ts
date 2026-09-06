@@ -4,6 +4,8 @@ export const parichheda18Chapters: Chapter[] = [
     {
         id: 'ch-18-01',
         number: 72,
+        isIntro: true,
+        badgeLabel: 'ॐ',
         title: 'ಅಥ ಪ್ರಾಣಲಿಂಗಿಸ್ಥಲಮ್',
         subtitle: 'ಇಗ ಪ್ರಾಣಲಿಂಗಿಸ್ಥಲವು (4 ಶ್ಲೋಕಗಳು)',
         description: 'ಪ್ರಾಣಲಿಂಗಿಸ್ಥಲಪ್ರಸಂಗಃ',
@@ -552,7 +554,7 @@ export const parichheda18Chapters: Chapter[] = [
         parichheda: {
             id: 'p-18',
             number: 18,
-            title: 'ಅಷ್ಟಾದಶಃ ಪರಿಚ್ಛೇದಃ - ಪ್ರಾಣಲಿಂಗಸ್ಥಲಾಂತರ್ಗತ ನವವಿಧಲಿಂಗಸ್ಥಲಪ್ರಸಂಗಃ'
+            title: 'ಅಷ್ಟಾದಶಃ ಪರಿಚ್ಛೇದಃ - ಪ್ರಾಣಲಿಂಗಿಸ್ಥಲಾಂತರ್ಗತ ನವವಿಧಲಿಂಗಸ್ಥಲಪ್ರಸಂಗಃ'
         },
 
         content: [
@@ -675,7 +677,7 @@ export const parichheda18Chapters: Chapter[] = [
         parichheda: {
             id: 'p-18',
             number: 18,
-            title: 'ಅಷ್ಟಾದಶಃ ಪರಿಚ್ಛೇದಃ - ಪ್ರಾಣಲಿಂಗಸ್ಥಲಾಂತರ್ಗತ ನವವಿಧಲಿಂಗಸ್ಥಲಪ್ರಸಂಗಃ'
+            title: 'ಅಷ್ಟಾದಶಃ ಪರಿಚ್ಛೇದಃ - ಪ್ರಾಣಲಿಂಗಿಸ್ಥಲಾಂತರ್ಗತ ನವವಿಧಲಿಂಗಸ್ಥಲಪ್ರಸಂಗಃ'
         },
 
         content: [
@@ -785,7 +787,7 @@ export const parichheda18Chapters: Chapter[] = [
         parichheda: {
             id: 'p-18',
             number: 18,
-            title: 'ಅಷ್ಟಾದಶಃ ಪರಿಚ್ಛೇದಃ - ಪ್ರಾಣಲಿಂಗಸ್ಥಲಾಂತರ್ಗತ ನವವಿಧಲಿಂಗಸ್ಥಲಪ್ರಸಂಗಃ'
+            title: 'ಅಷ್ಟಾದಶಃ ಪರಿಚ್ಛೇದಃ - ಪ್ರಾಣಲಿಂಗಿಸ್ಥಲಾಂತರ್ಗತ ನವವಿಧಲಿಂಗಸ್ಥಲಪ್ರಸಂಗಃ'
         },
 
         content: [
@@ -882,7 +884,7 @@ export const parichheda18Chapters: Chapter[] = [
         parichheda: {
             id: 'p-18',
             number: 18,
-            title: 'ಅಷ್ಟಾದಶಃ ಪರಿಚ್ಛೇದಃ - ಪ್ರಾಣಲಿಂಗಸ್ಥಲಾಂತರ್ಗತ ನವವಿಧಲಿಂಗಸ್ಥಲಪ್ರಸಂಗಃ'
+            title: 'ಅಷ್ಟಾದಶಃ ಪರಿಚ್ಛೇದಃ - ಪ್ರಾಣಲಿಂಗಿಸ್ಥಲಾಂತರ್ಗತ ನವವಿಧಲಿಂಗಸ್ಥಲಪ್ರಸಂಗಃ'
         },
 
         content: [
@@ -979,7 +981,7 @@ export const parichheda18Chapters: Chapter[] = [
         parichheda: {
             id: 'p-18',
             number: 18,
-            title: 'ಅಷ್ಟಾದಶಃ ಪರಿಚ್ಛೇದಃ - ಪ್ರಾಣಲಿಂಗಸ್ಥಲಾಂತರ್ಗತ ನವವಿಧಲಿಂಗಸ್ಥಲಪ್ರಸಂಗಃ'
+            title: 'ಅಷ್ಟಾದಶಃ ಪರಿಚ್ಛೇದಃ - ಪ್ರಾಣಲಿಂಗಿಸ್ಥಲಾಂತರ್ಗತ ನವವಿಧಲಿಂಗಸ್ಥಲಪ್ರಸಂಗಃ'
         },
 
         content: [
@@ -1102,7 +1104,7 @@ export const parichheda18Chapters: Chapter[] = [
         parichheda: {
             id: 'p-18',
             number: 18,
-            title: 'ಅಷ್ಟಾದಶಃ ಪರಿಚ್ಛೇದಃ - ಪ್ರಾಣಲಿಂಗಸ್ಥಲಾಂತರ್ಗತ ನವವಿಧಲಿಂಗಸ್ಥಲಪ್ರಸಂಗಃ'
+            title: 'ಅಷ್ಟಾದಶಃ ಪರಿಚ್ಛೇದಃ - ಪ್ರಾಣಲಿಂಗಿಸ್ಥಲಾಂತರ್ಗತ ನವವಿಧಲಿಂಗಸ್ಥಲಪ್ರಸಂಗಃ'
         },
 
         content: [

@@ -4,6 +4,8 @@ export const parichheda15Chapters: Chapter[] = [
     {
         id: 'ch-15-01',
         number: 42,
+        isIntro: true,
+        badgeLabel: 'ॐ',
         title: 'ಅಥ ಭಕ್ತಸ್ಥಲಮ್',
         subtitle: 'ಭಕ್ತಸ್ಥಲವು (6 ಶ್ಲೋಕಗಳು)',
         description: 'ಭಕ್ತಸ್ಥಲಪ್ರಸಂಗಃ',
@@ -1007,7 +1009,7 @@ export const parichheda15Chapters: Chapter[] = [
         parichheda: {
             id: 'p-15',
             number: 15,
-            title: 'ಪಂಚದಶಃ ಪರಿಚ್ಛೇದಃ'
+            title: 'ಪಂಚದಶಃ ಪರಿಚ್ಛೇದಃ - ಭಕ್ತಸ್ಥಲಾಂತರ್ಗತ ನವವಿಧಲಿಂಗಸ್ಥಲಪ್ರಸಂಗಃ'
         },
 
         content: [

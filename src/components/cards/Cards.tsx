@@ -63,7 +63,7 @@ export function ChapterCard({ chapter, variant = 'default', showProgress = true,
             <HStack justify="space-between" align="flex-start" className="mb-6">
               <View className="bg-white/20 rounded-2xl px-4 py-2 backdrop-blur-sm">
                 <AppText variant="caption" color="inverted" weight="semibold">
-                  {LOCAL_STRINGS.chapter} {toKannadaNumerals(chapter.number)}
+                  {chapter.badgeLabel || (chapter.isIntro ? 'ॐ ಪೀಠಿಕೆ' : `${LOCAL_STRINGS.chapter} ${toKannadaNumerals(chapter.number)}`)}
                 </AppText>
               </View>
               <View className="bg-white/20 rounded-full p-2 backdrop-blur-sm">
@@ -129,8 +129,8 @@ export function ChapterCard({ chapter, variant = 'default', showProgress = true,
               end={{ x: 1, y: 1 }}
               className="w-18 h-24 rounded-2xl items-center justify-center mr-4"
             >
-              <AppText variant="heading1" weight="bold" color="inverted">
-                {toKannadaNumerals(chapter.number)}
+              <AppText variant={chapter.isIntro ? "title" : "heading1"} weight="bold" color="inverted">
+                {chapter.badgeLabel || (chapter.isIntro ? 'ॐ' : toKannadaNumerals(chapter.number))}
               </AppText>
             </LinearGradient>
 
@@ -185,7 +185,7 @@ export function ChapterCard({ chapter, variant = 'default', showProgress = true,
             <HStack spacing="sm">
               <View className={clsx('w-10 h-10 rounded-xl items-center justify-center', categoryConfig.bg)}>
                 <AppText variant="body" weight="bold" className={categoryConfig.text}>
-                  {toKannadaNumerals(chapter.number)}
+                  {chapter.badgeLabel || (chapter.isIntro ? 'ॐ' : toKannadaNumerals(chapter.number))}
                 </AppText>
               </View>
               <VStack spacing="xs" className="justify-center">
@@ -211,7 +211,7 @@ export function ChapterCard({ chapter, variant = 'default', showProgress = true,
           <HStack spacing="sm">
             <View className={clsx('w-12 h-12 rounded-2xl items-center justify-center', categoryConfig.bg)}>
               <AppText variant="heading3" weight="bold" className={categoryConfig.text}>
-                {toKannadaNumerals(chapter.number)}
+                {chapter.badgeLabel || (chapter.isIntro ? 'ॐ' : toKannadaNumerals(chapter.number))}
               </AppText>
             </View>
             <VStack spacing="xs" className="justify-center">

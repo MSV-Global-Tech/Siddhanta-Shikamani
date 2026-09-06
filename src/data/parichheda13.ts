@@ -4,6 +4,8 @@ export const parichheda13Chapters: Chapter[] = [
     {
         id: 'ch-13-01',
         number: 37,
+        isIntro: true,
+        badgeLabel: 'ॐ',
         title: 'ಶರಣಸ್ಥಲಮ್',
         subtitle: 'ಶರಣಸ್ಥಲವು (4 ಶ್ಲೋಕಗಳು)',
         description: 'ಶರಣಸ್ಥಲಪ್ರಸಂಗಃ',

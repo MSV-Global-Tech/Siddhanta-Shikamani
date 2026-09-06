@@ -78,7 +78,7 @@ export const parichheda3Chapters: Chapter[] = [
         parichheda: {
             id: 'p-03',
             number: 3,
-            title: 'ತೃತೀಯಃ ಪರಿಚ್ಛೇದಃ - ಕೈಲಾಸವರ್ಣನೆ ಮತ್ತು ರೇಣುಕಾವತರಣ ಕಾರಣವು'
+            title: 'ತೃತೀಯಃ ಪರಿಚ್ಛೇದಃ - ಕೈಲಾಸವರ್ಣನಮ್, ರೇಣುಕಾವತರಣಕಾರಣಂ ಚ'
         },
         content: [
             {
@@ -185,7 +185,7 @@ export const parichheda3Chapters: Chapter[] = [
         parichheda: {
             id: 'p-03',
             number: 3,
-            title: 'ತೃತೀಯಃ ಪರಿಚ್ಛೇದಃ - ಕೈಲಾಸವರ್ಣನೆ ಮತ್ತು ರೇಣುಕಾವತರಣ ಕಾರಣವು'
+            title: 'ತೃತೀಯಃ ಪರಿಚ್ಛೇದಃ - ಕೈಲಾಸವರ್ಣನಮ್, ರೇಣುಕಾವತರಣಕಾರಣಂ ಚ'
         },
         content: [
             {
@@ -280,7 +280,7 @@ export const parichheda3Chapters: Chapter[] = [
         parichheda: {
             id: 'p-03',
             number: 3,
-            title: 'ತೃತೀಯಃ ಪರಿಚ್ಛೇದಃ - ಕೈಲಾಸವರ್ಣನೆ ಮತ್ತು ರೇಣುಕಾವತರಣ ಕಾರಣವು'
+            title: 'ತೃತೀಯಃ ಪರಿಚ್ಛೇದಃ - ಕೈಲಾಸವರ್ಣನಮ್, ರೇಣುಕಾವತರಣಕಾರಣಂ ಚ'
         },
         content: [
             {
@@ -417,7 +417,7 @@ export const parichheda3Chapters: Chapter[] = [
         parichheda: {
             id: 'p-03',
             number: 3,
-            title: 'ತೃತೀಯಃ ಪರಿಚ್ಛೇದಃ - ಕೈಲಾಸವರ್ಣನೆ ಮತ್ತು ರೇಣುಕಾವತರಣ ಕಾರಣವು'
+            title: 'ತೃತೀಯಃ ಪರಿಚ್ಛೇದಃ - ಕೈಲಾಸವರ್ಣನಮ್, ರೇಣುಕಾವತರಣಕಾರಣಂ ಚ'
         },
         content: [
             {
@@ -560,7 +560,7 @@ export const parichheda3Chapters: Chapter[] = [
         parichheda: {
             id: 'p-03',
             number: 3,
-            title: 'ತೃತೀಯಃ ಪರಿಚ್ಛೇದಃ - ಕೈಲಾಸವರ್ಣನೆ ಮತ್ತು ರೇಣುಕಾವತರಣ ಕಾರಣವು'
+            title: 'ತೃತೀಯಃ ಪರಿಚ್ಛೇದಃ - ಕೈಲಾಸವರ್ಣನಮ್, ರೇಣುಕಾವತರಣಕಾರಣಂ ಚ'
         },
         content: [
             {
@@ -601,7 +601,7 @@ export const parichheda3Chapters: Chapter[] = [
         parichheda: {
             id: 'p-03',
             number: 3,
-            title: 'ತೃತೀಯಃ ಪರಿಚ್ಛೇದಃ - ಕೈಲಾಸವರ್ಣನೆ ಮತ್ತು ರೇಣುಕಾವತರಣ ಕಾರಣವು'
+            title: 'ತೃತೀಯಃ ಪರಿಚ್ಛೇದಃ - ಕೈಲಾಸವರ್ಣನಮ್, ರೇಣುಕಾವತರಣಕಾರಣಂ ಚ'
         },
         content: [
             {

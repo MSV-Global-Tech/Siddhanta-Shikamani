@@ -4,6 +4,8 @@ export const parichheda16Chapters: Chapter[] = [
     {
         id: 'ch-16-01',
         number: 53,
+        isIntro: true,
+        badgeLabel: 'ॐ',
         title: 'ಅಥ ಮಾಹೇಶ್ವರಸ್ಥಲಮ್',
         subtitle: 'ಮಾಹೇಶ್ವರಸ್ಥಲಾಂತರ್ಗತವಾದ ನವವಿಧ ಲಿಂಗಸ್ಥಲಗಳ ಪ್ರಸಂಗವು',
         description: 'ಅಥ ಮಾಹೇಶ್ವರಸ್ಥಲಮ್',
@@ -85,7 +87,7 @@ export const parichheda16Chapters: Chapter[] = [
         parichheda: {
             id: 'p-16',
             number: 16,
-            title: 'ಷೋಡಶಃ ಪರಿಚ್ಛೇದಃ - ಮಹೇಶ್ವರಸ್ಥಲಾಂತರ್ಗತ ನವವಿಧಲಿಂಗಸ್ಥಲಪ್ರಸಂಗಃ'
+            title: 'ಷೋಡಶಃ ಪರಿಚ್ಛೇದಃ - ಮಾಹೇಶ್ವರಸ್ಥಲಾಂತರ್ಗತ ನವವಿಧಲಿಂಗಸ್ಥಲಪ್ರಸಂಗಃ'
         },
 
         content: [
@@ -235,7 +237,7 @@ export const parichheda16Chapters: Chapter[] = [
         parichheda: {
             id: 'p-16',
             number: 16,
-            title: 'ಷೋಡಶಃ ಪರಿಚ್ಛೇದಃ - ಮಹೇಶ್ವರಸ್ಥಲಾಂತರ್ಗತ ನವವಿಧಲಿಂಗಸ್ಥಲಪ್ರಸಂಗಃ'
+            title: 'ಷೋಡಶಃ ಪರಿಚ್ಛೇದಃ - ಮಾಹೇಶ್ವರಸ್ಥಲಾಂತರ್ಗತ ನವವಿಧಲಿಂಗಸ್ಥಲಪ್ರಸಂಗಃ'
         },
 
         content: [
@@ -372,7 +374,7 @@ export const parichheda16Chapters: Chapter[] = [
         parichheda: {
             id: 'p-16',
             number: 16,
-            title: 'ಷೋಡಶಃ ಪರಿಚ್ಛೇದಃ - ಮಹೇಶ್ವರಸ್ಥಲಾಂತರ್ಗತ ನವವಿಧಲಿಂಗಸ್ಥಲಪ್ರಸಂಗಃ'
+            title: 'ಷೋಡಶಃ ಪರಿಚ್ಛೇದಃ - ಮಾಹೇಶ್ವರಸ್ಥಲಾಂತರ್ಗತ ನವವಿಧಲಿಂಗಸ್ಥಲಪ್ರಸಂಗಃ'
         },
 
         content: [
@@ -535,7 +537,7 @@ export const parichheda16Chapters: Chapter[] = [
         parichheda: {
             id: 'p-16',
             number: 16,
-            title: 'ಷೋಡಶಃ ಪರಿಚ್ಛೇದಃ - ಮಹೇಶ್ವರಸ್ಥಲಾಂತರ್ಗತ ನವವಿಧಲಿಂಗಸ್ಥಲಪ್ರಸಂಗಃ'
+            title: 'ಷೋಡಶಃ ಪರಿಚ್ಛೇದಃ - ಮಾಹೇಶ್ವರಸ್ಥಲಾಂತರ್ಗತ ನವವಿಧಲಿಂಗಸ್ಥಲಪ್ರಸಂಗಃ'
         },
 
         content: [
@@ -659,7 +661,7 @@ export const parichheda16Chapters: Chapter[] = [
         parichheda: {
             id: 'p-16',
             number: 16,
-            title: 'ಷೋಡಶಃ ಪರಿಚ್ಛೇದಃ - ಮಹೇಶ್ವರಸ್ಥಲಾಂತರ್ಗತ ನವವಿಧಲಿಂಗಸ್ಥಲಪ್ರಸಂಗಃ'
+            title: 'ಷೋಡಶಃ ಪರಿಚ್ಛೇದಃ - ಮಾಹೇಶ್ವರಸ್ಥಲಾಂತರ್ಗತ ನವವಿಧಲಿಂಗಸ್ಥಲಪ್ರಸಂಗಃ'
         },
 
         content: [
@@ -756,7 +758,7 @@ export const parichheda16Chapters: Chapter[] = [
         parichheda: {
             id: 'p-16',
             number: 16,
-            title: 'ಷೋಡಶಃ ಪರಿಚ್ಛೇದಃ - ಶಿವಯೋಗಸ್ಥಲಪ್ರಸಂಗಃ'
+            title: 'ಷೋಡಶಃ ಪರಿಚ್ಛೇದಃ - ಮಾಹೇಶ್ವರಸ್ಥಲಾಂತರ್ಗತ ನವವಿಧಲಿಂಗಸ್ಥಲಪ್ರಸಂಗಃ'
         },
 
         content: [
@@ -892,7 +894,7 @@ export const parichheda16Chapters: Chapter[] = [
         parichheda: {
             id: 'p-16',
             number: 16,
-            title: 'ಷೋಡಶಃ ಪರಿಚ್ಛೇದಃ - ಶಿವಯೋಗಸ್ಥಲಪ್ರಸಂಗಃ'
+            title: 'ಷೋಡಶಃ ಪರಿಚ್ಛೇದಃ - ಮಾಹೇಶ್ವರಸ್ಥಲಾಂತರ್ಗತ ನವವಿಧಲಿಂಗಸ್ಥಲಪ್ರಸಂಗಃ'
         },
 
         content: [
@@ -1028,7 +1030,7 @@ export const parichheda16Chapters: Chapter[] = [
         parichheda: {
             id: 'p-16',
             number: 16,
-            title: 'ಷೋಡಶಃ ಪರಿಚ್ಛೇದಃ - ಶಿವಯೋಗಸ್ಥಲಪ್ರಸಂಗಃ'
+            title: 'ಷೋಡಶಃ ಪರಿಚ್ಛೇದಃ - ಮಾಹೇಶ್ವರಸ್ಥಲಾಂತರ್ಗತ ನವವಿಧಲಿಂಗಸ್ಥಲಪ್ರಸಂಗಃ'
         },
 
         content: [
@@ -1164,7 +1166,7 @@ export const parichheda16Chapters: Chapter[] = [
         parichheda: {
             id: 'p-16',
             number: 16,
-            title: 'ಷೋಡಶಃ ಪರಿಚ್ಛೇದಃ - ಶಿವಯೋಗಸ್ಥಲಪ್ರಸಂಗಃ'
+            title: 'ಷೋಡಶಃ ಪರಿಚ್ಛೇದಃ - ಮಾಹೇಶ್ವರಸ್ಥಲಾಂತರ್ಗತ ನವವಿಧಲಿಂಗಸ್ಥಲಪ್ರಸಂಗಃ'
         },
 
         content: [

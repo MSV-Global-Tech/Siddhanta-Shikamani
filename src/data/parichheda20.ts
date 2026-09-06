@@ -4,6 +4,8 @@ export const parichheda20Chapters: Chapter[] = [
     {
         id: 'ch-20-01',
         number: 93,
+        isIntro: true,
+        badgeLabel: 'ॐ',
         title: 'ಅಥ ಐಕ್ಯಸ್ಥಲಮ್',
         subtitle: 'ಇಗ ಸ್ವೀಕೃತಪ್ರಸಾದಿಸ್ಥಲವು (5 ಶ್ಲೋಕಗಳು)',
         description: 'ಸ್ವೀಕೃತಪ್ರಸಾದಿಸ್ಥಲಪ್ರಸಂಗಃ',
@@ -1102,7 +1104,7 @@ export const parichheda20Chapters: Chapter[] = [
         ]
     },
     {
-        id: 'ch-20-12',
+        id: 'ch-20-11',
         number: 102,
         title: 'ಅಥ ಶಿವೈಕ್ಯಸ್ಥಲಮ್',
         subtitle: 'ಶಿವೈಕ್ಯಸ್ಥಲವು (17 ಶ್ಲೋಕಗಳು)',
@@ -1115,7 +1117,7 @@ export const parichheda20Chapters: Chapter[] = [
         parichheda: {
             id: 'p-20',
             number: 20,
-            title: 'ವಿಂಶಃ ಪರಿಚ್ಛೇದಃ - ಶರಣಸ್ಥಲಾಂತರ್ಗತ ದ್ವಾದಶವಿಧಲಿಂಗಸ್ಥಲಪ್ರಸಂಗಃ'
+            title: 'ವಿಂಶಃ ಪರಿಚ್ಛೇದಃ - ಐಕ್ಯಸ್ಥಲಾಂತರ್ಗತನವವಿಧಲಿಂಗಸ್ಥಲಪ್ರಸಂಗಃ'
         },
 
         content: [

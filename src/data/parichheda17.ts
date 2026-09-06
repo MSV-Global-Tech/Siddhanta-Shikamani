@@ -4,6 +4,8 @@ export const parichheda17Chapters: Chapter[] = [
     {
         id: 'ch-17-01',
         number: 63,
+        isIntro: true,
+        badgeLabel: 'ॐ',
         title: 'ಅಥ ಪ್ರಸಾದಿಸ್ಥಲಮ್',
         subtitle: 'ಇಗ ಪ್ರಸಾದಿಸ್ಥಲವು (4 ಶ್ಲೋಕಗಳು)',
         description: 'ಈಗ ಪ್ರಸಾದಿಸ್ಥಲವು',
@@ -15,7 +17,7 @@ export const parichheda17Chapters: Chapter[] = [
         parichheda: {
             id: 'p-17',
             number: 17,
-            title: 'ಸಪ್ತದಶಃ ಪರಿಚ್ಛೇದಃ - ಪ್ರಸಾದಿಸ್ಥಲಾಂತರ್ಗತನವವಿಧಲಿಂಗಸ್ಥಲಪ್ರಸಂಗಃ'
+            title: 'ಸಪ್ತದಶಃ ಪರಿಚ್ಛೇದಃ - ಪ್ರಸಾದಿಸ್ಥಲಾಂತರ್ಗತ ನವವಿಧಲಿಂಗಸ್ಥಲಪ್ರಸಂಗಃ'
         },
 
         content: [
@@ -520,7 +522,7 @@ export const parichheda17Chapters: Chapter[] = [
         parichheda: {
             id: 'p-17',
             number: 17,
-            title: 'ಸಪ್ತದಶಃ ಪರಿಚ್ಛೇದಃ - ಶಿವಯೋಗಸ್ಥಲಪ್ರಸಂಗಃ'
+            title: 'ಸಪ್ತದಶಃ ಪರಿಚ್ಛೇದಃ - ಪ್ರಸಾದಿಸ್ಥಲಾಂತರ್ಗತ ನವವಿಧಲಿಂಗಸ್ಥಲಪ್ರಸಂಗಃ'
         },
 
         content: [
@@ -604,7 +606,7 @@ export const parichheda17Chapters: Chapter[] = [
         parichheda: {
             id: 'p-17',
             number: 17,
-            title: 'ಸಪ್ತದಶಃ ಪರಿಚ್ಛೇದಃ - ಶಿವಯೋಗಸ್ಥಲಪ್ರಸಂಗಃ'
+            title: 'ಸಪ್ತದಶಃ ಪರಿಚ್ಛೇದಃ - ಪ್ರಸಾದಿಸ್ಥಲಾಂತರ್ಗತ ನವವಿಧಲಿಂಗಸ್ಥಲಪ್ರಸಂಗಃ'
         },
 
         content: [
@@ -766,7 +768,7 @@ export const parichheda17Chapters: Chapter[] = [
         parichheda: {
             id: 'p-17',
             number: 17,
-            title: 'ಸಪ್ತದಶಃ ಪರಿಚ್ಛೇದಃ - ಶಿವಯೋಗಸ್ಥಲಪ್ರಸಂಗಃ'
+            title: 'ಸಪ್ತದಶಃ ಪರಿಚ್ಛೇದಃ - ಪ್ರಸಾದಿಸ್ಥಲಾಂತರ್ಗತ ನವವಿಧಲಿಂಗಸ್ಥಲಪ್ರಸಂಗಃ'
         },
 
         content: [
@@ -889,7 +891,7 @@ export const parichheda17Chapters: Chapter[] = [
         parichheda: {
             id: 'p-17',
             number: 17,
-            title: 'ಸಪ್ತದಶಃ ಪರಿಚ್ಛೇದಃ - ಶಿವಯೋಗಸ್ಥಲಪ್ರಸಂಗಃ'
+            title: 'ಸಪ್ತದಶಃ ಪರಿಚ್ಛೇದಃ - ಪ್ರಸಾದಿಸ್ಥಲಾಂತರ್ಗತ ನವವಿಧಲಿಂಗಸ್ಥಲಪ್ರಸಂಗಃ'
         },
 
         content: [
@@ -1038,7 +1040,7 @@ export const parichheda17Chapters: Chapter[] = [
         parichheda: {
             id: 'p-17',
             number: 17,
-            title: 'ಸಪ್ತದಶಃ ಪರಿಚ್ಛೇದಃ - ಶಿವಯೋಗಸ್ಥಲಪ್ರಸಂಗಃ'
+            title: 'ಸಪ್ತದಶಃ ಪರಿಚ್ಛೇದಃ - ಪ್ರಸಾದಿಸ್ಥಲಾಂತರ್ಗತ ನವವಿಧಲಿಂಗಸ್ಥಲಪ್ರಸಂಗಃ'
         },
 
         content: [
@@ -1226,7 +1228,7 @@ export const parichheda17Chapters: Chapter[] = [
         parichheda: {
             id: 'p-17',
             number: 17,
-            title: 'ಸಪ್ತದಶಃ ಪರಿಚ್ಛೇದಃ - ಶಿವಯೋಗಸ್ಥಲಪ್ರಸಂಗಃ'
+            title: 'ಸಪ್ತದಶಃ ಪರಿಚ್ಛೇದಃ - ಪ್ರಸಾದಿಸ್ಥಲಾಂತರ್ಗತ ನವವಿಧಲಿಂಗಸ್ಥಲಪ್ರಸಂಗಃ'
         },
 
         content: [

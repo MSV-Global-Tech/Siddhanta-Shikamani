@@ -4,6 +4,8 @@ export const parichheda11Chapters: Chapter[] = [
     {
         id: 'ch-11-01',
         number: 25,
+        isIntro: true,
+        badgeLabel: 'ॐ',
         title: 'ಅಥ ಪ್ರಸಾದಿಸ್ಥಲಮ್',
         subtitle: 'ಪ್ರಸಾದಿಸ್ಥಲವು (5 ಶ್ಲೋಕಗಳು)',
         description: 'ಪ್ರಸಾದಿಸ್ಥಲಪ್ರಸಂಗಃ',
@@ -535,7 +537,7 @@ export const parichheda11Chapters: Chapter[] = [
         parichheda: {
             id: 'p-11',
             number: 11,
-            title: 'ಏಕಾದಶಃ ಪರಿಚ್ಛೇದಃ'
+            title: 'ಏಕಾದಶಃ ಪರಿಚ್ಛೇದಃ - ಪ್ರಸಾದಿನಃ ಸಪ್ತವಿಧಸ್ಥಲಪ್ರಸಂಗಃ'
         },
 
         content: [
@@ -671,7 +673,7 @@ export const parichheda11Chapters: Chapter[] = [
         ]
     },
     {
-        id: 'ch-10-06',
+        id: 'ch-11-06',
         number: 29,
         title: 'ಅಥ ಭಕ್ತಮಾಹಾತ್ಮ್ಯಸ್ಥಲಮ್',
         subtitle: 'ಭಕ್ತಮಾಹಾತ್ಮ್ಯಸ್ಥಲವು (12 ಶ್ಲೋಕಗಳು)',
@@ -684,7 +686,7 @@ export const parichheda11Chapters: Chapter[] = [
         parichheda: {
             id: 'p-11',
             number: 11,
-            title: 'ಏಕಾದಶಃ ಪರಿಚ್ಛೇದಃ'
+            title: 'ಏಕಾದಶಃ ಪರಿಚ್ಛೇದಃ - ಪ್ರಸಾದಿನಃ ಸಪ್ತವಿಧಸ್ಥಲಪ್ರಸಂಗಃ'
         },
 
         content: [
@@ -846,7 +848,7 @@ export const parichheda11Chapters: Chapter[] = [
         ]
     },
     {
-        id: 'ch-11-06',
+        id: 'ch-11-07',
         number: 30,
         title: 'ಅಥ ಶರಣಮಾಹಾತ್ಮ್ಯಸ್ಥಲಮ್',
         subtitle: 'ಶರಣಮಾಹಾತ್ಮ್ಯಸ್ಥಲವು (10 ಶ್ಲೋಕಗಳು)',
@@ -859,7 +861,7 @@ export const parichheda11Chapters: Chapter[] = [
         parichheda: {
             id: 'p-11',
             number: 11,
-            title: 'ಏಕಾದಶಃ ಪರಿಚ್ಛೇದಃ'
+            title: 'ಏಕಾದಶಃ ಪರಿಚ್ಛೇದಃ - ಪ್ರಸಾದಿನಃ ಸಪ್ತವಿಧಸ್ಥಲಪ್ರಸಂಗಃ'
         },
 
         content: [
@@ -995,7 +997,7 @@ export const parichheda11Chapters: Chapter[] = [
         ]
     },
     {
-        id: 'ch-10-07',
+        id: 'ch-11-08',
         number: 31,
         title: 'ಅಥ ಪ್ರಸಾದಮಾಹಾತ್ಮ್ಯಸ್ಥಲಮ್',
         subtitle: 'ಪ್ರಸಾದಮಾಹಾತ್ಮ್ಯಸ್ಥಲವು (11 ಶ್ಲೋಕಗಳು)',
@@ -1008,7 +1010,7 @@ export const parichheda11Chapters: Chapter[] = [
         parichheda: {
             id: 'p-11',
             number: 11,
-            title: 'ಏಕಾದಶಃ ಪರಿಚ್ಛೇದಃ'
+            title: 'ಏಕಾದಶಃ ಪರಿಚ್ಛೇದಃ - ಪ್ರಸಾದಿನಃ ಸಪ್ತವಿಧಸ್ಥಲಪ್ರಸಂಗಃ'
         },
 
         content: [

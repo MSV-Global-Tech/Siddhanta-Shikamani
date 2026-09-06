@@ -1,6 +1,8 @@
 export interface Chapter {
   id: string;
   number: number;
+  isIntro?: boolean;
+  badgeLabel?: string;
   title: string;
   subtitle: string;
   description: string;

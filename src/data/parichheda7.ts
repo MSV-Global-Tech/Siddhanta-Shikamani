@@ -622,7 +622,7 @@ export const parichheda7Chapters: Chapter[] = [
             id: 'p-07',
             number: 7,
             title:
-                'ಸಪ್ತಮಃ ಪರಿಚ್ಛೇದಃ - ರುದ್ರಾಕ್ಷಧಾರಣಪ್ರಸಂಗಃ'
+                'ಸಪ್ತಮಃ ಪರಿಚ್ಛೇದಃ - ಭಸ್ಮರುದ್ರಾಕ್ಷಧಾರಣಪ್ರಸಂಗಃ'
         },
 
         content: [

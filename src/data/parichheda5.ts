@@ -632,7 +632,7 @@ export const parichheda5Chapters: Chapter[] = [
         parichheda: {
             id: 'p-05',
             number: 5,
-            title: 'ಪಂಚಮಃ ಪರಿಚ್ಛೇದಃ'
+            title: 'ಪಂಚಮಃ ಪರಿಚ್ಛೇದಃ - ಭಕ್ತಸ್ಥಲೇ ಪಿಂಡ-ಪಿಂಡಜ್ಞಾನ-ಸಂಸಾರಹೇಯಸ್ಥಲಪ್ರಸಂಗಃ'
         },
         content: [
             {

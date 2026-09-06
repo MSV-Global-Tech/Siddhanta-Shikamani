@@ -197,7 +197,7 @@ function renderChapterCard(chapter: Chapter, handleOpen: (id: string) => void) {
               weight="bold"
               className="text-primary-dark font-kannada-bold"
             >
-              {toKannadaNumerals(chapter.number)}
+              {chapter.badgeLabel || (chapter.isIntro ? 'ॐ' : toKannadaNumerals(chapter.number))}
             </AppText>
           </View>
         </View>

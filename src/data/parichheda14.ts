@@ -4,6 +4,8 @@ export const parichheda14Chapters: Chapter[] = [
     {
         id: 'ch-14-01',
         number: 41,
+        isIntro: true,
+        badgeLabel: 'ॐ',
         title: 'ಅಥ ಐಕ್ಯಸ್ಥಲಮ್',
         subtitle: 'ಐಕ್ಯಸ್ಥಲವು (3 ಶ್ಲೋಕಗಳು)',
         description: 'ಐಕ್ಯಸ್ಥಲಪ್ರಸಂಗಃ',
@@ -251,7 +253,7 @@ export const parichheda14Chapters: Chapter[] = [
         parichheda: {
             id: 'p-14',
             number: 14,
-            title: 'ಚತುರ್ದಶಃ ಪರಿಚ್ಛೇದಃ - ಆಚಾರಸಂಪತ್ತಿಸ್ಥಲಪ್ರಸಂಗಃ'
+            title: 'ಚತುರ್ದಶಃ ಪರಿಚ್ಛೇದಃ - ಐಕ್ಯಸ್ಯ ಚತುರ್ವಿಧಸ್ಥಲಪ್ರಸಂಗಃ'
         },
 
         content: [

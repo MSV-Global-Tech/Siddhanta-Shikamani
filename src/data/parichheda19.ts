@@ -4,6 +4,8 @@ export const parichheda19Chapters: Chapter[] = [
     {
         id: 'ch-19-01',
         number: 81,
+        isIntro: true,
+        badgeLabel: 'ॐ',
         title: 'ಅಥ ಶರಣಸ್ಥಲಮ್',
         subtitle: 'ಇಗ ಶರಣಸ್ಥಲವು (5 ಶ್ಲೋಕಗಳು)',
         description: 'ಶರಣಸ್ಥಲಪ್ರಸಂಗಃ',
@@ -89,7 +91,7 @@ export const parichheda19Chapters: Chapter[] = [
     },
     {
         id: 'ch-19-02',
-        number: 82,
+        number: 81,
         title: 'ಅಥ ದೀಕ್ಷಾಪಾದೋದಕಸ್ಥಲಮ್',
         subtitle: 'ಇಗ ದೀಕ್ಷಾಪಾದೋದಕಸ್ಥಲವು (6 ಶ್ಲೋಕಗಳು)',
         description: 'ದೀಕ್ಷಾಪಾದೋದಕಸ್ಥಲಪ್ರಸಂಗಃ',
@@ -1170,7 +1172,7 @@ export const parichheda19Chapters: Chapter[] = [
     },
 
     {
-        id: 'ch-19-12',
+        id: 'ch-19-11',
         number: 90,
         title: 'ಅಥ ಕ್ರಿಯಾಪ್ರಕಾಶಸ್ಥಲಮ್',
         subtitle: 'ಇಗ ಕ್ರಿಯಾಪ್ರಕಾಶಸ್ಥಲವು (7 ಶ್ಲೋಕಗಳು)',
@@ -1188,8 +1190,8 @@ export const parichheda19Chapters: Chapter[] = [
 
         content: [
             {
-                id: 'v-19-83',
-                verseNumber: 83,
+                id: 'v-19-76',
+                verseNumber: 76,
                 sanskrit:
                     'ಶಿವಸ್ಯ ಪರಿಪೂರ್ಣಸ್ಯ\n' +
                     'ಚಿದಾಕಾಶಸ್ವರೂಪಿಣಃ |\n' +
@@ -1281,7 +1283,7 @@ export const parichheda19Chapters: Chapter[] = [
     },
 
     {
-        id: 'ch-19-13',
+        id: 'ch-19-12',
         number: 91,
         title: 'ಅಥ ಭಾವಪ್ರಕಾಶಸ್ಥಲಮ್',
         subtitle: 'ಇಗ ಭಾವಪ್ರಕಾಶಸ್ಥಲವು (7 ಶ್ಲೋಕಗಳು)',
@@ -1392,7 +1394,7 @@ export const parichheda19Chapters: Chapter[] = [
     },
 
     {
-        id: 'ch-19-14',
+        id: 'ch-19-13',
         number: 92,
         title: 'ಅಥ ಜ್ಞಾನಪ್ರಕಾಶಸ್ಥಲಮ್',
         subtitle: 'ಇಗ ಜ್ಞಾನಪ್ರಕಾಶಸ್ಥಲವು (8 ಶ್ಲೋಕಗಳು)',
