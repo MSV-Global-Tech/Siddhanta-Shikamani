@@ -2,7 +2,7 @@
   "expo": {
     "name": "Siddhanta Shikamani",
     "slug": "siddhanta-shikamani",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "updates": {
       "url": "https://u.expo.dev/7358bf6d-e559-464c-9222-17186b1c3e56",
       "enabled": true,
@@ -24,11 +24,11 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.msvglobaltech.siddhantashikamani",
-      "buildNumber": "7"
+      "buildNumber": "8"
     },
     "android": {
       "package": "com.msvglobaltech.siddhantashikamani",
-      "versionCode": 8,
+      "versionCode": 9,
       "adaptiveIcon": {
         "foregroundImage": "./assets/logo.png",
         "backgroundColor": "#FFFFFF"

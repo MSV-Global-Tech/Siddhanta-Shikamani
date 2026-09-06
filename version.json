@@ -1,5 +1,5 @@
 {
-  "version": "1.0.2",
+  "version": "1.0.3",
   "buildNumber": 9,
-  "releaseNotes": "UI enhancements, clean Bhavartha header toggle, and instant startup"
+  "releaseNotes": "Bug fixes, data corrections across Parichhedas, and stability improvements"
 }
